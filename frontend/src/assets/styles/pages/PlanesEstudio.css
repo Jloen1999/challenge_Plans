@@ -1,0 +1,246 @@
+.planes-estudio-page {
+    padding: 1.5rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    position: relative;
+    background: linear-gradient(135deg, rgba(248, 250, 252, 0.9) 0%, rgba(255, 255, 255, 0.9) 100%);
+    border-radius: 12px;
+    padding: 2rem;
+}
+
+/* Patrón de fondo para la página */
+.planes-estudio-page::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%230066cc' fill-opacity='0.03'%3E%3Cpath d='M50 50c0-5.523 4.477-10 10-10s10 4.477 10 10-4.477 10-10 10c0 5.523-4.477 10-10 10s-10-4.477-10-10 4.477-10 10-10zM10 10c0-5.523 4.477-10 10-10s10 4.477 10 10-4.477 10-10 10c0 5.523-4.477 10-10 10S0 25.523 0 20s4.477-10 10-10zm10 8c4.418 0 8-3.582 8-8s-3.582-8-8-8-8 3.582-8 8 3.582 8 8 8zm40 40c4.418 0 8-3.582 8-8s-3.582-8-8-8-8 3.582-8 8 3.582 8 8 8z' /%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    z-index: 0;
+    border-radius: 12px;
+    opacity: 0.6;
+}
+
+.page-header {
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.page-header h1 {
+    font-size: 2rem;
+    color: #333;
+    margin-bottom: 0.5rem;
+}
+
+.page-header p {
+    font-size: 1rem;
+    color: #666;
+}
+
+.filtros-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    padding: 1rem;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.08);
+    position: relative;
+    z-index: 1;
+    margin-bottom: 2.5rem;
+}
+
+.filtro-grupo {
+    display: flex;
+    flex-direction: column;
+    min-width: 200px;
+    flex: 1;
+}
+
+.filtro-grupo label {
+    font-size: 0.9rem;
+    margin-bottom: 0.5rem;
+    color: #555;
+}
+
+.filtro-input,
+.filtro-select {
+    padding: 0.5rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 1rem;
+}
+
+.planes-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+    position: relative;
+    z-index: 1;
+    padding: 1.5rem;
+    background: rgba(255, 255, 255, 0.7);
+    border-radius: 10px;
+    backdrop-filter: blur(5px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+}
+
+.plan-card {
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    padding: 1.5rem;
+    transition: transform 0.3s, box-shadow 0.3s;
+    position: relative;
+    overflow: hidden;
+    border: none;
+}
+
+.plan-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 6px;
+    background: linear-gradient(90deg, var(--color-primary), var(--color-secondary));
+    border-radius: 3px 3px 0 0;
+}
+
+/* Diferentes categorías/tipos de planes con distintos colores */
+.plan-card.basico::before {
+    background: linear-gradient(90deg, #4caf50, #8bc34a);
+}
+
+.plan-card.intermedio::before {
+    background: linear-gradient(90deg, #ff9800, #ffc107);
+}
+
+.plan-card.avanzado::before {
+    background: linear-gradient(90deg, #f44336, #ff5722);
+}
+
+.plan-card.personalizado::before {
+    background: linear-gradient(90deg, #9c27b0, #e91e63);
+}
+
+.plan-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 20px rgba(0, 0, 102, 0.15);
+}
+
+.plan-card h3 {
+    font-size: 1.25rem;
+    margin-bottom: 0.75rem;
+    color: #333;
+}
+
+.plan-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-bottom: 1.25rem;
+    font-size: 0.9rem;
+}
+
+.plan-meta span {
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    font-weight: 500;
+}
+
+.plan-meta .duracion {
+    background-color: #e3f2fd;
+    color: #0277bd;
+}
+
+.plan-meta .tareas {
+    background-color: #e8f5e9;
+    color: #2e7d32;
+}
+
+.plan-meta .creador {
+    background-color: #f3e5f5;
+    color: #6a1b9a;
+}
+
+.descripcion {
+    font-size: 0.95rem;
+    color: var(--color-text-light);
+    margin-bottom: 1.5rem;
+    height: 60px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    line-height: 1.4;
+}
+
+.plan-actions {
+    display: flex;
+    gap: 0.75rem;
+    margin-top: auto;
+}
+
+.planes-actions {
+    display: flex;
+    justify-content: center;
+    margin-top: 2rem;
+}
+
+.loading-message,
+.error-message,
+.empty-message {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 3rem;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+}
+
+.error-message {
+    color: #d32f2f;
+    background-color: #fff8f8;
+}
+
+.empty-message {
+    color: #666;
+}
+
+.empty-message button {
+    margin-top: 1rem;
+}
+
+/* Estilos responsivos */
+@media (max-width: 768px) {
+    .planes-estudio-page {
+        padding: 1.5rem 1rem;
+    }
+
+    .planes-grid {
+        padding: 1rem 0.5rem;
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    }
+
+    .filtro-grupo {
+        min-width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+    .plan-card h3 {
+        font-size: 1.15rem;
+    }
+
+    .plan-meta {
+        flex-direction: column;
+        gap: 0.5rem;
+        align-items: flex-start;
+    }
+}

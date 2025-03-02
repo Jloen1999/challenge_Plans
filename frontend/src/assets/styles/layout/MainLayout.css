@@ -1,0 +1,45 @@
+/* Estilos para el layout principal de la aplicación */
+
+.main-layout {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.content-container {
+    display: flex;
+    flex: 1;
+    max-width: 1400px;
+    width: 100%;
+    margin: 0 auto;
+    padding: var(--spacing-md);
+    gap: var(--spacing-lg);
+}
+
+.main-content {
+    flex: 1;
+    width: 100%;
+}
+
+/* Media queries para diseño responsivo */
+@media (max-width: 1024px) {
+    .content-container {
+        padding: var(--spacing-sm);
+    }
+}
+
+@media (max-width: 768px) {
+    .content-container {
+        flex-direction: column;
+    }
+
+    .main-content {
+        order: 1;
+    }
+
+    /* El sidebar irá debajo del contenido principal en dispositivos móviles */
+    .sidebar {
+        order: 2;
+        width: 100%;
+    }
+}

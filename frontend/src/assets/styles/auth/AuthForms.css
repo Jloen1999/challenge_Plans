@@ -1,0 +1,121 @@
+.auth-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #f5f5f5;
+    padding: 1rem;
+}
+
+.auth-container {
+    width: 100%;
+    max-width: 450px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+.auth-logo {
+    background-color: #4c6ef5;
+    color: white;
+    padding: 1.5rem 1rem;
+    text-align: center;
+}
+
+.auth-logo h1 {
+    margin: 0;
+    font-size: 1.8rem;
+}
+
+/* Estilos específicos para los formularios de autenticación */
+
+.auth-form-container {
+    padding: var(--spacing-md);
+}
+
+.auth-form-container h2 {
+    font-size: 1.8rem;
+    margin-bottom: var(--spacing-lg);
+    color: var(--color-primary);
+    text-align: center;
+}
+
+.auth-form {
+    margin-bottom: var(--spacing-lg);
+}
+
+.auth-form .form-group {
+    margin-bottom: var(--spacing-md);
+}
+
+.auth-form .form-group label {
+    display: block;
+    margin-bottom: var(--spacing-xs);
+    font-weight: 500;
+    color: var(--color-text);
+}
+
+.auth-form .form-group input {
+    width: 100%;
+    padding: var(--spacing-sm);
+    border: var(--border-width) solid var(--color-background-dark);
+    border-radius: var(--border-radius-sm);
+    font-size: 1rem;
+    transition: border-color var(--transition-speed) var(--transition-timing);
+}
+
+.auth-form .form-group input:focus {
+    border-color: var(--color-primary);
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(63, 81, 181, 0.2);
+}
+
+.auth-form button {
+    width: 100%;
+    padding: var(--spacing-sm);
+    font-size: 1.1rem;
+    font-weight: 500;
+    margin-top: var(--spacing-md);
+    cursor: pointer;
+}
+
+.auth-form button:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+}
+
+/* Mensajes de error */
+.auth-error {
+    background-color: rgba(244, 67, 54, 0.1);
+    border: 1px solid rgba(244, 67, 54, 0.3);
+    color: var(--color-danger);
+    padding: var(--spacing-sm);
+    border-radius: var(--border-radius-sm);
+    margin-bottom: var(--spacing-md);
+    text-align: center;
+    font-size: 0.9rem;
+}
+
+.error {
+    color: var(--color-danger);
+    font-size: 0.85rem;
+    margin-top: var(--spacing-xxs);
+}
+
+/* Texto de redirección */
+.auth-redirect {
+    text-align: center;
+    margin-top: var(--spacing-lg);
+    color: var(--color-text-light);
+}
+
+.auth-redirect a {
+    color: var(--color-primary);
+    font-weight: 500;
+    margin-left: var(--spacing-xxs);
+}
+
+.auth-redirect a:hover {
+    text-decoration: underline;
+}

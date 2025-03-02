@@ -1,0 +1,112 @@
+.document-uploader {
+    margin-bottom: 1.5rem;
+}
+
+.upload-area {
+    border: 2px dashed var(--color-primary-light);
+    border-radius: 8px;
+    padding: 2rem;
+    text-align: center;
+    background-color: rgba(var(--color-primary-rgb), 0.03);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.upload-area:hover {
+    border-color: var(--color-primary);
+    background-color: rgba(var(--color-primary-rgb), 0.05);
+}
+
+.upload-area.dragging {
+    border-color: var(--color-primary);
+    background-color: rgba(var(--color-primary-rgb), 0.08);
+    transform: scale(1.01);
+}
+
+.upload-area.has-error {
+    border-color: var(--color-danger);
+    background-color: rgba(var(--color-danger-rgb), 0.05);
+}
+
+.upload-icon {
+    margin-bottom: 1rem;
+}
+
+.upload-icon svg {
+    fill: var(--color-primary);
+}
+
+.upload-text {
+    color: var(--color-text);
+}
+
+.drag-text {
+    margin-bottom: 0.5rem;
+    font-size: 1.1rem;
+}
+
+.browse-button {
+    background-color: var(--color-primary);
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    font-weight: 500;
+    margin: 0.5rem 0;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.browse-button:hover {
+    background-color: var(--color-primary-dark);
+}
+
+.formats-text {
+    font-size: 0.9rem;
+    color: var(--color-text-light);
+    margin-top: 0.5rem;
+}
+
+.file-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.file-name {
+    font-weight: 500;
+    color: var(--color-primary);
+    word-break: break-word;
+    max-width: 100%;
+}
+
+.change-file {
+    background: none;
+    border: none;
+    color: var(--color-secondary);
+    text-decoration: underline;
+    cursor: pointer;
+    font-size: 0.9rem;
+}
+
+.upload-error {
+    color: var(--color-danger);
+    font-size: 0.9rem;
+    margin-top: 0.5rem;
+    padding: 0.5rem;
+    border-radius: 4px;
+    background-color: rgba(var(--color-danger-rgb), 0.1);
+}
+
+/* Dark mode */
+.dark-theme .upload-area {
+    background-color: rgba(var(--color-primary-rgb), 0.1);
+    border-color: rgba(var(--color-primary-rgb), 0.4);
+}
+
+.dark-theme .upload-area:hover,
+.dark-theme .upload-area.dragging {
+    background-color: rgba(var(--color-primary-rgb), 0.15);
+    border-color: var(--color-primary-light);
+}

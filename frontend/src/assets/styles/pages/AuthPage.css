@@ -1,0 +1,155 @@
+/* Estilos para las páginas de autenticación (Login y Registro) */
+
+.auth-page {
+    min-height: 80vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--spacing-lg);
+    background-color: var(--color-background-light);
+}
+
+.auth-container {
+    display: flex;
+    width: 100%;
+    max-width: 1000px;
+    background-color: var(--color-background);
+    border-radius: var(--border-radius-md);
+    overflow: hidden;
+    box-shadow: var(--shadow-md);
+}
+
+/* Sección informativa */
+.auth-info {
+    flex: 1;
+    padding: var(--spacing-xl);
+    background-color: var(--color-primary);
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.auth-info h1 {
+    color: white;
+    margin-bottom: var(--spacing-md);
+    font-size: 2.2rem;
+}
+
+.auth-info p {
+    margin-bottom: var(--spacing-lg);
+    opacity: 0.9;
+    font-size: 1.1rem;
+}
+
+/* Características y beneficios */
+.auth-features,
+.auth-benefits {
+    margin-top: var(--spacing-lg);
+}
+
+.auth-feature,
+.auth-benefit {
+    display: flex;
+    align-items: center;
+    margin-bottom: var(--spacing-sm);
+}
+
+.feature-icon,
+.benefit-icon {
+    font-size: 1.5rem;
+    margin-right: var(--spacing-sm);
+}
+
+/* Contenedor del formulario */
+.auth-form-wrapper {
+    flex: 1;
+    padding: var(--spacing-lg);
+    background-color: var(--color-background);
+}
+
+.auth-form-container {
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+.auth-form-container h2 {
+    margin-bottom: var(--spacing-md);
+    color: var(--color-primary);
+    text-align: center;
+}
+
+/* Estilos del formulario */
+.auth-form {
+    margin-bottom: var(--spacing-md);
+}
+
+.auth-form .form-group {
+    margin-bottom: var(--spacing-md);
+}
+
+.auth-form button {
+    width: 100%;
+    padding: var(--spacing-sm);
+    font-size: 1.1rem;
+}
+
+/* Mensajes de error */
+.auth-error {
+    background-color: rgba(244, 67, 54, 0.1);
+    color: var(--color-danger);
+    padding: var(--spacing-sm);
+    border-radius: var(--border-radius-sm);
+    margin-bottom: var(--spacing-md);
+    text-align: center;
+}
+
+.error {
+    color: var(--color-danger);
+    font-size: 0.9rem;
+    margin-top: var(--spacing-xxs);
+}
+
+/* Texto de redirección */
+.auth-redirect {
+    text-align: center;
+    margin-bottom: 0;
+}
+
+.auth-redirect a {
+    color: var(--color-primary);
+    font-weight: 500;
+}
+
+.auth-redirect a:hover {
+    text-decoration: underline;
+}
+
+/* Estilos responsivos */
+@media (max-width: 768px) {
+    .auth-container {
+        flex-direction: column;
+    }
+
+    .auth-info {
+        padding: var(--spacing-lg);
+    }
+
+    .auth-form-wrapper {
+        padding: var(--spacing-md);
+    }
+}
+
+@media (max-width: 480px) {
+    .auth-page {
+        padding: var(--spacing-sm);
+    }
+
+    .auth-info {
+        padding: var(--spacing-md);
+    }
+
+    .auth-info h1 {
+        font-size: 1.8rem;
+    }
+}

@@ -1,0 +1,7 @@
+# Login/Signup
+
+Vamos a implementar el sistema de autenticación para la aplicación de Challenge Plans en tres pasos:
+
+1. Crear un script SQL para insertar datos de muestra
+2. Implementar el backend de autenticación con Express
+3. Desarrollar la interfaz de usuario para login/signup en el frontend

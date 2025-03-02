@@ -1,0 +1,261 @@
+.crear-plan-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2rem 1.5rem;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.page-header {
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.page-header h1 {
+    font-size: 2rem;
+    color: #333;
+    margin-bottom: 0.5rem;
+}
+
+.page-header p {
+    color: #666;
+    font-size: 1rem;
+}
+
+.plan-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.form-section {
+    margin-bottom: 2rem;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 1rem;
+}
+
+.form-section h2 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    color: #333;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.form-row {
+    display: flex;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+}
+
+.form-row .form-group {
+    flex: 1 1 200px;
+}
+
+.form-control {
+    padding: 0.75rem;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 1rem;
+    background-color: #f9f9f9;
+    transition: border-color 0.2s;
+}
+
+.form-control:focus {
+    outline: none;
+    border-color: #0066cc;
+    box-shadow: 0 0 0 2px rgba(0, 102, 204, 0.1);
+}
+
+textarea.form-control {
+    resize: vertical;
+    min-height: 80px;
+}
+
+.error-message {
+    background-color: #fff0f0;
+    border-left: 4px solid #ff3b30;
+    color: #c82333;
+    padding: 1rem;
+    border-radius: 4px;
+    margin-bottom: 1rem;
+    font-size: 0.9rem;
+}
+
+.tareas-container {
+    margin-top: 1rem;
+}
+
+.tareas-empty {
+    padding: 1.5rem;
+    text-align: center;
+    background-color: #f8f8f8;
+    border-radius: 6px;
+    color: #666;
+}
+
+.tareas-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.tarea-item {
+    padding: 1rem;
+    background-color: #f5f9ff;
+    border-radius: 6px;
+    border-left: 4px solid #0066cc;
+}
+
+.tarea-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5rem;
+}
+
+.tarea-header h3 {
+    margin: 0;
+    font-size: 1.1rem;
+}
+
+.tarea-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+}
+
+.prioridad {
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    font-weight: 500;
+}
+
+.prioridad.alta {
+    background-color: #ffe5e5;
+    color: #d32f2f;
+}
+
+.prioridad.media {
+    background-color: #fff9e6;
+    color: #f59f00;
+}
+
+.prioridad.baja {
+    background-color: #e6f7ff;
+    color: #0288d1;
+}
+
+.fecha-limite {
+    color: #666;
+}
+
+.tarea-descripcion {
+    margin: 0.5rem 0 0;
+    font-size: 0.95rem;
+    color: #333;
+}
+
+.nueva-tarea {
+    background-color: #f8f9fa;
+    padding: 1.5rem;
+    border-radius: 8px;
+    margin-top: 1rem;
+}
+
+.nueva-tarea h3 {
+    font-size: 1.2rem;
+    margin-top: 0;
+    margin-bottom: 1rem;
+}
+
+.btn-icon {
+    background: none;
+    border: none;
+    color: #666;
+    cursor: pointer;
+    font-size: 1.25rem;
+    padding: 0.25rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: background-color 0.2s;
+}
+
+.btn-icon:hover {
+    background-color: #f0f0f0;
+    color: #d32f2f;
+}
+
+.form-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.btn {
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 6px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-size: 1rem;
+}
+
+.btn-primary {
+    background-color: #0066cc;
+    color: white;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+}
+
+.btn-primary:disabled {
+    background-color: #83b7e6;
+    cursor: not-allowed;
+}
+
+.btn-secondary {
+    background-color: #5a6268;
+    color: white;
+}
+
+.btn-secondary:hover {
+    background-color: #495057;
+}
+
+.btn-outline {
+    background-color: transparent;
+    border: 1px solid #ddd;
+    color: #666;
+}
+
+.btn-outline:hover {
+    border-color: #bbb;
+    color: #333;
+    background-color: #f5f5f5;
+}
+
+@media (max-width: 768px) {
+    .form-row {
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .crear-plan-container {
+        padding: 1.5rem 1rem;
+    }
+}

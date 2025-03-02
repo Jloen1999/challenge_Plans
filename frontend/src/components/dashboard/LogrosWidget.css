@@ -1,0 +1,120 @@
+.logros-widget {
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.widget-title {
+    margin-top: 0;
+    font-size: 1.2rem;
+    color: #333;
+    margin-bottom: 1rem;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 0.5rem;
+}
+
+.logros-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.logro-item {
+    display: flex;
+    align-items: flex-start;
+    padding: 0.75rem 0;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.logro-item:last-child {
+    border-bottom: none;
+}
+
+.logro-icon {
+    font-size: 1.5rem;
+    margin-right: 0.75rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.logro-content {
+    flex: 1;
+}
+
+.logro-desc {
+    margin: 0 0 0.25rem;
+    font-size: 0.9rem;
+    color: #333;
+}
+
+.logro-date {
+    font-size: 0.8rem;
+    color: #888;
+}
+
+/* Clases específicas según tipo de logro */
+.logro-unirse .logro-icon {
+    color: #0066cc;
+}
+
+.logro-tarea .logro-icon {
+    color: #4caf50;
+}
+
+.logro-completar .logro-icon {
+    color: #ff9800;
+}
+
+.logro-crear .logro-icon {
+    color: #9c27b0;
+}
+
+.logro-apunte .logro-icon {
+    color: #2196f3;
+}
+
+.logro-recompensa .logro-icon {
+    color: #f44336;
+}
+
+.logro-nivel .logro-icon {
+    color: #ffc107;
+}
+
+.no-logros {
+    text-align: center;
+    color: #888;
+    padding: 1rem;
+    font-style: italic;
+}
+
+.ver-mas {
+    text-align: center;
+    margin-top: 1rem;
+}
+
+.ver-mas a {
+    color: #0066cc;
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+.ver-mas a:hover {
+    text-decoration: underline;
+}
+
+.logros-widget.loading,
+.logros-widget.error {
+    text-align: center;
+    padding: 2rem;
+    color: #666;
+}
+
+.logros-widget.error {
+    color: #c62828;
+}
