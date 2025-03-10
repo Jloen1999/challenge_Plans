@@ -1,0 +1,26 @@
+<svg width="600" height="300" viewBox="0 0 600 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M100 150C100 116.863 126.863 90 160 90H440C473.137 90 500 116.863 500 150V150C500 183.137 473.137 210 440 210H160C126.863 210 100 183.137 100 150V150Z" fill="#EDF2F7"/>
+  <path d="M150 150L450 150" stroke="#CBD5E1" stroke-width="5" stroke-linecap="round" stroke-dasharray="10 20"/>
+  <path d="M300 55V245" stroke="#CBD5E1" stroke-width="5" stroke-linecap="round" stroke-dasharray="10 20"/>
+
+  <!-- 4 -->
+  <path d="M150 90V150H120V180H150V210H180V180H240V150H180V90H150Z" fill="url(#paint0_linear)"/>
+  
+  <!-- 0 -->
+  <path d="M300 90C278.909 90 262 106.909 262 128V172C262 193.091 278.909 210 300 210C321.091 210 338 193.091 338 172V128C338 106.909 321.091 90 300 90ZM308 172C308 176.418 304.418 180 300 180C295.582 180 292 176.418 292 172V128C292 123.582 295.582 120 300 120C304.418 120 308 123.582 308 128V172Z" fill="url(#paint0_linear)"/>
+  
+  <!-- 4 -->
+  <path d="M420 90V150H390V180H420V210H450V180H510V150H450V90H420Z" fill="url(#paint0_linear)"/>
+  
+  <!-- Character -->
+  <circle cx="300" cy="260" r="20" fill="#2563EB"/>
+  <circle cx="300" cy="200" r="30" fill="#4A6CF7"/>
+  <path d="M285 190H315M290 200H310M285 210H315" stroke="white" stroke-width="3" stroke-linecap="round"/>
+  
+  <defs>
+    <linearGradient id="paint0_linear" x1="150" y1="90" x2="150" y2="210" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#4A6CF7"/>
+      <stop offset="1" stop-color="#2563EB"/>
+    </linearGradient>
+  </defs>
+</svg>

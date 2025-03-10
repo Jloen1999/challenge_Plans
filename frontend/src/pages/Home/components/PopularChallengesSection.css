@@ -1,0 +1,223 @@
+.popular-challenges-section {
+  background-color: #ffffff;
+  position: relative;
+}
+
+.challenges-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 2rem;
+  margin-bottom: 2.5rem;
+}
+
+.challenge-card {
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+  overflow: hidden;
+  padding: 1.5rem;
+  position: relative;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border-top: 4px solid transparent;
+}
+
+.challenge-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+}
+
+.difficulty-badge {
+  position: absolute;
+  top: 1.5rem;
+  right: 1.5rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  padding: 0.25rem 0.75rem;
+  border-radius: 20px;
+}
+
+.difficulty-badge.principiante {
+  background-color: #dcfce7;
+  color: #16a34a;
+}
+
+.difficulty-badge.intermedio {
+  background-color: #f8fafc;
+  color: #0284c7;
+}
+
+.difficulty-badge.avanzado {
+  background-color: #fee2e2;
+  color: #ef4444;
+}
+
+.challenge-title {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: #1e293b;
+  margin-bottom: 0.75rem;
+  padding-right: 5rem;
+  line-height: 1.3;
+}
+
+.challenge-description {
+  color: #64748b;
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+  font-size: 0.95rem;
+}
+
+.challenge-categories {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.challenge-category {
+  background: linear-gradient(135deg, #f1f5f9, #e2e8f0);
+  color: #475569;
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 0.2rem 0.75rem;
+  border-radius: 100px;
+}
+
+.challenge-stats {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+  border-top: 1px solid #f1f5f9;
+  padding-top: 1rem;
+}
+
+.stat {
+  display: flex;
+  align-items: center;
+  font-size: 0.9rem;
+  color: #475569;
+}
+
+.stat-icon {
+  margin-right: 0.5rem;
+  font-size: 1rem;
+}
+
+.challenge-footer {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.challenge-creator {
+  display: flex;
+  align-items: center;
+  font-size: 0.85rem;
+  color: #64748b;
+}
+
+.creator-avatar {
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-right: 0.5rem;
+  border: 2px solid white;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.challenge-button {
+  background: linear-gradient(135deg, #4a6cf7, #2563eb);
+  color: white;
+  padding: 0.75rem;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  text-decoration: none;
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+.challenge-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2);
+}
+
+.principiante {
+  border-top-color: #16a34a;
+}
+
+.intermedio {
+  border-top-color: #0284c7;
+}
+
+.avanzado {
+  border-top-color: #ef4444;
+}
+
+.see-all-container {
+  text-align: center;
+  margin-top: 1rem;
+}
+
+.see-all-button {
+  display: inline-block;
+  background: transparent;
+  border: 2px solid #2563eb;
+  color: #2563eb;
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.see-all-button:hover {
+  background: #2563eb;
+  color: white;
+}
+
+.challenges-loading, 
+.challenges-error,
+.no-challenges {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 300px;
+  width: 100%;
+  text-align: center;
+  color: var(--color-text-medium);
+}
+
+.challenges-error {
+  background-color: rgba(239, 68, 68, 0.05);
+  border-radius: var(--border-radius-lg);
+  padding: 2rem;
+}
+
+.retry-button {
+  margin-top: 1rem;
+  padding: 0.5rem 1.5rem;
+  background: var(--color-primary);
+  color: white;
+  border: none;
+  border-radius: var(--border-radius-md);
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.retry-button:hover {
+  background: var(--color-primary-dark);
+  transform: translateY(-2px);
+}
+
+@media (max-width: 768px) {
+  .challenges-container {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+}

@@ -1,56 +1,108 @@
 import 'reflect-metadata';
-import express from 'express';
+import express, { Request, Response, NextFunction } from 'express';
 import cors from 'cors';
-import dotenv from 'dotenv';
-import authRoutes from './routes/auth.routes';
-import retoRoutes from './routes/reto.routes';
-import planEstudioRoutes from './routes/planEstudio.routes';
-import apunteRoutes from './routes/apunte.routes';
-import participacionRoutes from './routes/participacion.routes';
-import logroRoutes from './routes/logro.routes';
-import notFoundHandler from './middlewares/notFoundHandler';
-import errorHandler from './middlewares/errorHandler';
-import fs from 'fs';
-import path from 'path';
+import morgan from 'morgan';
+import http from 'http';
+import { AppDataSource } from './data-source';
+import apiRoutes from './routes';
+import env from './config/env.config';
+import { configurarJobs } from './config/job-config';
+import { initializeSocketServer } from './websockets/notification-socket';
 
-// Configuración inicial
-dotenv.config();
-const app = express();
-const PORT = process.env.PORT || 5000;
-
-// Asegurarse de que exista el directorio temporal para subidas
-const tempDir = path.join(__dirname, '../uploads/temp');
-if (!fs.existsSync(tempDir)) {
-  fs.mkdirSync(tempDir, { recursive: true });
+// Declaración para la variable global de socketServer
+declare global {
+  var socketServer: any;
 }
 
+// Inicializar Express
+const app = express();
+
 // Middleware
-app.use(cors());
+app.use(cors({
+  origin: env.frontendUrl,
+  credentials: true
+}));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(morgan('dev'));
 
-// Rutas
-app.use('/api/auth', authRoutes);
-app.use('/api/retos', retoRoutes);
-app.use('/api/planes', planEstudioRoutes);
-app.use('/api/apuntes', apunteRoutes);
-app.use('/api/participacion', participacionRoutes);
-app.use('/api/logros', logroRoutes);
+// Rutas API
+app.use('/api', apiRoutes);
 
-// Ruta de prueba
-app.get('/', (req, res) => {
-  res.send('API de Challenge Plans funcionando correctamente');
+// Ruta de estado para health checks
+app.get('/health', (req: Request, res: Response) => {
+  res.status(200).json({ 
+    status: 'UP',
+    timestamp: new Date(),
+    environment: env.nodeEnv
+  });
 });
 
-// Middleware para manejar rutas no encontradas (404)
-// Debe ir después de todas las rutas válidas
-app.use(notFoundHandler);
-
-// Middleware para manejar errores (500)
-// Debe ser el último middleware
-app.use(errorHandler);
-
-// Iniciar servidor
-app.listen(PORT, () => {
-  console.log(`Servidor corriendo en el puerto ${PORT}`);
+// Middleware para manejo de rutas no encontradas
+app.use('*', (req: Request, res: Response) => {
+  res.status(404).json({ 
+    message: 'Ruta no encontrada',
+    path: req.originalUrl
+  });
 });
+
+// Middleware para manejo de errores global
+app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
+  console.error('Error no manejado:', err);
+  
+  const statusCode = 'statusCode' in err ? (err as any).statusCode : 500;
+  
+  res.status(statusCode).json({
+    message: err.message || 'Error interno del servidor',
+    error: env.isProd ? undefined : err.stack
+  });
+});
+
+// Función para iniciar el servidor
+async function bootstrap() {
+  try {
+    // Inicializar conexión a la base de datos
+    await AppDataSource.initialize();
+    console.log('✅ Conexión a la base de datos establecida correctamente');
+
+    // Crear servidor HTTP
+    const server = http.createServer(app);
+    
+    // Inicializar Socket.IO para notificaciones en tiempo real
+    const io = initializeSocketServer(server);
+    global.socketServer = io;
+    
+    // Configurar jobs programados
+    configurarJobs();
+
+    // Iniciar el servidor
+    const PORT = env.port;
+    server.listen(PORT, () => {
+      console.log(`🚀 Servidor ejecutándose en http://localhost:${PORT}`);
+      console.log(`🌎 Entorno: ${env.nodeEnv}`);
+      console.log(`🔌 Socket.IO inicializado para notificaciones en tiempo real`);
+    });
+
+  } catch (error) {
+    console.error('❌ Error al iniciar el servidor:', error);
+    process.exit(1);
+  }
+}
+
+// Iniciar la aplicación
+bootstrap();
+
+// Manejo de señales para cierre correcto
+process.on('SIGTERM', async () => {
+  console.log('🛑 SIGTERM recibido. Cerrando servidor...');
+  await AppDataSource.destroy();
+  process.exit(0);
+});
+
+process.on('SIGINT', async () => {
+  console.log('🛑 SIGINT recibido. Cerrando servidor...');
+  await AppDataSource.destroy();
+  process.exit(0);
+});
+
+export default app; // Exportamos app para pruebas

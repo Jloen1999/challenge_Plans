@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="300" viewBox="0 0 400 300" fill="none">
+  <!-- Definición de gradientes -->
+  <defs>
+    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f1f5f9" />
+      <stop offset="100%" stop-color="#e2e8f0" />
+    </linearGradient>
+    <linearGradient id="accentGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#4a6cf7" />
+      <stop offset="100%" stop-color="#2563eb" />
+    </linearGradient>
+  </defs>
+
+  <!-- Fondo circular -->
+  <circle cx="200" cy="160" r="130" fill="url(#bgGradient)" opacity="0.6" />
+  
+  <!-- Carpeta vacía -->
+  <g transform="translate(100, 80)">
+    <!-- Base de la carpeta -->
+    <path d="M200 140H0V40H60L80 20H140V40H200V140Z" fill="white" stroke="#94a3b8" stroke-width="4" />
+    
+    <!-- Frente de la carpeta -->
+    <path d="M210 140H-10L10 60H190L210 140Z" fill="white" stroke="#94a3b8" stroke-width="4" />
+    
+    <!-- Signos de interrogación (elementos faltantes) -->
+    <g>
+      <circle cx="70" cy="100" r="15" fill="url(#accentGradient)" opacity="0.7" />
+      <path d="M70 93L70 97C70 98 70 101 73 102C75 103 78 103 78 106C78 109 75 109 73 109C70 109 70 106 70 105" stroke="white" stroke-width="4" stroke-linecap="round" />
+      <circle cx="70" cy="114" r="2" fill="white" />
+    </g>
+    
+    <g>
+      <circle cx="110" cy="85" r="15" fill="url(#accentGradient)" opacity="0.9" />
+      <path d="M110 78L110 82C110 83 110 86 113 87C115 88 118 88 118 91C118 94 115 94 113 94C110 94 110 91 110 90" stroke="white" stroke-width="4" stroke-linecap="round" />
+      <circle cx="110" cy="99" r="2" fill="white" />
+    </g>
+    
+    <g>
+      <circle cx="150" cy="100" r="15" fill="url(#accentGradient)" opacity="0.7" />
+      <path d="M150 93L150 97C150 98 150 101 153 102C155 103 158 103 158 106C158 109 155 109 153 109C150 109 150 106 150 105" stroke="white" stroke-width="4" stroke-linecap="round" />
+      <circle cx="150" cy="114" r="2" fill="white" />
+    </g>
+
+    <!-- Línea de búsqueda -->
+    <line x1="50" y1="60" x2="150" y2="60" stroke="#cbd5e1" stroke-width="4" stroke-dasharray="6 4" />
+  </g>
+  
+  <!-- Texto de estado vacío -->
+  <text x="200" y="240" text-anchor="middle" font-family="Arial" font-size="18" font-weight="bold" fill="#475569">No se encontraron elementos</text>
+  <text x="200" y="265" text-anchor="middle" font-family="Arial" font-size="14" fill="#64748b">Intenta con otros criterios de búsqueda</text>
+</svg>

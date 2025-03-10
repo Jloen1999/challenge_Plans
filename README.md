@@ -1,86 +1,46 @@
-# Plataforma de Aprendizaje Colaborativo para Estudiantes
+# 🚀 Challenge Plans - Plataforma de Aprendizaje Colaborativo
 
-## Descripción General
+![Version](https://img.shields.io/badge/version-1.0\.0-blue)
+![Node](https://img.shields.io/badge/node-v16+-green)
+![PostgreSQL](https://img.shields.io/badge/PostgreSQL-14+-blue)
+![TypeORM](https://img.shields.io/badge/TypeORM-^0.3\.17-orange)
 
-Plataforma web diseñada para estudiantes que buscan un entorno interactivo y seguro para el aprendizaje colaborativo. Facilita la creación y participación en retos académicos personalizables, la organización de planes de estudio, la gestión de tareas, el intercambio de apuntes y ofrece un sistema de recompensas gamificado.
+Una plataforma web diseñada para estudiantes que buscan un entorno interactivo y seguro para el aprendizaje colaborativo. Facilita la creación y participación en retos académicos personalizables, la organización de planes de estudio, la gestión de tareas, el intercambio de apuntes y ofrece un sistema de recompensas gamificado.
 
-## Índice
+---
 
-- [Plataforma de Aprendizaje Colaborativo para Estudiantes](#plataforma-de-aprendizaje-colaborativo-para-estudiantes)
-  - [Descripción General](#descripción-general)
-  - [Índice](#índice)
-  - [Objetivos](#objetivos)
-  - [Requisitos](#requisitos)
-    - [1. Requisitos Funcionales](#1-requisitos-funcionales)
-    - [2. Requisitos No Funcionales](#2-requisitos-no-funcionales)
-  - [Casos de Uso](#casos-de-uso)
-    - [CU02: Crear un Reto](#cu02-crear-un-reto)
-    - [CU03: Unirse a un Reto](#cu03-unirse-a-un-reto)
-    - [CU04: Gestionar Planes de Estudio](#cu04-gestionar-planes-de-estudio)
-    - [CU05: Subir Apuntes](#cu05-subir-apuntes)
-    - [CU06: Gestionar Tareas de un Reto](#cu06-gestionar-tareas-de-un-reto)
-    - [CU07: Actualizar Progreso en un Reto](#cu07-actualizar-progreso-en-un-reto)
-    - [CU08: Obtener Recompensas](#cu08-obtener-recompensas)
-    - [CU09: Registrar Logros](#cu09-registrar-logros)
-    - [CU10: Categorizar Retos](#cu10-categorizar-retos)
-      - [CU11: Subir y Descargar Apuntes](#cu11-subir-y-descargar-apuntes)
-  - [Tecnologías](#tecnologías)
-  - [Estructura del Proyecto](#estructura-del-proyecto)
-  - [Configuración Inicial](#configuración-inicial)
-    - [Backend](#backend)
-    - [Frontend](#frontend)
-  - [Versión 1: Modelo de Base de Datos](#versión-1-modelo-de-base-de-datos)
-  - [Versión 2: Modelo de bases de datos (Normalizado)](#versión-2-modelo-de-bases-de-datos-normalizado)
-    - [SQL Completo con Mejoras](#sql-completo-con-mejoras)
-    - [Explicación de las Mejoras Implementadas](#explicación-de-las-mejoras-implementadas)
-  - [**Explicación de Atributos por Tabla**](#explicación-de-atributos-por-tabla)
-    - [**1. usuarios**](#1-usuarios)
-    - [**2. categorias**](#2-categorias)
-    - [**3. retos**](#3-retos)
-    - [**4. reto\_categorias**](#4-reto_categorias)
-    - [**5. participacion\_retos**](#5-participacion_retos)
-    - [**6. tareas**](#6-tareas)
-    - [**7. planes\_estudio**](#7-planes_estudio)
-    - [**8. apuntes**](#8-apuntes)
-    - [**9. recompensas**](#9-recompensas)
-    - [**10. usuario\_recompensas**](#10-usuario_recompensas)
-    - [**11. logros**](#11-logros)
-  - [**Relaciones entre Tablas**](#relaciones-entre-tablas)
-    - [**Relaciones Principales**](#relaciones-principales)
-- [Registrarse en Supabase](#registrarse-en-supabase)
-- [Obtener las credenciales de conexión a supabase y almacenarlas en un .env](#obtener-las-credenciales-de-conexión-a-supabase-y-almacenarlas-en-un-env)
-- [Cómo comprobar la conexión a la base de datos en Supabase](#cómo-comprobar-la-conexión-a-la-base-de-datos-en-supabase)
-  - [1. Ejecutar el script de prueba typescript](#1-ejecutar-el-script-de-prueba-typescript)
-  - [3. Interpretar los resultados](#3-interpretar-los-resultados)
-    - [Si la conexión es exitosa, verás:](#si-la-conexión-es-exitosa-verás)
-    - [Si hay un error de conexión, verás:](#si-hay-un-error-de-conexión-verás)
-  - [Posibles problemas y soluciones:](#posibles-problemas-y-soluciones)
-- [Formas de ejecutar el script de creación de las tablas e inserción de registros](#formas-de-ejecutar-el-script-de-creación-de-las-tablas-e-inserción-de-registros)
-  - [1. Ejecutar el script en el editor de Supabase](#1-ejecutar-el-script-en-el-editor-de-supabase)
-  - [2. Ejecutar el typescript en el terminal con el comando ``npx ts-node src/create-tables.ts``](#2-ejecutar-el-typescript-en-el-terminal-con-el-comando-npx-ts-node-srccreate-tablests)
-- [Guía para ejecutar la aplicación web Challenge Plans](#guía-para-ejecutar-la-aplicación-web-challenge-plans)
-  - [1. Preparar y ejecutar el Backend](#1-preparar-y-ejecutar-el-backend)
-  - [Verificar la conexión a la base de datos](#verificar-la-conexión-a-la-base-de-datos)
-  - [Ejecutar el servidor backend](#ejecutar-el-servidor-backend)
-  - [Inicia el servidor](#inicia-el-servidor)
-  - [O puedes usar](#o-puedes-usar)
-  - [Ejecutar la aplicación React](#ejecutar-la-aplicación-react)
-  - [Ver la aplicación en el navegador](#ver-la-aplicación-en-el-navegador)
+## 📋 Índice
 
-## Objetivos
+- [Objetivos](#-objetivos)
+- [Requisitos](#-requisitos)
+- [Tecnologías](#-tecnologías)
+- [Configuración del Entorno](#-configuración-del-entorno)
+- [Configuración de la Base de Datos](#-configuración-de-la-base-de-datos)
+- [Arquitectura y Componentes](#-arquitectura-y-componentes)
+- [Modelo de Base de Datos](#-modelo-de-base-de-datos)
+- [Desarrollo](#-desarrollo)
+- [API Endpoints](#-api-endpoints)
+- [Ejecutar el Proyecto](#-ejecutar-el-proyecto)
+- [Pruebas](#-pruebas)
 
-* **Fomentar el aprendizaje colaborativo:** Facilitando la creación y participación en retos académicos.
-* **Organización eficiente:** Permitir la creación y gestión de planes de estudio con tareas y plazos definidos.
+---
+
+## 🎯 Objetivos
+
+* **Fomentar el aprendizaje colaborativo:** Facilitar la creación y participación en retos académicos.
+* **Organización eficiente:** Permitir la creación y gestión de planes de estudio con tareas y plazos.
 * **Repositorio colaborativo:** Ofrecer un espacio para compartir y acceder a apuntes digitales.
 * **Motivación:** Implementar un sistema de gamificación con recompensas por logros.
 * **Rendimiento y seguridad:** Garantizar la escalabilidad y seguridad en el manejo de datos.
 
-## Requisitos
+---
+
+## 📝 Requisitos
 
 ### 1. Requisitos Funcionales
-Los **requisitos funcionales** describen las capacidades que la plataforma debe ofrecer a los usuarios.
+
 | ID   | Descripción                                                         | Prioridad |
-| :--- | :------------------------------------------------------------------ | :-------- |
+|:-----|:--------------------------------------------------------------------|:----------|
 | RF01 | Autenticación de usuarios (registro/inicio sesión)                  | Alta      |
 | RF02 | Creación/edición de retos con tareas y plazos                       | Alta      |
 | RF03 | Unirse a retos existentes                                           | Alta      |
@@ -91,982 +51,891 @@ Los **requisitos funcionales** describen las capacidades que la plataforma debe 
 | RF08 | Buscar retos y apuntes por categorías o etiquetas                   | Baja      |
 | RF09 | Permitir interacción social (comentarios o valoraciones en apuntes) | Baja      |
 
-**Notas:**
-
-- Los requisitos de alta prioridad (RF01 a RF03) son esenciales para la funcionalidad básica de la plataforma.
-  
-- RF04 a RF07 amplían las capacidades y mejoran la experiencia del usuario.
-  
-- RF08 y RF09 son funcionalidades adicionales que podrían implementarse en fases posteriores
-
 ### 2. Requisitos No Funcionales
-Los **requisitos no funcionales** aseguran que la plataforma sea eficiente, segura y escalable.
 
-- **Rendimiento:** La plataforma debe responder en menos de 2 segundos para el 95% de las solicitudes.
-  
-- **Seguridad:**
-    - Encriptación AES-256 para contraseñas.
-  
-    - Uso de JWT (JSON Web Tokens) con *refresh tokens* para la gestión de sesiones.
-  
-- **Escalabilidad:** Diseño modular que permita añadir nuevas funcionalidades sin afectar las existentes.
-  
-- **Compatibilidad:** Soporte para las últimas dos versiones de navegadores como Chrome, Firefox, Safari y Edge.
-  
-- **Disponibilidad:** Garantizar un 99.9% de tiempo de actividad mediante balanceo de carga y redundancia.
-  
-- **Usabilidad:** Interfaz intuitiva y responsiva, adaptable a dispositivos móviles y de escritorio.
-
-## Casos de Uso
-
-### CU02: Crear un Reto
-
-- **Actor:** Usuario (Estudiante)
-  
-- **Descripción:** Crear un nuevo reto académico con tareas y plazos definidos.
-  
-- **Precondiciones:** El usuario está autenticado.
-  
-- **Flujo Principal:**
-    1. El usuario selecciona "Crear Reto" desde el *dashboard*.
-  
-    2. Rellena un formulario con título, descripción, categoría, fechas límite y tareas (título, descripción, puntos).
-  
-    3. El sistema valida que las fechas sean correctas (fecha fin &gt; fecha inicio).
-  
-    4. El reto se publica y queda disponible para que otros usuarios se unan.
-  
-- **Excepciones:**
-    - Fechas inválidas o título duplicado: Mostrar mensaje de error.
-
-* * *
-
-### CU03: Unirse a un Reto
-
-- **Actor:** Usuario (Estudiante)
-  
-- **Descripción:** Participar en un reto creado por otro usuario.
-  
-- **Precondiciones:** El usuario está autenticado y el reto está disponible.
-  
-- **Flujo Principal:**
-    1. El usuario busca retos en la sección "Explorar".
-  
-    2. Visualiza detalles del reto (tareas, participantes, plazo).
-  
-    3. Selecciona "Unirse al Reto" y recibe confirmación.
-  
-- **Excepciones:**
-    - Reto no disponible o ya completado: Mostrar mensaje de error.
-
-* * *
-
-### CU04: Gestionar Planes de Estudio
-
-- **Actor:** Usuario (Estudiante)
-  
-- **Descripción:** Crear, editar o eliminar un plan de estudio.
-  
-- **Precondiciones:** El usuario está autenticado.
-  
-- **Flujo Principal:**
-    1. El usuario selecciona "Crear Plan de Estudio" desde el *dashboard*.
-  
-    2. Rellena un formulario con título, descripción, fecha de inicio y duración en días.
-  
-    3. El sistema guarda el plan y lo asocia al usuario.
-  
-- **Excepciones:**
-    - Duración inválida (menor o igual a 0): Mostrar mensaje de error.
-
-* * *
-
-### CU05: Subir Apuntes
-
-- **Actor:** Usuario (Estudiante)
-  
-- **Descripción:** Subir apuntes en formato PDF, Markdown o DOCX.
-  
-- **Precondiciones:** El usuario está autenticado.
-  
-- **Flujo Principal:**
-    1. El usuario selecciona "Subir Apunte" desde el *dashboard*.
-  
-    2. Ingresa título, selecciona formato y opcionalmente lo asocia a un reto o plan de estudio.
-  
-    3. El sistema guarda el apunte y lo hace disponible para descarga.
-  
-- **Excepciones:**
-    - Formato no permitido: Mostrar mensaje de error.
-
-* * *
-
-### CU06: Gestionar Tareas de un Reto
-
-- **Actor:** Usuario (Creador del Reto)
-  
-- **Descripción:** Añadir, editar o eliminar tareas dentro de un reto.
-  
-- **Precondiciones:** El usuario está autenticado y es el creador del reto.
-  
-- **Flujo Principal:**
-    1. El usuario accede al panel de gestión del reto.
-  
-    2. Selecciona "Añadir Tarea" y rellena título, descripción, puntos y tipo.
-  
-    3. El sistema guarda la tarea y la asocia al reto.
-  
-- **Excepciones:**
-    - Puntos inválidos (menor o igual a 0): Mostrar mensaje de error.
-
-* * *
-
-### CU07: Actualizar Progreso en un Reto
-
-- **Actor:** Usuario (Participante del Reto)
-  
-- **Descripción:** Actualizar el progreso personal en un reto.
-  
-- **Precondiciones:** El usuario está autenticado y participa en el reto.
-  
-- **Flujo Principal:**
-    1. El usuario accede al panel del reto.
-  
-    2. Marca tareas como completadas o actualiza el porcentaje de progreso.
-  
-    3. El sistema registra el nuevo progreso.
-  
-- **Excepciones:**
-    - Progreso fuera de rango (0-100): Mostrar mensaje de error.
-
-* * *
-
-### CU08: Obtener Recompensas
-
-- **Actor:** Usuario (Estudiante)
-  
-- **Descripción:** Obtener recompensas automáticamente al cumplir ciertos criterios.
-  
-- **Precondiciones:** El usuario está autenticado y cumple con los criterios de obtención.
-  
-- **Flujo Principal:**
-    1. El sistema verifica si el usuario ha cumplido con un criterio (ej., completar un reto).
-  
-    2. Si se cumple, el sistema asigna la recompensa correspondiente.
-  
-    3. El usuario puede ver sus recompensas en su perfil.
-  
-- **Excepciones:**
-    - Criterio no cumplido: No se asigna recompensa.
-
-* * *
-
-### CU09: Registrar Logros
-
-- **Actor:** Sistema (automático)
-  
-- **Descripción:** Registrar logros del usuario, como completar tareas o unirse a retos.
-  
-- **Precondiciones:** El usuario realiza una acción que genera un logro.
-  
-- **Flujo Principal:**
-    1. El usuario realiza una acción (ej., completar una tarea).
-  
-    2. El sistema registra el logro en la base de datos.
-  
-    3. El logro se asocia al usuario y a la acción realizada.
-  
-- **Excepciones:**
-    - Acción no válida: No se registra logro.
-
-* * *
-
-### CU10: Categorizar Retos
-
-- **Actor:** Usuario (Creador del Reto)
-  
-- **Descripción:** Asignar una o más categorías a un reto.
-  
-- **Precondiciones:** El usuario está autenticado y es el creador del reto.
-  
-- **Flujo Principal:**
-    1. Durante la creación o edición del reto, el usuario selecciona categorías.
-  
-    2. El sistema asocia el reto a las categorías seleccionadas.
-  
-    3. Las categorías aparecen en la descripción del reto.
-  
-- **Excepciones:**
-    - Categoría no existente: Mostrar mensaje de error.
-
-#### CU11: Subir y Descargar Apuntes
-
-- **Actor:** Estudiante
-  
-- **Descripción:** Compartir y acceder a apuntes.
-  
-- **Flujo Principal:**
-    1. Selecciona "Subir Apunte" desde el *dashboard*.
-  
-    2. Ingresa título, selecciona formato (PDF, imagen, texto) y asocia opcionalmente a un reto o plan.
-  
-    3. Otros usuarios pueden descargar el apunte desde la sección correspondiente.
-
-
-## Tecnologías
-
-* **Frontend:** React + TypeScript, Redux Toolkit, React Router, Axios.
-* **Backend:** Express.js + TypeScript, PostgreSQL (Supabase), TypeORM.
-* **Autenticación:** JWT con refresh tokens.
-* **Almacenamiento:** Supabase Storage para archivos.
-* **Extra:** Socket.io para notificaciones en tiempo real.
-
-## Estructura del Proyecto
-
-```text
-/backend
-  ├── src/
-  │   ├── controllers/ # Lógica de endpoints
-  │   ├── models/      # Entidades de DB
-  │   └── config/      # Variables de entorno
-  ├── package.json
-  └── tsconfig.json
-
-/frontend
-  ├── src/
-  │   ├── components/  # Componentes reutilizables
-  │   ├── pages/       # Vistas principales
-  │   ├── hooks/       # Custom hooks
-  │   ├── services/    # Conexión a APIs
-  │   └── assets/      # Imágenes/fuentes
-  ├── package.json
-  └── vite.config.ts
-```
-
-## Configuración Inicial
-
-### Backend
-
-```bash
-npm init -y
-npm install express typescript ts-node @types/express pg typeorm reflect-metadata dotenv
-npx tsc --init # Configurar outDir como "./dist"
-npm install cors
-npm install @types/cors
-npm install pg fs path
-npm install jsonwebtoken bcryptjs express-validator --save
-npm i --save-dev @types/jsonwebtoken
-# Instala multer y sus tipos
-npm install multer
-npm install @types/multer --save-dev
-
-# Instala otras dependencias necesarias para el controlador de apuntes
-npm install @supabase/supabase-js uuid
-npm install @types/uuid --save-dev
-npm install @types/morgan --save-dev
-
-```
-
-### Frontend
-
-```bash
-npm create vite@latest frontend -- --template react-ts
-cd frontend
-npm install @reduxjs/toolkit react-router-dom axios socket.io-client
-npm install react-icons
-npm install marked @types/marked
-npm install dompurify
-npm install --save-dev @types/dompurify
-npm install @aws-sdk/client-s3 @aws-sdk/s3-request-presigner
-npm install uuid
-```
-
-## Versión 1: Modelo de Base de Datos
-
-```sql
--- Tabla de Usuarios (sin cambios)
-CREATE TABLE usuarios (
-    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-    email VARCHAR(255) UNIQUE NOT NULL CHECK (email ~* '^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$'),
-    hash_contraseña VARCHAR(255) NOT NULL,
-    nombre VARCHAR(100) NOT NULL,
-    fecha_registro TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    puntaje INT DEFAULT 0 CHECK (puntaje >= 0)
-);
-
--- Tabla de Retos (añadida relación con planes_estudio)
-CREATE TABLE retos (
-    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-    creador_id UUID NOT NULL REFERENCES usuarios(id) ON DELETE CASCADE,
-    visibilidad VARCHAR(10) DEFAULT 'privado' CHECK (visibilidad IN ('publico', 'privado')),
-    plan_estudio_id UUID REFERENCES planes_estudio(id) ON DELETE SET NULL,
-    titulo VARCHAR(150) NOT NULL,
-    descripcion TEXT,
-    fecha_inicio DATE NOT NULL,
-    fecha_fin DATE NOT NULL CHECK (fecha_fin > fecha_inicio),
-    estado VARCHAR(20) DEFAULT 'activo' CHECK (estado IN ('activo', 'completado', 'cancelado')),
-    dificultad VARCHAR(15) CHECK (dificultad IN ('principiante', 'intermedio', 'avanzado'))
-);
-
--- Tabla de Participación en Retos (sin cambios)
-CREATE TABLE participacion_retos (
-    usuario_id UUID REFERENCES usuarios(id) ON DELETE CASCADE,
-    reto_id UUID REFERENCES retos(id) ON DELETE CASCADE,
-    fecha_union TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    progreso INT DEFAULT 0 CHECK (progreso BETWEEN 0 AND 100),
-    PRIMARY KEY (usuario_id, reto_id)
-);
-
--- Tabla de Tareas (añadida relación con usuarios para asignación)
-CREATE TABLE tareas (
-    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-    reto_id UUID NOT NULL REFERENCES retos(id) ON DELETE CASCADE,
-    asignado_a UUID REFERENCES usuarios(id) ON DELETE SET NULL,
-    titulo VARCHAR(100) NOT NULL,
-    descripcion TEXT,
-    puntos INT NOT NULL CHECK (puntos > 0),
-    fecha_limite DATE,
-    tipo VARCHAR(20) CHECK (tipo IN ('lectura', 'ejercicio', 'proyecto'))
-);
-
--- Tabla de Planes de Estudio (sin cambios)
-CREATE TABLE planes_estudio (
-    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-    usuario_id UUID NOT NULL REFERENCES usuarios(id) ON DELETE CASCADE,
-    titulo VARCHAR(150) NOT NULL,
-    descripcion TEXT,
-    fecha_creacion DATE DEFAULT CURRENT_DATE,
-    duracion_dias INT CHECK (duracion_dias > 0),
-    visibilidad VARCHAR(10) DEFAULT 'privado' CHECK (visibilidad IN ('publico', 'privado'))
-);
-
--- Tabla de Apuntes (añadida relación con planes_estudio)
-CREATE TABLE apuntes (
-    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-    usuario_id UUID NOT NULL REFERENCES usuarios(id) ON DELETE CASCADE,
-    reto_id UUID REFERENCES retos(id) ON DELETE SET NULL,
-    plan_estudio_id UUID REFERENCES planes_estudio(id) ON DELETE SET NULL,
-    titulo VARCHAR(200) NOT NULL,
-    contenido TEXT,
-    formato VARCHAR(10) CHECK (formato IN ('pdf', 'md', 'docx')),
-    fecha_subida TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    calificacion_promedio DECIMAL(3,2) DEFAULT 0.0 CHECK (calificacion_promedio BETWEEN 0 AND 5),
-    visibilidad VARCHAR(10) DEFAULT 'privado' CHECK (visibilidad IN ('publico', 'privado'))
-);
-
--- Tabla de Recompensas (sin cambios)
-CREATE TABLE recompensas (
-    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-    nombre VARCHAR(100) UNIQUE NOT NULL,
-    tipo VARCHAR(20) CHECK (tipo IN ('insignia', 'puntos', 'nivel')),
-    valor INT NOT NULL CHECK (valor > 0),
-    criterio_obtencion TEXT NOT NULL
-);
-
--- Tabla de Relación Usuario-Recompensas (sin cambios)
-CREATE TABLE usuario_recompensas (
-    usuario_id UUID REFERENCES usuarios(id) ON DELETE CASCADE,
-    recompensa_id UUID REFERENCES recompensas(id) ON DELETE CASCADE,
-    fecha_obtencion TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    PRIMARY KEY (usuario_id, recompensa_id)
-);
-```
-
-## Versión 2: Modelo de bases de datos (Normalizado)
-Este diseño incluye optimizaciones en la estructura, índices para consultas rápidas, campos de auditoría, soporte para gamificación y otras mejoras que facilitan el uso y la integración con APIs.
-
-### SQL Completo con Mejoras
-
-```sql
--- Tabla de Usuarios
-CREATE TABLE IF NOT EXISTS usuarios (
-    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-    email VARCHAR(255) UNIQUE NOT NULL CHECK (
-        email ~* '^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$'
-    ),
-    hash_contraseña VARCHAR(255) NOT NULL,
-    nombre VARCHAR(100) NOT NULL,
-    fecha_registro TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    puntaje INT DEFAULT 0 CHECK (puntaje >= 0),
-    creado_por UUID REFERENCES usuarios(id),
-    modificado_por UUID REFERENCES usuarios(id),
-    fecha_creacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    fecha_modificacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-);
--- Tabla de Categorías
-CREATE TABLE IF NOT EXISTS categorias (
-    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-    nombre VARCHAR(50) UNIQUE NOT NULL
-);
--- Tabla de Planes de Estudio (debe crearse antes que retos debido a la referencia)
-CREATE TABLE IF NOT EXISTS planes_estudio (
-    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-    usuario_id UUID NOT NULL REFERENCES usuarios(id) ON DELETE CASCADE,
-    titulo VARCHAR(150) NOT NULL,
-    descripcion TEXT,
-    fecha_inicio DATE DEFAULT CURRENT_DATE,
-    -- Cambiado de fecha_creacion a fecha_inicio
-    duracion_dias INT CHECK (duracion_dias > 0),
-    creado_por UUID REFERENCES usuarios(id),
-    modificado_por UUID REFERENCES usuarios(id),
-    fecha_creacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    fecha_modificacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-);
--- Tabla de Retos
-CREATE TABLE IF NOT EXISTS retos (
-    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-    creador_id UUID NOT NULL REFERENCES usuarios(id) ON DELETE CASCADE,
-    plan_estudio_id UUID REFERENCES planes_estudio(id) ON DELETE
-    SET NULL,
-        titulo VARCHAR(150) NOT NULL,
-        descripcion TEXT,
-        fecha_inicio DATE NOT NULL,
-        fecha_fin DATE NOT NULL CHECK (fecha_fin > fecha_inicio),
-        estado VARCHAR(20) DEFAULT 'activo' CHECK (estado IN ('activo', 'completado', 'cancelado')),
-        dificultad VARCHAR(15) CHECK (
-            dificultad IN ('principiante', 'intermedio', 'avanzado')
-        ),
-        creado_por UUID REFERENCES usuarios(id),
-        modificado_por UUID REFERENCES usuarios(id),
-        fecha_creacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-        fecha_modificacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-);
--- Tabla de Relación Retos-Categorías (N:M)
-CREATE TABLE IF NOT EXISTS reto_categorias (
-    reto_id UUID REFERENCES retos(id) ON DELETE CASCADE,
-    categoria_id UUID REFERENCES categorias(id) ON DELETE CASCADE,
-    PRIMARY KEY (reto_id, categoria_id)
-);
--- Tabla de Participación en Retos
-CREATE TABLE IF NOT EXISTS participacion_retos (
-    usuario_id UUID REFERENCES usuarios(id) ON DELETE CASCADE,
-    reto_id UUID REFERENCES retos(id) ON DELETE CASCADE,
-    fecha_union TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    progreso INT DEFAULT 0 CHECK (
-        progreso BETWEEN 0 AND 100
-    ),
-    PRIMARY KEY (usuario_id, reto_id)
-);
--- Tabla de Tareas
-CREATE TABLE IF NOT EXISTS tareas (
-    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-    reto_id UUID NOT NULL REFERENCES retos(id) ON DELETE CASCADE,
-    asignado_a UUID REFERENCES usuarios(id) ON DELETE
-    SET NULL,
-        titulo VARCHAR(100) NOT NULL,
-        descripcion TEXT,
-        puntos INT NOT NULL CHECK (puntos > 0),
-        fecha_limite DATE,
-        tipo VARCHAR(20) CHECK (tipo IN ('lectura', 'ejercicio', 'proyecto')),
-        creado_por UUID REFERENCES usuarios(id),
-        modificado_por UUID REFERENCES usuarios(id),
-        fecha_creacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-        fecha_modificacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-);
--- Tabla de Apuntes
-CREATE TABLE IF NOT EXISTS apuntes (
-    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-    usuario_id UUID NOT NULL REFERENCES usuarios(id) ON DELETE CASCADE,
-    reto_id UUID REFERENCES retos(id) ON DELETE
-    SET NULL,
-        documento_url VARCHAR DEFAULT 'https://rirdnwywjctumorueupm.supabase.co/storage/v1/object/sign/apuntes/dc985c50-12d8-4e3b-88a1-159896808903/cp.pdf?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJhcHVudGVzL2RjOTg1YzUwLTEyZDgtNGUzYi04OGExLTE1OTg5NjgwODkwMy9jcC5wZGYiLCJpYXQiOjE3NDA5MzUzNDYsImV4cCI6MTc3MjQ3MTM0Nn0.W7xIp6wlVwoSuAPNv0PfwnI0evY4Lr-bLQwGc5zAnvE'
-    SET NULL,
-        plan_estudio_id UUID REFERENCES planes_estudio(id) ON DELETE
-    SET NULL,
-        titulo VARCHAR(200) NOT NULL,
-        contenido TEXT,
-        formato VARCHAR(10) CHECK (formato IN ('pdf', 'md', 'docx')),
-        fecha_subida TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-        -- Esta es distinta de fecha_creacion
-        calificacion_promedio DECIMAL(3, 2) DEFAULT 0.0 CHECK (
-            calificacion_promedio BETWEEN 0 AND 5
-        ),
-        creado_por UUID REFERENCES usuarios(id),
-        modificado_por UUID REFERENCES usuarios(id),
-        fecha_creacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-        fecha_modificacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-);
--- Tabla de Recompensas
-CREATE TABLE IF NOT EXISTS recompensas (
-    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-    nombre VARCHAR(100) UNIQUE NOT NULL,
-    tipo VARCHAR(20) CHECK (tipo IN ('insignia', 'puntos', 'nivel')),
-    valor INT NOT NULL CHECK (valor > 0),
-    criterio_obtencion TEXT NOT NULL
-);
--- Tabla de Relación Usuario-Recompensas (N:M)
-CREATE TABLE IF NOT EXISTS usuario_recompensas (
-    usuario_id UUID REFERENCES usuarios(id) ON DELETE CASCADE,
-    recompensa_id UUID REFERENCES recompensas(id) ON DELETE CASCADE,
-    fecha_obtencion TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    PRIMARY KEY (usuario_id, recompensa_id)
-);
--- Tabla de Logros (para gamificación)
-CREATE TABLE IF NOT EXISTS logros (
-    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-    usuario_id UUID NOT NULL REFERENCES usuarios(id) ON DELETE CASCADE,
-    tipo VARCHAR(50) NOT NULL,
-    -- Ejemplo: 'completar_tarea', 'unirse_reto'
-    descripcion TEXT,
-    fecha TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-);
--- Índices para optimización de consultas
-CREATE INDEX IF NOT EXISTS idx_usuarios_email ON usuarios(email);
-CREATE INDEX IF NOT EXISTS idx_retos_titulo ON retos(titulo);
-CREATE INDEX IF NOT EXISTS idx_retos_estado ON retos(estado);
-CREATE INDEX IF NOT EXISTS idx_tareas_reto_id ON tareas(reto_id);
-CREATE INDEX IF NOT EXISTS idx_tareas_fecha_limite ON tareas(fecha_limite);
-CREATE INDEX IF NOT EXISTS idx_apuntes_titulo ON apuntes(titulo);
-CREATE INDEX IF NOT EXISTS idx_apuntes_fecha_subida ON apuntes(fecha_subida);
-CREATE INDEX IF NOT EXISTS idx_participacion_retos_usuario_id ON participacion_retos(usuario_id);
-CREATE INDEX IF NOT EXISTS idx_participacion_retos_reto_id ON participacion_retos(reto_id);
--- Vista para consultar el progreso en retos
-CREATE OR REPLACE VIEW vista_progreso_reto AS
-SELECT u.nombre,
-    r.titulo,
-    pr.progreso
-FROM participacion_retos pr
-    JOIN usuarios u ON pr.usuario_id = u.id
-    JOIN retos r ON pr.reto_id = r.id;
--- Índice de texto completo para búsqueda avanzada en títulos de retos
-CREATE INDEX IF NOT EXISTS idx_titulo_retos_text ON retos USING GIN (to_tsvector('spanish', titulo));
-```
+- **🔍 Rendimiento:** Respuesta < 2 segundos para el 95% de solicitudes.
+- **🔐 Seguridad:** JWT con refresh tokens y encriptación AES-256 para contraseñas.
+- **📈 Escalabilidad:** Arquitectura modular para expansión futura.
+- **💻 Compatibilidad:** Soporte para navegadores modernos y dispositivos móviles.
+- **⏱️ Disponibilidad:** Garantía de 99.9% de tiempo de actividad.
 
 ---
 
-### Explicación de las Mejoras Implementadas
-
-1. **Normalización y Relaciones:**
-   - Se incluyó la tabla `reto_categorias` para manejar relaciones N:M entre `retos` y `categorias`.
-   - La tabla `usuario_recompensas` permite asignar múltiples recompensas a usuarios.
-
-2. **Optimización de Consultas:**
-   - Se añadieron índices en campos frecuentemente consultados como `email`, `titulo`, `estado`, y claves foráneas.
-   - Un índice de texto completo (`idx_titulo_retos_text`) permite búsquedas avanzadas en los títulos de los retos.
-
-3. **Tipos de Datos:**
-   - Se usaron tipos como `UUID` para identificadores únicos y restricciones (`CHECK`) para garantizar integridad de datos.
-
-4. **Auditoría:**
-   - Campos como `creado_por`, `modificado_por`, `fecha_creacion` y `fecha_modificacion` se añadieron a las tablas principales para rastrear cambios.
-
-5. **Soporte a Gamificación:**
-   - La tabla `logros` registra eventos como completar tareas o unirse a retos.
-   - La tabla `recompensas` y su relación con `usuarios` permite gestionar insignias y puntos.
-
-6. **Facilitar APIs:**
-   - La vista `vista_progreso_reto` simplifica consultas complejas para mostrar el progreso de los usuarios en retos.
-
-7. **Experiencia del Usuario:**
-   - La estructura soporta búsqueda avanzada y categorización de retos para una mejor navegación.
-
-## **Explicación de Atributos por Tabla**
-
-### **1. usuarios**
-
-- **id**: UUID PRIMARY KEY DEFAULT gen\_random\_uuid()  
-Identificador único del usuario, generado automáticamente.
-  
-- **email**: VARCHAR(255) UNIQUE NOT NULL  
-Correo electrónico único para autenticación.
-  
-- **hash\_contraseña**: VARCHAR(255) NOT NULL  
-Contraseña encriptada del usuario.
-  
-- **nombre**: VARCHAR(100) NOT NULL  
-Nombre completo del usuario.
-  
-- **fecha\_registro**: TIMESTAMP DEFAULT CURRENT\_TIMESTAMP  
-Fecha y hora del registro del usuario.
-  
-- **puntaje**: INT DEFAULT 0 CHECK (puntaje &gt;= 0)  
-Puntos acumulados por el usuario en el sistema de gamificación.
-  
-- **creado\_por**: UUID REFERENCES usuarios(id)  
-ID del usuario que creó este registro (para auditoría).
-  
-- **modificado\_por**: UUID REFERENCES usuarios(id)  
-ID del usuario que modificó este registro por última vez.
-  
-- **fecha\_creacion**: TIMESTAMP DEFAULT CURRENT\_TIMESTAMP  
-Fecha y hora de creación del registro.
-  
-- **fecha\_modificacion**: TIMESTAMP DEFAULT CURRENT\_TIMESTAMP  
-Fecha y hora de la última modificación del registro.
-
-### **2. categorias**
-
-- **id**: UUID PRIMARY KEY DEFAULT gen\_random\_uuid()  
-Identificador único de la categoría.
-  
-- **nombre**: VARCHAR(50) UNIQUE NOT NULL  
-Nombre único de la categoría (ej., "Matemáticas", "Historia").
-
-### **3. retos**
-
-- **id**: UUID PRIMARY KEY DEFAULT gen\_random\_uuid()  
-Identificador único del reto.
-  
-- **creador\_id**: UUID NOT NULL REFERENCES usuarios(id) ON DELETE CASCADE  
-ID del usuario que creó el reto.
-  
-- **plan\_estudio\_id**: UUID REFERENCES planes\_estudio(id) ON DELETE SET NULL  
-ID del plan de estudio al que pertenece el reto (opcional).
-  
-- **titulo**: VARCHAR(150) NOT NULL  
-Título del reto.
-  
-- **descripcion**: TEXT  
-Descripción detallada del reto.
-  
-- **fecha\_inicio**: DATE NOT NULL  
-Fecha de inicio del reto.
-  
-- **fecha\_fin**: DATE NOT NULL CHECK (fecha\_fin &gt; fecha\_inicio)  
-Fecha de finalización del reto.
-  
-- **estado**: VARCHAR(20) DEFAULT 'activo' CHECK (estado IN ('activo', 'completado', 'cancelado'))  
-Estado actual del reto.
-  
-- **dificultad**: VARCHAR(15) CHECK (dificultad IN ('principiante', 'intermedio', 'avanzado'))  
-Nivel de dificultad del reto.
-  
-- **creado\_por**, **modificado\_por**, **fecha\_creacion**, **fecha\_modificacion**:  
-Campos de auditoría similares a los de usuarios.
-
-### **4. reto\_categorias**
-
-- **reto\_id**: UUID REFERENCES retos(id) ON DELETE CASCADE  
-ID del reto.
-  
-- **categoria\_id**: UUID REFERENCES categorias(id) ON DELETE CASCADE  
-ID de la categoría asociada al reto.
-  
-- **PRIMARY KEY (reto\_id, categoria\_id)**  
-Clave primaria compuesta para la relación muchos a muchos.
-
-### **5. participacion\_retos**
-
-- **usuario\_id**: UUID REFERENCES usuarios(id) ON DELETE CASCADE  
-ID del usuario que participa en el reto.
-  
-- **reto\_id**: UUID REFERENCES retos(id) ON DELETE CASCADE  
-ID del reto en el que participa el usuario.
-  
-- **fecha\_union**: TIMESTAMP DEFAULT CURRENT\_TIMESTAMP  
-Fecha y hora en que el usuario se unió al reto.
-  
-- **progreso**: INT DEFAULT 0 CHECK (progreso BETWEEN 0 AND 100)  
-Porcentaje de progreso del usuario en el reto.
-  
-- **PRIMARY KEY (usuario\_id, reto\_id)**  
-Clave primaria compuesta para la relación muchos a muchos.
-
-### **6. tareas**
-
-- **id**: UUID PRIMARY KEY DEFAULT gen\_random\_uuid()  
-Identificador único de la tarea.
-  
-- **reto\_id**: UUID NOT NULL REFERENCES retos(id) ON DELETE CASCADE  
-ID del reto al que pertenece la tarea.
-  
-- **asignado\_a**: UUID REFERENCES usuarios(id) ON DELETE SET NULL  
-ID del usuario al que se asigna la tarea (opcional).
-  
-- **titulo**: VARCHAR(100) NOT NULL  
-Título de la tarea.
-  
-- **descripcion**: TEXT  
-Descripción detallada de la tarea.
-  
-- **puntos**: INT NOT NULL CHECK (puntos &gt; 0)  
-Puntos otorgados al completar la tarea.
-  
-- **fecha\_limite**: DATE  
-Fecha límite para completar la tarea.
-  
-- **tipo**: VARCHAR(20) CHECK (tipo IN ('lectura', 'ejercicio', 'proyecto'))  
-Tipo de tarea.
-  
-- **creado\_por**, **modificado\_por**, **fecha\_creacion**, **fecha\_modificacion**:  
-Campos de auditoría.
-
-### **7. planes\_estudio**
-
-- **id**: UUID PRIMARY KEY DEFAULT gen\_random\_uuid()  
-Identificador único del plan de estudio.
-  
-- **usuario\_id**: UUID NOT NULL REFERENCES usuarios(id) ON DELETE CASCADE  
-ID del usuario que creó el plan de estudio.
-  
-- **titulo**: VARCHAR(150) NOT NULL  
-Título del plan de estudio.
-  
-- **descripcion**: TEXT  
-Descripción del plan de estudio.
-  
-- **fecha\_creacion**: DATE DEFAULT CURRENT\_DATE  
-Fecha de creación del plan.
-  
-- **duracion\_dias**: INT CHECK (duracion\_dias &gt; 0)  
-Duración estimada del plan en días.
-  
-- **creado\_por**, **modificado\_por**, **fecha\_creacion**, **fecha\_modificacion**:  
-Campos de auditoría.
-
-### **8. apuntes**
-
-- **id**: UUID PRIMARY KEY DEFAULT gen\_random\_uuid()  
-Identificador único del apunte.
-  
-- **usuario\_id**: UUID NOT NULL REFERENCES usuarios(id) ON DELETE CASCADE  
-ID del usuario que subió el apunte.
-  
-- **reto\_id**: UUID REFERENCES retos(id) ON DELETE SET NULL  
-ID del reto al que está asociado el apunte (opcional).
-  
-- **plan\_estudio\_id**: UUID REFERENCES planes\_estudio(id) ON DELETE SET NULL  
-ID del plan de estudio al que está asociado el apunte (opcional).
-  
-- **titulo**: VARCHAR(200) NOT NULL  
-Título del apunte.
-  
-- **contenido**: TEXT  
-Contenido del apunte (puede ser texto o referencia a un archivo).
-  
-- **formato**: VARCHAR(10) CHECK (formato IN ('pdf', 'md', 'docx'))  
-Formato del archivo del apunte.
-  
-- **fecha\_subida**: TIMESTAMP DEFAULT CURRENT\_TIMESTAMP  
-Fecha y hora de subida del apunte.
-  
-- **calificacion\_promedio**: DECIMAL(3,2) DEFAULT 0.0 CHECK (calificacion\_promedio BETWEEN 0 AND 5)  
-Calificación promedio dada por otros usuarios.
-  
-- **creado\_por**, **modificado\_por**, **fecha\_creacion**, **fecha\_modificacion**:  
-Campos de auditoría.
-
-### **9. recompensas**
-
-- **id**: UUID PRIMARY KEY DEFAULT gen\_random\_uuid()  
-Identificador único de la recompensa.
-  
-- **nombre**: VARCHAR(100) UNIQUE NOT NULL  
-Nombre único de la recompensa.
-  
-- **tipo**: VARCHAR(20) CHECK (tipo IN ('insignia', 'puntos', 'nivel'))  
-Tipo de recompensa.
-  
-- **valor**: INT NOT NULL CHECK (valor &gt; 0)  
-Valor numérico de la recompensa.
-  
-- **criterio\_obtencion**: TEXT NOT NULL  
-Descripción del criterio para obtener la recompensa.
-
-### **10. usuario\_recompensas**
-
-- **usuario\_id**: UUID REFERENCES usuarios(id) ON DELETE CASCADE  
-ID del usuario que obtuvo la recompensa.
-  
-- **recompensa\_id**: UUID REFERENCES recompensas(id) ON DELETE CASCADE  
-ID de la recompensa obtenida.
-  
-- **fecha\_obtencion**: TIMESTAMP DEFAULT CURRENT\_TIMESTAMP  
-Fecha y hora en que se obtuvo la recompensa.
-  
-- **PRIMARY KEY (usuario\_id, recompensa\_id)**  
-Clave primaria compuesta para la relación muchos a muchos.
-
-### **11. logros**
-
-- **id**: UUID PRIMARY KEY DEFAULT gen\_random\_uuid()  
-Identificador único del logro.
-  
-- **usuario\_id**: UUID NOT NULL REFERENCES usuarios(id) ON DELETE CASCADE  
-ID del usuario que realizó el logro.
-  
-- **tipo**: VARCHAR(50) NOT NULL  
-Tipo de logro (ej., "completar\_tarea", "unirse\_reto").
-  
-- **descripcion**: TEXT  
-Descripción detallada del logro.
-  
-- **fecha**: TIMESTAMP DEFAULT CURRENT\_TIMESTAMP  
-Fecha y hora en que se registró el logro.
-
-* * *
-
-## **Relaciones entre Tablas**
-
-### **Relaciones Principales**
-
-- **usuarios** ↔ **retos**:  
-
-    - **Creador** (1:N): Un usuario puede crear múltiples retos (creador\_id en retos).
-  
-    - **Participación** (N:M): Un usuario puede participar en múltiples retos y un reto puede tener múltiples participantes (a través de participacion\_retos).
-  
-- **usuarios** ↔ **planes\_estudio**:  
-
-    - Relación 1:N: Un usuario puede crear múltiples planes de estudio (usuario\_id en planes\_estudio).
-  
-- **usuarios** ↔ **apuntes**:  
-
-    - Relación 1:N: Un usuario puede subir múltiples apuntes (usuario\_id en apuntes).
-  
-- **usuarios** ↔ **recompensas**:  
-
-    - Relación N:M: Un usuario puede obtener múltiples recompensas y una recompensa puede ser obtenida por múltiples usuarios (a través de usuario\_recompensas).
-  
-- **retos** ↔ **tareas**:  
-
-    - Relación 1:N: Un reto puede tener múltiples tareas (reto\_id en tareas).
-  
-- **retos** ↔ **categorias**:  
-
-    - Relación N:M: Un reto puede pertenecer a múltiples categorías y una categoría puede estar asociada a múltiples retos (a través de reto\_categorias).
-  
-- **planes\_estudio** ↔ **retos**:  
-
-    - Relación 1:N (opcional): Un plan de estudio puede contener múltiples retos (plan\_estudio\_id en retos).
-  
-- **tareas** ↔ **usuarios**:  
-
-    - Relación N:1 (opcional): Una tarea puede ser asignada a un usuario (asignado\_a en tareas).
-  
-- **apuntes** ↔ **retos / planes\_estudio**:  
-
-    - Relación N:1 (opcional): Un apunte puede estar asociado a un reto o plan de estudio (reto\_id o plan\_estudio\_id en apuntes).
-  
-- **logros** ↔ **usuarios**:  
-
-    - Relación N:1: Un logro es realizado por un usuario (usuario\_id en logros).
-
-# Registrarse en Supabase
-1. **Accede a la consola de Supabase**
-   - Ve a [https://app.supabase.com/](https://app.supabase.com/)
-   - Inicia sesión con tus credenciales
-   - Selecciona tu proyecto
-
-# Obtener las credenciales de conexión a supabase y almacenarlas en un .env
-[Mirar](/docs/supabase-credentials.md)
-
-# Cómo comprobar la conexión a la base de datos en Supabase
-Para verificar que la conexión a tu base de datos Supabase funciona correctamente después de modificar el archivo .env, puedes seguir estos pasos:
-
-## 1. Ejecutar el script de prueba [typescript](/backend/src/test-connection.ts)
-
-Abre una terminal en la carpeta del backend y ejecuta:
-
-<textarea data-mprt="7" class="inputarea monaco-mouse-cursor-text" wrap="off" autocorrect="off" autocapitalize="off" autocomplete="off" spellcheck="false" aria-label="No se puede acceder al editor en este momento. Para habilitar el modo optimizado para lectores de pantalla, use Mayús+Alt+F1" aria-required="false" tabindex="0" role="textbox" aria-roledescription="editor" aria-multiline="true" aria-autocomplete="none"></textarea>
-
-npx ts-node src/test-connection.ts
-
-<canvas width="0" height="66"></canvas><canvas class="minimap-decorations-layer" width="0" height="66"></canvas>
-
-## 3. Interpretar los resultados
-
-### Si la conexión es exitosa, verás:
-
-<textarea data-mprt="7" class="inputarea monaco-mouse-cursor-text" wrap="off" autocorrect="off" autocapitalize="off" autocomplete="off" spellcheck="false" aria-label="No se puede acceder al editor en este momento. Para habilitar el modo optimizado para lectores de pantalla, use Mayús+Alt+F1" aria-required="false" tabindex="0" role="textbox" aria-roledescription="editor" aria-multiline="true" aria-autocomplete="none"></textarea>
-
-✅ Conexión a la base de datos en Supabase establecida correctamente
-
-✅ Consulta de prueba exitosa: [fecha y hora actual]
-
-✅ Conexión cerrada correctamente
-
-✅ Proceso de prueba de conexión completado
-
-<canvas width="0" height="156"></canvas><canvas class="minimap-decorations-layer" width="0" height="156"></canvas>
-
-### Si hay un error de conexión, verás:
-
-<textarea data-mprt="7" class="inputarea monaco-mouse-cursor-text" wrap="off" autocorrect="off" autocapitalize="off" autocomplete="off" spellcheck="false" aria-label="No se puede acceder al editor en este momento. Para habilitar el modo optimizado para lectores de pantalla, use Mayús+Alt+F1" aria-required="false" tabindex="0" role="textbox" aria-roledescription="editor" aria-multiline="true" aria-autocomplete="none"></textarea>
-
-❌ Error al conectar con la base de datos: [detalles del error]
-
-<canvas width="0" height="66"></canvas><canvas class="minimap-decorations-layer" width="0" height="66"></canvas>
-
-## Posibles problemas y soluciones:
-
-1. **Credenciales incorrectas**: Verifica que tu URL, contraseña y usuario de Supabase sean correctos.
-2. **Problema con SSL**: Supabase requiere SSL. Si ves errores relacionados con esto, asegúrate de que la opción `ssl` esté configurada correctamente en `data-source.ts`.
-3. **Restricciones de dirección IP**: Algunas configuraciones de Supabase pueden tener restricciones de IP. Verifica en tu panel de Supabase si hay restricciones activas.
-4. **Firewall o antivirus**: Si utilizas un firewall o antivirus, verifica que no esté bloqueando la conexión.
-5. **Tabla de proyección en Supabase**: Asegúrate de que tu base de datos en Supabase esté correctamente configurada y accesible para conexiones desde aplicaciones externas.
-
-
-# Formas de ejecutar el script de creación de las tablas e inserción de registros
-## 1. Ejecutar el [script](/backend/createDB.sql) en el editor de Supabase
-[Mirar](/docs/supabase-instructions.md)
-
-## 2. Ejecutar el [typescript](/backend/src/create-tables.ts) en el terminal con el comando ``npx ts-node src/create-tables.ts``
-El script ``create-tables.ts`` acepta tres operaciones diferentes:
-
-1. Eliminar todas las tablas
-2. Crear todas las tablas según el esquema
-3. Insertar datos de ejemplo
-Puedes ejecutar las operaciones en secuencia si necesitas recrear la base de datos desde cero:
-```bash
-npx ts-node src/create-tables.ts 1  # Primero elimina todas las tablas
-npx ts-node src/create-tables.ts 2  # Luego crea las tablas nuevamente
-npx ts-node src/create-tables.ts 3  # Finalmente inserta datos de ejemplo
-```
-![MER](/backend/assets/MER.png)
-
-# Guía para ejecutar la aplicación web Challenge Plans
-
-Para visualizar la página web que hemos estado desarrollando, necesitarás ejecutar tanto el backend como el frontend del proyecto. Voy a explicarte paso a paso cómo hacerlo:
-
-## 1. Preparar y ejecutar el Backend
-
-## Verificar la conexión a la base de datos
-
-Puedes comprobar que la conexión a Supabase funciona correctamente ejecutando:
-
-```bash
-npx ts-node src/test-connection.ts
+## 💻 Tecnologías
+
+| Capa | Tecnologías |
+|------|-------------|
+| **Frontend** | ![React](https://img.shields.io/badge/React-18-blue) ![TypeScript](https://img.shields.io/badge/TypeScript-5-blue) ![Redux](https://img.shields.io/badge/Redux_Toolkit-1.9-purple) |
+| **Backend** | ![Express](https://img.shields.io/badge/Express-4.18-green) ![TypeScript](https://img.shields.io/badge/TypeScript-5-blue) ![TypeORM](https://img.shields.io/badge/TypeORM-0.3.17-orange) |
+| **Base de Datos** | ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-14+-blue) |
+| **Autenticación** | JWT con refresh tokens |
+| **Almacenamiento** | Supabase Storage |
+| **Comunicación** | Socket.io para notificaciones en tiempo real |
+
+---
+
+## ⚙️ Configuración del Entorno
+
+### Prerrequisitos
+
+- Node.js 18 o superior
+- npm 8 o superior
+- PostgreSQL 14 o superior
+- Git
+
+### Instalación
+
+1. Clonar el repositorio:
+   ```bash
+   git clone https://github.com/usuario/challenge_Plans.git
+   cd challenge_Plans
+   ```
+
+2. Instalar dependencias del backend:
+   ```bash
+   cd backend
+   npm install
+   ```
+
+3. Instalar dependencias del frontend:
+   ```bash
+   cd ../frontend
+   npm install
+   ```
+
+4. Configurar variables de entorno (ver sección siguiente).
+
+---
+
+## 🗄️ Configuración de la Base de Datos
+
+La aplicación utiliza PostgreSQL con TypeORM para la gestión de migraciones y datos.
+
+### Variables de Entorno
+
+Crea un archivo `.env` en el directorio `/backend`:
+
+```env
+PORT=5000
+DB_HOST=localhost
+DB_PORT=5432
+DB_USER=postgres
+DB_PASSWORD=tu_contraseña
+DB_NAME=challenge_plans
+JWT_SECRET=tu_clave_secreta_jwt
+JWT_EXPIRATION=24h
+FRONTEND_URL=http://localhost:5173
 ```
 
-Si ves el mensaje "✅ Conexión a la base de datos en Supabase establecida correctamente", todo está bien.
+### Verificación de Conexión
 
-## Ejecutar el servidor backend
-
-Para iniciar el servidor backend en modo desarrollo:
 ```bash
-# Inicia el servidor con nodemon para recargar automáticamente cuando hay cambios
-npm run dev
-
-# O puedes usar
-npx ts-node src/index.ts
+cd backend
+npm run verify-conn
 ```
 
-## Inicia el servidor 
-Inicia el servidor con nodemon para recargar automáticamente cuando hay cambios
+### 🔄 Sistema de Migraciones
+
+El proyecto utiliza TypeORM para gestionar migraciones que configuran el esquema de base de datos.
+
+#### Componentes Principales
+
+| Migración | Descripción | Script |
+|-----------|-------------|--------|
+| 🏗️ **Initial Migration** | Crea todas las tablas base del sistema | `npm run migration:initial` |
+| ⚙️ **Triggers and Functions** | Añade triggers, funciones e índices | `npm run migration:triggers` |
+| 🔔 **Notifications and Audit** | Configura sistema de notificaciones y auditoría | `npm run migration:notifications` |
+| 🗑️ **Drop Database** | Elimina completamente el esquema | `npm run migration:dropdb` |
+
+#### Estrategias de Ejecución
+
+##### 1️⃣ Ejecución Automática (todas las migraciones)
 
 ```bash
-npm run dev
+npm run migration:run
 ```
-## O puedes usar
+
+> ⚠️ **Advertencia**: Este método puede causar errores si las migraciones no están diseñadas para ejecutarse secuencialmente sin intervención manual.
+
+##### 2️⃣ Ejecución Manual Controlada (Recomendada)
 
 ```bash
-npx ts-node src/index.ts
+# Paso 1: Limpiar la base de datos (si es necesario)
+npm run migration:dropdb
+
+# Paso 2: Crear tablas base
+npm run migration:initial
+
+# Paso 3: Añadir triggers y funciones
+npm run migration:triggers
+
+# Paso 4: Configurar sistema de notificaciones y auditoría
+npm run migration:notifications
 ```
 
-
-El servidor debería iniciarse en [localhost](http://localhost:5000) (o el puerto especificado en tu archivo .env)
-
-## Ejecutar la aplicación React
-
-Para iniciar la aplicación de React en modo desarrollo:
+#### 🔍 Verificación del Esquema
 
 ```bash
+npm run verify-db
+```
+
+#### 🔙 Revertir una Migración
+
+```bash
+npm run migration:revert
+```
+
+#### Flujo de Trabajo Recomendado
+
+1. **📥 Configuración inicial**:
+   ```bash
+   npm run migration:dropdb
+   npm run migration:initial
+   npm run migration:triggers
+   npm run migration:notifications
+   ```
+
+2. **🔄 Desarrollo iterativo**:
+   - Modifica entidades en `src/entities`
+   - Genera una migración: `npm run migration:generate -- MiCambio`
+   - Ejecuta la migración: `npm run migration:run`
+
+3. **🔄 Reinicio completo** (cuando sea necesario):
+   - Vuelve al paso 1
+
+### ▶️ Ejecutando la Aplicación
+
+```bash
+# En el directorio backend
 npm run dev
 ```
 
+La API estará disponible en [http://localhost:5000](http://localhost:5000)
 
-La aplicación debería iniciarse y estar disponible en: [localhost](http://localhost:3000) (Vite suele usar este puerto por defecto)
+---
 
-## Ver la aplicación en el navegador
-- En caso de error sobre la versión de las dependencias, ejecutar el [bat](/frontend/reinstall-deps.bat)
+## 🏗️ Arquitectura y Componentes
+
+*[Sección pendiente de completar]*
+
+## 🔧 Servicios, Controladores y Rutas
+
+La aplicación sigue una arquitectura por capas donde cada componente tiene una responsabilidad específica:
+
+### Servicios (Services)
+
+Los servicios encapsulan la lógica de negocio y realizan operaciones con la base de datos a través de los repositorios.
+
+| Servicio | Descripción | Funcionalidades principales |
+|----------|-------------|----------------------------|
+| **AuthService** | Gestiona la autenticación y autorización de usuarios | - Registro de usuarios<br>- Login y generación de tokens<br>- Obtención de perfiles<br>- Verificación de permisos |
+
+### Controladores (Controllers)
+
+Los controladores manejan las peticiones HTTP, validan los datos de entrada y utilizan los servicios para procesar la lógica de negocio.
+
+| Controlador | Descripción | Endpoints principales |
+|-------------|-------------|----------------------|
+| **AuthController** | Gestiona las operaciones de autenticación | - `POST /register`: Registra nuevos usuarios<br>- `POST /login`: Inicia sesión<br>- `GET /profile`: Obtiene perfil del usuario<br>- `POST /refresh-token`: Actualiza el token de acceso |
+
+### Rutas (Routes)
+
+Las rutas definen los endpoints de la API y conectan las URL con los métodos correspondientes en los controladores.
+
+| Grupo de Rutas | Ruta base | Descripción |
+|----------------|-----------|-------------|
+| **authRoutes** | `/api/auth` | Rutas para autenticación y gestión de usuarios |
+
+### Middlewares
+
+Componentes que procesan las peticiones antes de llegar a los controladores.
+
+| Middleware | Descripción |
+|------------|-------------|
+| **authenticate** | Verifica que el usuario esté autenticado mediante el token JWT |
+| **authorize** | Comprueba que el usuario tenga los permisos necesarios para acceder a un recurso |
+| **notFoundHandler** | Maneja las rutas no encontradas (404) |
+| **errorHandler** | Procesa y formatea los errores de la aplicación |
+
+### Utilidades (Utils)
+
+Funciones de ayuda utilizadas en diferentes partes de la aplicación.
+
+| Utilidad | Descripción |
+|----------|-------------|
+| **jwt.ts** | Funciones para generar y verificar tokens JWT |
+| **custom-errors.ts** | Clases de error personalizadas para mejorar el manejo de excepciones |
+
+A medida que el proyecto evolucione, se añadirán nuevos servicios, controladores y rutas para manejar otras funcionalidades como retos, planes de estudio, tareas, etc.
+
+---
+
+## Modelo de Base de Datos
+
+Esta base de datos está diseñada para soportar una plataforma de aprendizaje colaborativo donde los usuarios pueden crear y participar en retos, subir apuntes, completar tareas, obtener recompensas y logros, y colaborar en un entorno gamificado. A continuación, se describe el esquema de la base de datos, los índices, la vista materializada, y los triggers y funciones que automatizan y optimizan los procesos.
+
+### Esquema de la Base de Datos
+
+### Tablas Principales
+
+#### Usuarios
+- **usuarios**: Almacena la información básica de los usuarios, como su email, nombre, contraseña cifrada (hash_contraseña), puntaje y nivel. Cada usuario tiene un identificador único (UUID), y su fecha de registro se guarda automáticamente. Los roles, como "administrador" o "estudiante", no están en esta tabla, sino que se manejan en otra para mayor flexibilidad.
+
+#### Categorías
+- **categorias**: Sirve para clasificar los retos en grupos como "Matemáticas" o "Programación". Cada categoría tiene un nombre único, una descripción opcional y un icono para identificarla visualmente.
+
+#### Planes de Estudio
+- **planes_estudio**: Permite a los usuarios organizar su aprendizaje creando planes con un título, descripción, fecha de inicio y duración en días. Pueden ser públicos o privados, y cada plan está vinculado al usuario que lo creó.
+
+#### Retos
+- **retos**: Son desafíos o proyectos que los usuarios pueden crear o unirse. Incluyen un título, descripción, fechas de inicio y fin, nivel de dificultad (principiante, intermedio o avanzado), puntos totales y un estado (borrador, activo o finalizado). También registran quién los creó y si son públicos.
+
+#### Relaciones entre Retos y Otras Entidades
+- **reto_planes_estudio**: Conecta retos con planes de estudio, permitiendo que un reto forme parte de varios planes. Registra la fecha en que se asociaron.
+- **reto_categorias**: Vincula retos con categorías, de modo que un reto puede pertenecer a varias categorías (por ejemplo, "Programación" y "Proyectos").
+
+#### Participación en Retos
+- **participacion_retos**: Registra cuándo un usuario se une a un reto, su progreso (de 0 a 100%), y su estado (activo, completado o cancelado). También guarda la fecha de unión y, si aplica, la de finalización.
+
+#### Tareas
+- **tareas**: Son actividades específicas dentro de un reto, como leer un texto o resolver un ejercicio. Tienen un título, descripción, puntos, fecha límite y tipo (lectura, ejercicio o proyecto). Pueden estar asignadas a un usuario, aunque esto es opcional.
+- **tarea_asignaciones**: Permite asignar una misma tarea a varios usuarios, cada uno con un rol como "responsable" o "colaborador". Registra la fecha de asignación.
+- **tareas_completadas**: Guarda cuándo un usuario completa una tarea, con su progreso (puede ser parcial) y comentarios opcionales.
+
+#### Apuntes
+- **apuntes**: Permite a los usuarios subir notas o documentos, con un título, contenido opcional (puede ser solo un archivo), y formato (pdf, md, docx). Pueden estar vinculados a un reto o plan de estudio, y ser públicos o privados. También tienen una calificación promedio.
+- **archivos_genericos**: Almacena archivos adjuntos a diferentes elementos de la plataforma (apuntes, tareas, retos, etc.), con detalles como nombre, URL, formato y tamaño.
+- **calificaciones_apuntes**: Registra las calificaciones (de 0 a 5) y comentarios que los usuarios dan a los apuntes, junto con la fecha.
+
+#### Recompensas y Logros
+- **recompensas**: Define las recompensas que los usuarios pueden ganar, como insignias, puntos o niveles. Incluye un nombre, tipo, valor y criterio para obtenerlas.
+- **usuario_recompensas**: Conecta a los usuarios con las recompensas que han conseguido, registrando la fecha de obtención.
+- **logros**: Guarda acciones destacadas de los usuarios, como completar una tarea o unirse a un reto, con una descripción y fecha.
+
+#### Auditoría
+- **auditoria**: Lleva un registro de cambios importantes en la base de datos (inserciones, actualizaciones o eliminaciones), con detalles como quién lo hizo, qué cambió y cuándo.
+
+#### Reglas de Recompensas
+- **reglas_recompensas**: Establece condiciones para otorgar recompensas, como "completar un reto" o "subir un apunte". Usa un formato flexible (JSONB) para definir reglas complejas.
+
+#### Notificaciones
+- **notificaciones**: Envía mensajes a los usuarios sobre eventos como tareas asignadas o retos completados. Incluye título, mensaje, tipo y si es grupal. Registra si fue leída y cuándo.
+- **notificaciones_lecturas**: Rastrea si los usuarios han leído las notificaciones grupales, con la fecha de lectura.
+
+#### Roles y Permisos
+- **roles**: Define roles como "administrador" o "moderador", con una descripción opcional.
+- **permisos**: Establece acciones específicas, como "editar reto" o "ver estadísticas".
+- **rol_permisos**: Asocia permisos a roles, para definir qué puede hacer cada rol.
+- **usuario_roles**: Asigna roles a los usuarios, con la fecha de asignación.
+
+#### Historial y Comentarios
+- **historial_progreso**: Registra cómo cambia el progreso de un usuario en un reto, con el progreso anterior y nuevo, la fecha y el evento que lo causó (como completar una tarea).
+- **comentarios**: Permite dejar comentarios en retos, tareas, apuntes o planes de estudio. Incluye el contenido, la fecha y la posibilidad de responder a otros comentarios (anidamiento).
+
+---
+
+### Relaciones Clave
+
+- Un **usuario** puede crear múltiples **retos** y **planes de estudio**.
+- Un **reto** puede estar asociado a varios **planes de estudio** y **categorías**.
+- Un **usuario** puede participar en varios **retos**, y cada participación tiene un progreso.
+- Una **tarea** pertenece a un **reto** y puede ser asignada a varios **usuarios**.
+- Los **apuntes** pueden estar vinculados a un **reto** o **plan de estudio** y recibir **calificaciones**.
+- Las **recompensas** se otorgan a **usuarios** según las **reglas de recompensas**.
+- Las **notificaciones** se envían a **usuarios** y pueden estar relacionadas con **retos**, **tareas**, etc.
+
+---
+
+### Notas Adicionales
+
+- **Fechas y Horarios**: La base de datos usa `TIMESTAMP WITH TIME ZONE` para registrar fechas y horas, asegurando que las diferencias horarias se manejen correctamente.
+- **Particionamiento**: Hay un ejemplo comentado para dividir la tabla de **notificaciones** en partes más pequeñas (por mes). Esto es útil si la tabla crece mucho y se necesita optimizar el rendimiento.
+
+Este README ofrece una visión clara y accesible de la base de datos, explicando cada tabla y sus relaciones sin tecnicismos innecesarios. Si necesitas más detalles o tienes preguntas, ¡siéntete libre de preguntar!
+
+---
+
+## Triggers, Funciones e Índices en la Base de Datos
+
+### Sistema de Notificaciones y Auditoría ([triggers y funciones](/backend/src/migrations/1741440000000-TriggersAndFunctions.ts))
+
+Este archivo se enfoca en gestionar notificaciones y registrar cambios en la base de datos (auditoría).
+
+#### Funciones
+
+- **`limpiar_notificaciones_antiguas()`**
+  - **Qué hace**: Borra las notificaciones que ya fueron leídas y tienen más de 30 días.
+  - **Para qué sirve**: Evita que la tabla de notificaciones se llene de información vieja, manteniendo el sistema más ligero y rápido.
+
+- **`registrar_auditoria()`**
+  - **Qué hace**: Guarda un registro cada vez que se agrega, modifica o elimina algo en ciertas tablas (como `retos` o `usuarios`).
+  - **Para qué sirve**: Permite rastrear quién hizo qué y cuándo, útil para seguimiento o solución de problemas. Actualmente, el usuario que realiza la acción se registra como `NULL` (esto se mejorará desde la aplicación).
+
+- **`programar_limpieza_notificaciones()`**
+  - **Qué hace**: Llama a la función `limpiar_notificaciones_antiguas()` cuando se programa su ejecución.
+  - **Para qué sirve**: Facilita programar limpiezas automáticas (por ejemplo, con un job diario) para mantener las notificaciones organizadas.
+
+#### Triggers
+
+- **`audit_retos_trigger`** (en la tabla `retos`)
+  - **Cuándo se activa**: Después de agregar (`INSERT`), modificar (`UPDATE`) o eliminar (`DELETE`) un registro en `retos`.
+  - **Qué hace**: Registra automáticamente el cambio en la tabla `auditoria`.
+
+- **`audit_usuarios_trigger`** (en la tabla `usuarios`)
+  - **Cuándo se activa**: Después de modificar (`UPDATE`) o eliminar (`DELETE`) un registro en `usuarios`.
+  - **Qué hace**: Registra el cambio en la tabla `auditoria`.
+
+#### Índices
+
+- **`idx_auditoria_usuario`**, **`idx_auditoria_tabla`**, **`idx_auditoria_fecha`**
+  - **Qué son**: Índices en las columnas `usuario_id`, `tabla` y `fecha` de la tabla `auditoria`.
+  - **Para qué sirven**: Hacen que las búsquedas por usuario, tabla o fecha sean más rápidas, como si fueran marcadores en un libro.
+
+---
+
+### Triggers y Funciones Generales ([triggers y funciones](/backend/src/migrations/1741440000000-TriggersAndFunctions.ts))
+
+#### Índices
+
+- **Índices Simples y Compuestos**
+  - **Ejemplos**: 
+    - `idx_usuarios_email` (en `usuarios.email`): Buscar usuarios por email.
+    - `idx_retos_titulo` (en `retos.titulo`): Buscar retos por título.
+    - `idx_participacion_usuario_reto` (en `participacion_retos(usuario_id, reto_id)`): Consultas combinadas de usuario y reto.
+  - **Para qué sirven**: Aceleran las búsquedas más comunes en la plataforma, como encontrar un usuario o un reto específico.
+
+- **Índice de Texto Completo**
+  - **`idx_titulo_retos_text`**
+    - **Qué es**: Un índice especial en la columna `titulo` de `retos` para búsquedas avanzadas.
+    - **Para qué sirve**: Permite buscar palabras dentro de los títulos de los retos de forma rápida y eficiente.
+
+#### Vista Materializada
+
+- **`vista_progreso_reto_mat`**
+  - **Qué es**: Una tabla precalculada que muestra el progreso de los usuarios en los retos, combinando datos de `participacion_retos`, `usuarios` y `retos`.
+  - **Para qué sirve**: Ofrece una forma rápida de consultar el progreso sin recalcular todo cada vez.
+  - **Índices adicionales**: 
+    - `idx_vista_progreso_usuario` (en `nombre`): Búsquedas por nombre de usuario.
+    - `idx_vista_progreso_reto` (en `titulo`): Búsquedas por título de reto.
+
+#### Funciones y Triggers
+
+- **Actualización de Nivel de Usuario**
+  - **Función**: `actualizar_nivel_usuario()`
+  - **Trigger**: `trigger_nivel_usuario`
+  - **Qué hace**: Calcula el nivel de un usuario según su puntaje (1 nivel por cada 100 puntos) al actualizar el puntaje.
+  - **Para qué sirve**: Automatiza la gamificación para que los niveles suban sin intervención manual.
+
+- **Gestión de Tareas Completadas**
+  - **Función**: `gestionar_tarea_completada()`
+  - **Trigger**: `trigger_tarea_completada`
+  - **Qué hace**: Actualiza la tabla `tareas_completadas` cuando una tarea se marca como completada o se reasigna.
+  - **Para qué sirve**: Mantiene un registro exacto de quién completó qué tarea.
+
+- **Gestión de Estado de Participación en Retos**
+  - **Función**: `gestionar_estado_participacion()`
+  - **Trigger**: `trigger_actualizar_estado`
+  - **Qué hace**: Cambia el estado a "completado" cuando el progreso llega al 100%, otorga recompensas y registra logros; revierte si el progreso baja.
+  - **Para qué sirve**: Automatiza la finalización de retos y la entrega de premios.
+
+- **Actualización de Puntos Totales en Retos**
+  - **Función**: `actualizar_puntos_totales()`
+  - **Trigger**: `trigger_actualizar_puntos_totales`
+  - **Qué hace**: Recalcula los puntos totales de un reto al agregar, modificar o eliminar tareas.
+  - **Para qué sirve**: Mantiene los puntos de los retos actualizados automáticamente.
+
+- **Registro de Logros**
+  - **Funciones**: 
+    - `registrar_logro_usuario_nuevo()`: Registra un logro al crear un usuario.
+    - `gestionar_logro_participacion()`: Registra o elimina logros al unirse o abandonar un reto.
+  - **Triggers**: 
+    - `trigger_logro_registro_usuario`
+    - `trigger_logro_participacion`
+  - **Para qué sirven**: Automatizan la gamificación para motivar a los usuarios.
+
+- **Actualización de Fecha de Modificación**
+  - **Función**: `actualizar_fecha_modificacion()`
+  - **Triggers**: En tablas como `usuarios`, `retos`, `tareas`, `apuntes`, `planes_estudio`.
+  - **Qué hace**: Actualiza la columna `fecha_modificacion` al modificar un registro.
+  - **Para qué sirve**: Lleva un control de cuándo se editaron los datos.
+
+- **Gestión de Puntaje de Usuario**
+  - **Función**: `gestionar_puntaje_usuario()`
+  - **Trigger**: `trigger_actualizar_puntaje`
+  - **Qué hace**: Suma o resta puntos al usuario al ganar o perder recompensas de tipo "puntos".
+  - **Para qué sirve**: Asegura que el puntaje refleje las recompensas obtenidas.
+
+- **Finalización de Retos Vencidos**
+  - **Función**: `finalizar_retos_vencidos()`
+  - **Qué hace**: Cambia el estado de los retos a "finalizado" si su fecha de fin ya pasó.
+  - **Para qué sirve**: Automatiza la clausura de retos viejos (puede programarse con herramientas como `pg_cron`).
+
+- **Actualización de Participaciones en Retos**
+  - **Función**: `actualizar_participaciones_reto()`
+  - **Trigger**: `trigger_actualizar_participaciones`
+  - **Qué hace**: Aumenta o disminuye el contador de participaciones en un reto al unirse o abandonarlo.
+  - **Para qué sirve**: Mantiene un conteo exacto de participantes.
+
+- **Cálculo de Promedio de Calificaciones en Apuntes**
+  - **Función**: `actualizar_calificacion_promedio()`
+  - **Trigger**: `trigger_actualizar_promedio`
+  - **Qué hace**: Recalcula el promedio de calificaciones de un apunte al agregar, modificar o eliminar calificaciones.
+  - **Para qué sirve**: Muestra una calificación promedio actualizada en todo momento.
+
+- **Registro de Cambios de Progreso**
+  - **Función**: `registrar_cambio_progreso()`
+  - **Trigger**: `trigger_registrar_cambio_progreso`
+  - **Qué hace**: Guarda un historial de los cambios en el progreso de un usuario en un reto.
+  - **Para qué sirve**: Permite rastrear cómo avanzan los usuarios en los retos.
+
+- **Notificaciones**
+  - **Funciones**:
+    - `notificar_tarea_asignada()`: Notifica al asignar una tarea.
+    - `notificar_reto_completado()`: Notifica al completar un reto.
+    - `notificar_recompensa_obtenida()`: Notifica al ganar una recompensa.
+  - **Triggers**: 
+    - `trigger_notificar_tarea_asignada`
+    - `trigger_notificar_reto_completado`
+    - `trigger_notificar_recompensa`
+  - **Para qué sirven**: Mantienen a los usuarios informados sobre eventos importantes.
+
+- **Otorgamiento Genérico de Recompensas**
+  - **Función**: `otorgar_recompensa_generica()`
+  - **Triggers**: 
+    - `trigger_recompensa_completar_reto`
+    - `trigger_recompensa_subir_apunte`
+    - `trigger_recompensa_crear_plan`
+  - **Qué hace**: Otorga recompensas según eventos (como completar retos o subir apuntes públicos) y condiciones definidas.
+  - **Para qué sirve**: Automatiza la entrega de premios para incentivar a los usuarios.
+
+- **Validación de Integridad Referencial**
+  - **Función**: `validar_entidad_id()`
+  - **Triggers**: 
+    - `trigger_validar_entidad_id` (en `comentarios`)
+    - `trigger_validar_entidad_id_archivos` (en `archivos_genericos`)
+  - **Qué hace**: Verifica que los IDs en estas tablas apunten a registros válidos (ej. un comentario sobre un reto existente).
+  - **Para qué sirve**: Evita errores y datos inconsistentes.
+
+- **Actualización de Fecha de Estado en Retos**
+  - **Función**: `actualizar_fecha_estado_reto()`
+  - **Trigger**: `trigger_actualizar_fecha_estado`
+  - **Qué hace**: Actualiza `fecha_estado` cuando cambia el estado de un reto.
+  - **Para qué sirve**: Registra cuándo cambió el estado de un reto.
+
+- **Sincronización de Tareas Completadas**
+  - **Función**: `sincronizar_tareas_completadas()`
+  - **Trigger**: `trigger_sincronizar_tareas_completadas`
+  - **Qué hace**: Asegura que si una tarea completada se asigna a un nuevo usuario, se registre en `tareas_completadas`.
+  - **Para qué sirve**: Mantiene la coherencia entre asignaciones y completitud.
+
+- **Notificación de Asignación Múltiple**
+  - **Función**: `notificar_asignacion_multiple()`
+  - **Trigger**: `trigger_notificar_asignacion_multiple`
+  - **Qué hace**: Notifica a todos los usuarios asignados a una tarea a través de `tarea_asignaciones`.
+  - **Para qué sirve**: Mejora la comunicación cuando varias personas trabajan en una tarea.
+
+---
+
+## Configuración de la Base de Datos
+
+### Supabase
+## Configuración de Supabase
+
+### 1. Crear una cuenta en Supabase
+
+1. Visita [https://supabase.com/](https://supabase.com/) y haz clic en "Start your project"
+2. Regístrate usando tu cuenta de GitHub, Google o email
+3. Confirma tu correo electrónico si es necesario
+
+### 2. Crear un nuevo proyecto
+
+1. En el dashboard de Supabase, haz clic en "New Project"
+2. Asigna un nombre a tu proyecto (por ejemplo, "challenge-plans")
+3. Establece una contraseña segura para la base de datos
+4. Selecciona la región más cercana para optimizar la latencia
+5. Haz clic en "Create new project" y espera a que se complete (puede tomar unos minutos)
+
+### 3. Configurar la base de datos
+
+1. En el menú lateral de tu proyecto, ve a "Database" → "Connection Pooling"
+2. Copia la cadena de conexión y guárdala para utilizarla en tu archivo `.env`
+3. Ve a "Storage" → "Buckets" y crea un nuevo bucket llamado `apuntes` para almacenar archivos
+4. Configura los permisos del bucket según tus necesidades (puedes comenzar con "Public" durante desarrollo)
+
+### 4. Obtener credenciales
+
+1. Ve a "Settings" → "API" en el menú lateral
+2. Copia los siguientes valores:
+    - **URL**: Es tu endpoint de API
+    - **anon public**: Clave para operaciones públicas
+    - **service_role**: Clave para operaciones privilegiadas (¡mantén esta segura!)
+    - 2.1. **Encuentra las credenciales de conexión**
+      - En el menú lateral izquierdo, busca la sección "Configuración" (Settings)
+      - Haz clic en "Database" (Base de datos)
+      - Desplázate hacia abajo hasta la sección "Connection Info" o "Connection Pooling"
+      - Aquí encontrarás toda la información necesaria:
+         - **Host**: Aparece como "Host" o en la cadena de conexión (termina con `.supabase.co`)
+         - **Port**: Generalmente 5432 (puerto estándar de PostgreSQL) o 6543 para conexiones directas
+         - **Database name**: Normalmente "postgres"
+         - **User**: "postgres" por defecto
+         - **Password**: Haz clic en "Show Password" para ver tu contraseña
+  
+### 5. Configurar variables de entorno
+
+Añade estas variables a tu archivo `.env` del backend:
+
+```
+SUPABASE_URL=https://tu-proyecto-id.supabase.co
+SUPABASE_ANON_KEY=tu-clave-anon-public
+SUPABASE_SERVICE_KEY=tu-clave-service-role
+SUPABASE_BUCKET=apuntes
+```
+
+### 6. Probar la conexión
+
+Ejecuta el siguiente comando para verificar que tu aplicación puede conectarse a Supabase:
+
+```bash
+cd backend
+npm run verify-supabase
+```
+
+> **Nota**: Asegúrate de que la opción "Row Level Security (RLS)" esté habilitada para tus tablas en producción para mayor seguridad.
+
+### Migraciones
+
+Para crear la base de datos inicial y aplicar las migraciones, ejecuta:
+
+```bash
+cd backend
+npm run migration:create:initial
+npm run migration:run
+```
+
+### Variables de Entorno
+
+Crea un archivo `.env` en el directorio `/backend` con las siguientes variables:
+
+```bash
+DB_HOST=localhost
+DB_PORT=5432
+DB_USER=postgres
+DB_PASSWORD=tu_contraseña
+DB_NAME=challenge_plans
+
+# URL de proyecto Supabase
+# Otras variables de entorno
+PORT=5000
+JWT_SECRET=tu_secreto_jwt
+
+# Modo de ambiente
+NODE_ENV=development
+
+SUPABASE_BUCKET=nombre_bucket
+SUPABASE_SECRET_KEY=tu_supabase_key
+SUPABASE_URL=postgres://usuario:contraseña@localhost:5432/nombre_base_datos
+```
+
+### Verificación de la conexión a la base de datos
+
+Para verificar que la conexión a la base de datos funciona correctamente, ejecuta:
+
+```bash
+cd backend
+npm run verify-conn
+```
+
+### Sistema de Migraciones
+
+El proyecto utiliza TypeORM para gestionar migraciones que configuran el esquema de base de datos. Las migraciones están organizadas en cuatro componentes principales:
+
+| Migración | Descripción | Script |
+| --- | --- | --- |
+| Initial Migration | Crea todas las tablas base del sistema | `migration:initial` |
+| Triggers and Functions | Añade triggers, funciones e índices para optimización | `migration:triggers` |
+| Notifications and Audit | Configura el sistema de notificaciones y auditoría | `migration:notifications` |
+| Drop Database | Elimina completamente el esquema (¡usar con precaución!) | `migration:dropdb` |
+| Seed Database | Añade registros iniciales para pruebas y desarrollo | `migration:seed` |
+
+#### Estrategias de Ejecución de Migraciones
+
+Existen dos formas de ejecutar las migraciones:
+
+1. **Ejecución Automática de Todas las Migraciones**:
+
+```bash
+npm run migration:run
+```
+
+Este comando ejecuta **todas** las migraciones en el orden especificado en los nombres de archivo (por ejemplo, 1741400000000-InitialMigration.ts se ejecutará antes que 1741500000000-NotificationsAndAuditSystem.ts).
+ 
+> ⚠️ **Advertencia**: Este método puede causar errores si las migraciones no están diseñadas para ejecutarse secuencialmente sin intervención manual.
+
+2. **Ejecución Manual Controlada** (Recomendada para desarrollo):
+
+```bash
+# Paso 1: Limpiar la base de datos (si es necesario)
+npm run migration:dropdb
+
+# Paso 2: Crear tablas base
+npm run migration:initial
+
+# Paso 3: Añadir triggers y funciones
+npm run migration:triggers
+
+# Paso 4: Configurar sistema de notificaciones y auditoría
+npm run migration:notifications
+
+# Paso 5: Añadir registros
+npm run migration:seed
+```
+
+Este enfoque te da control total sobre el proceso y permite verificar el resultado después de cada paso.
+
+#### Verificación del Esquema
+
+Para verificar el estado actual de la base de datos:
+
+```bash
+npm run verify-db
+```
+
+Este comando muestra información detallada sobre todas las tablas, triggers, funciones e índices existentes en la base de datos.
+
+#### Revertir una Migración
+
+Si necesitas revertir la última migración ejecutada:
+
+```bash
+npm run migration:revert
+```
+
+#### Flujo de Trabajo Recomendado para Desarrollo
+
+1. **Configuración inicial**:
+
+```bash
+npm run migration:dropdb
+npm run migration:initial
+npm run migration:triggers
+npm run migration:notifications
+npm run migration:seed
+```
+
+2. **Desarrollo iterativo**:
+
+    - Modifica entidades en `src/entities`
+    - Genera una migración específica: `npm run migration:generate -- MiCambio`
+    - Ejecuta solo esa migración manualmente
+3. **Reinicio completo** (cuando sea necesario):
+
+    - Volver al paso 1
+
+### Descripción de las Migraciones
+
+- **InitialMigration**: Crea la estructura básica de tablas y relaciones.
+- **TriggersAndFunctions**: Implementa optimizaciones como índices, triggers para actualización automática y funciones especializadas.
+- **NotificationsAndAuditSystem**: Configura el sistema de notificaciones en tiempo real y el registro de auditoría para cambios importantes.
+- **Migración de Datos Semilla**: Inserta datos de ejemplo para roles, usuarios, retos, categorías, etc.
+- **DropDatabase**: Migración especial que elimina y recrea todo el esquema para desarrollo.
+
+
+# Desarrollo 
+## 1. BackEnd
+
+## 2. FrontEnd
+
+## 🔌 API Endpoints
+
+La aplicación expone los siguientes endpoints RESTful organizados por módulos:
+
+### 🔐 Autenticación y Usuarios (`/api/auth`)
+
+| Método | Endpoint | Descripción | Acceso | Body/Params |
+|--------|----------|-------------|--------|-------------|
+| `POST` | `/api/auth/register` | Registra un nuevo usuario | Público | `{ email, password, nombre }` |
+| `POST` | `/api/auth/login` | Inicia sesión y obtiene tokens | Público | `{ email, password }` |
+| `GET` | `/api/auth/profile` | Obtiene perfil del usuario | Privado | Header: `Authorization: Bearer {token}` |
+| `POST` | `/api/auth/refresh-token` | Refresca el token de acceso | Público | `{ refreshToken }` |
+| `POST` | `/api/auth/reset-password` | Restablece contraseña de un usuario | Admin | `{ userId, newPassword }` |
+
+#### Guía para obtener el perfil de usuario
+
+Para acceder al perfil de usuario necesitas seguir estos pasos:
+
+1. **Iniciar sesión para obtener el token de acceso**
+   ```bash
+   curl -X POST http://localhost:5000/api/auth/login \
+     -H "Content-Type: application/json" \
+     -d '{"email": "estudiante1@example.com", "password": "hash_est789"}'
+   ```
+   Guarda el `accessToken` de la respuesta.
+
+2. **Acceder al endpoint de perfil usando el token**
+   ```bash
+   curl -X GET http://localhost:5000/api/auth/profile \
+     -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+   ```
+
+3. **Usando Postman**
+   - Crea una colección nueva para "Challenge Plans API"
+   - Configura un entorno con las variables:
+     - `base_url`: `http://localhost:5000/api`
+     - `token`: (déjalo vacío inicialmente)
+   - Crea una petición POST para login:
+     - URL: `{{base_url}}/auth/login`
+     - Body (JSON): `{"email": "estudiante1@example.com", "password": "hash_est789"}`
+     - En la pestaña "Tests", añade:
+       ```javascript
+       if (pm.response.code === 200) {
+           var jsonData = pm.response.json();
+           pm.environment.set("token", jsonData.accessToken);
+       }
+       ```
+   - Crea una petición GET para el perfil:
+     - URL: `{{base_url}}/auth/profile`
+     - Headers: `Authorization: Bearer {{token}}`
+
+4. **Respuesta esperada**
+   ```json
+   {
+     "user": {
+       "id": "uuid-del-usuario",
+       "email": "estudiante1@example.com",
+       "nombre": "Estudiante Uno",
+       "fecha_registro": "2023-07-25T15:30:00.000Z",
+       "puntaje": 200,
+       "nivel": 2,
+       "fecha_creacion": "2023-07-25T15:30:00.000Z",
+       "fecha_modificacion": "2023-07-25T15:30:00.000Z",
+       "roles": ["Estudiante"],
+       "permisos": ["ver_retos", "participar_reto", "subir_apunte", ...]
+     }
+   }
+   ```
+
+#### Guía para restablecer contraseña de usuario (Administradores)
+
+Para utilizar el endpoint de restablecimiento de contraseña, debes seguir estos pasos:
+
+1. **Obtener un token de administrador**
+   ```bash
+   curl -X POST http://localhost:5000/api/auth/login \
+     -H "Content-Type: application/json" \
+     -d '{"email": "admin@example.com", "password": "hash_admin123"}'
+   ```
+   Guarda el `accessToken` devuelto.
+
+2. **Utilizar el endpoint para restablecer la contraseña**
+   ```bash
+   curl -X POST http://localhost:5000/api/auth/reset-password \
+     -H "Content-Type: application/json" \
+     -H "Authorization: Bearer {accessToken}" \
+     -d '{
+       "userId": "uuid-del-usuario-objetivo",
+       "newPassword": "nueva_contraseña"
+     }'
+   ```
+
+3. **Usando Postman**
+   - Obtén primero el token como administrador con el endpoint de login
+   - Crea una nueva petición POST a `{{base_url}}/auth/reset-password`
+   - En la pestaña "Headers":
+     - Key: `Authorization`
+     - Value: `Bearer {{token}}`
+   - En la pestaña "Body", selecciona "raw" y "JSON":
+     ```json
+     {
+       "userId": "uuid-del-usuario-objetivo",
+       "newPassword": "nueva_contraseña123"
+     }
+     ```
+
+4. **Respuestas posibles**
+
+   | Código | Descripción | Respuesta |
+   |--------|-------------|-----------|
+   | 200 | Éxito | `{ message: "Contraseña restablecida correctamente" }` |
+   | 401 | No autenticado | `{ message: "No autenticado" }` |
+   | 403 | Sin permisos | `{ message: "No tiene permisos para esta acción" }` |
+   | 404 | No encontrado | `{ message: "Usuario no encontrado" }` |
+
+> **Nota**: Este endpoint solo está disponible para usuarios con el rol de Administrador o que tengan el permiso específico `editar_usuario`.
+
+#### Ejemplos de Uso
+
+**Registro de Usuario:**
+```bash
+curl -X POST http://localhost:5000/api/auth/register \
+  -H "Content-Type: application/json" \
+  -d '{"email": "usuario@ejemplo.com", "password": "contraseña123", "nombre": "Usuario Ejemplo"}'
+```
+
+**Inicio de Sesión:**
+```bash
+curl -X POST http://localhost:5000/api/auth/login \
+  -H "Content-Type: application/json" \
+  -d '{"email": "usuario@ejemplo.com", "password": "contraseña123"}'
+```
+
+**Obtener Perfil:**
+```bash
+curl -X GET http://localhost:5000/api/auth/profile \
+  -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+```
+
+### 🎯 Retos (Desafíos)
+
+| Método | Ruta                          | Descripción                            | Autenticación | Permisos          |
+|--------|-------------------------------|-----------------------------------------|--------------|-------------------|
+| GET    | /api/retos                    | Obtiene lista de retos públicos o todos | Opcional     | ver_retos         |
+| GET    | /api/retos/:id                | Obtiene un reto específico por ID       | Opcional     | -                 |
+| GET    | /api/retos/user/participations| Obtiene los retos del usuario actual    | Requerida    | -                 |
+| GET    | /api/retos/stats/popular      | Obtiene los retos más populares         | No requerida | -                 |
+| POST   | /api/retos                    | Crea un nuevo reto                      | Requerida    | crear_reto        |
+| PUT    | /api/retos/:id                | Actualiza un reto existente             | Requerida    | editar_reto       |
+| DELETE | /api/retos/:id                | Elimina un reto existente               | Requerida    | eliminar_reto     |
+| POST   | /api/retos/:id/join           | Permite unirse a un reto                | Requerida    | participar_reto   |
+| PATCH  | /api/retos/:id/progress       | Actualiza el progreso en un reto        | Requerida    | -                 |
+
+## Guía de uso de la API de Retos
+
+### Obtener lista de retos
+
+#### Como usuario no autenticado (solo retos públicos)
+```bash
+GET /api/retos
+```
+
+Solo retornará retos públicos y en estado activo.
+
+#### Como administrador (todos los retos)
+```bash
+GET /api/retos
+Authorization: Bearer [token_admin]
+```
+
+Para obtener todos los retos (tanto públicos como privados) como administrador:
+
+1. **Autenticarse como administrador:**
+
+### Planes de Estudio
+
+| Método | Ruta                                      | Descripción                               | Autenticación | Permisos          |
+|--------|-------------------------------------------|------------------------------------------|--------------|-------------------|
+| GET    | /api/planes-estudio                       | Obtiene todos los planes públicos o todos | Opcional     | ver_planes        |
+| GET    | /api/planes-estudio/:id                   | Obtiene un plan específico por ID         | Opcional     | -                 |
+| GET    | /api/planes-estudio/search                | Busca planes por término                  | Opcional     | -                 |
+| GET    | /api/planes-estudio/stats/popular         | Obtiene los planes más populares          | No requerida | -                 |
+| GET    | /api/planes-estudio/user/me               | Obtiene planes del usuario autenticado    | Requerida    | -                 |
+| GET    | /api/planes-estudio/user/:userId          | Obtiene planes de un usuario específico   | Opcional     | -                 |
+| GET    | /api/planes-estudio/:id/retos             | Obtiene retos asociados a un plan         | Opcional     | -                 |
+| POST   | /api/planes-estudio                       | Crea un nuevo plan de estudios            | Requerida    | crear_plan        |
+| POST   | /api/planes-estudio/:id/retos             | Asigna retos a un plan                    | Requerida    | asociar_reto_plan |
+| PUT    | /api/planes-estudio/:id                   | Actualiza un plan existente               | Requerida    | editar_plan       |
+| DELETE | /api/planes-estudio/:id                   | Elimina un plan existente                 | Requerida    | eliminar_plan     |
+| DELETE | /api/planes-estudio/:id/retos/:retoId     | Elimina un reto de un plan                | Requerida    | editar_plan       |
+
+#### Obtener todos los planes de estudio
+
+

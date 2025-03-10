@@ -1,50 +1,55 @@
 import express from 'express';
-import morgan from 'morgan';
 import cors from 'cors';
+import morgan from 'morgan';
+import dotenv from 'dotenv';
+import routes from './routes';
 import path from 'path';
 
-import authRoutes from './routes/auth.routes';
-import usuarioRoutes from './routes/usuario.routes';
-import retoRoutes from './routes/reto.routes';
-import planRoutes from './routes/planEstudio.routes';
-import apunteRoutes from './routes/apunteRoutes'; // Importar rutas de apuntes
-import participacionRoutes from './routes/participacion.routes'; // Importar rutas de participación
+// Cargar variables de entorno
+dotenv.config();
 
+// Crear instancia de Express
 const app = express();
 
-// Configuraciones
-app.set('port', process.env.PORT || 5000);
-
-// Middlewares - asegurar que estén configurados correctamente
-app.use(morgan('dev'));
+// Configuración de middlewares
 app.use(cors());
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(morgan('dev')); // Logging de solicitudes HTTP
 
-// Aumentar límite de tamaño para JSON y formularios
-app.use(express.json({ limit: '50mb' }));
-app.use(express.urlencoded({ extended: true, limit: '50mb' }));
-
-// Directorio de archivos estáticos
+// Directorio estático para subidas temporales
 app.use('/uploads', express.static(path.join(__dirname, '../uploads')));
 
-// Rutas
-app.use('/api/auth', authRoutes);
-app.use('/api/usuarios', usuarioRoutes);
-app.use('/api/retos', retoRoutes);
-app.use('/api/planes', planRoutes);
-app.use('/api/apuntes', apunteRoutes); // Registrar rutas de apuntes
-app.use('/api/participacion', participacionRoutes); // Registrar rutas de participación
+// Rutas API
+app.use('/api', routes);
 
-// Ruta de verificación de estado
-app.get('/api/status', (req, res) => {
-  res.json({ 
-    status: 'online',
-    message: 'API funcionando correctamente' 
+// Ruta raíz
+app.get('/', (req, res) => {
+  res.json({
+    mensaje: 'API Challenge Plans',
+    version: '1.0.0',
+    estado: '✅ Funcionando correctamente',
+    documentacion: '/api/docs'
   });
 });
 
-// Manejo de rutas no encontradas
+// Middleware para manejo de rutas no encontradas
 app.use((req, res) => {
-  res.status(404).json({ message: 'Ruta no encontrada' });
+  res.status(404).json({ error: 'Ruta no encontrada' });
 });
+
+// Middleware para manejo de errores
+// La forma correcta de registrar un middleware de error es después de definir todas las rutas
+// El middleware de error debe tener exactamente 4 parámetros para que Express lo reconozca como tal
+const errorHandler: express.ErrorRequestHandler = (err, req, res, next) => {
+  console.error('Error en la aplicación:', err);
+  res.status(500).json({
+    success: false,
+    message: 'Ha ocurrido un error interno del servidor',
+    error: process.env.NODE_ENV === 'development' ? err.message : undefined
+  });
+};
+
+app.use(errorHandler);
 
 export default app;

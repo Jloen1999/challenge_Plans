@@ -1,54 +1,128 @@
-import axios from 'axios';
+/**
+ * Servicio base para realizar peticiones HTTP a la API
+ */
 
-const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
+const API_URL = '/api';
 
-// Configuración de instancia de axios
-export const api = axios.create({
-  baseURL: API_URL,
-  headers: {
-    'Content-Type': 'application/json'
-  }
-});
+interface ApiResponse<T = any> {
+  data?: T;
+  error?: string;
+  status: number;
+}
 
-// Interceptor para añadir el token a las solicitudes
-api.interceptors.request.use(
-  (config) => {
-    const token = localStorage.getItem('token');
-    if (token) {
-      config.headers.Authorization = `Bearer ${token}`;
+interface RequestOptions {
+  headers?: Record<string, string>;
+  token?: string;
+}
+
+/**
+ * Realiza una petición GET a la API
+ * @param endpoint - Endpoint relativo al API_URL
+ * @param options - Opciones de la petición
+ */
+export async function get<T = any>(endpoint: string, options: RequestOptions = {}): Promise<ApiResponse<T>> {
+  return await request<T>('GET', endpoint, undefined, options);
+}
+
+/**
+ * Realiza una petición POST a la API
+ * @param endpoint - Endpoint relativo al API_URL
+ * @param body - Cuerpo de la petición
+ * @param options - Opciones de la petición
+ */
+export async function post<T = any>(endpoint: string, body?: any, options: RequestOptions = {}): Promise<ApiResponse<T>> {
+  return await request<T>('POST', endpoint, body, options);
+}
+
+/**
+ * Realiza una petición PUT a la API
+ * @param endpoint - Endpoint relativo al API_URL
+ * @param body - Cuerpo de la petición
+ * @param options - Opciones de la petición
+ */
+export async function put<T = any>(endpoint: string, body?: any, options: RequestOptions = {}): Promise<ApiResponse<T>> {
+  return await request<T>('PUT', endpoint, body, options);
+}
+
+/**
+ * Realiza una petición DELETE a la API
+ * @param endpoint - Endpoint relativo al API_URL
+ * @param options - Opciones de la petición
+ */
+export async function del<T = any>(endpoint: string, options: RequestOptions = {}): Promise<ApiResponse<T>> {
+  return await request<T>('DELETE', endpoint, undefined, options);
+}
+
+/**
+ * Función base para realizar peticiones HTTP
+ */
+async function request<T = any>(
+  method: string,
+  endpoint: string,
+  body?: any,
+  options: RequestOptions = {}
+): Promise<ApiResponse<T>> {
+  const url = `${API_URL}${endpoint}`;
+  
+  // Construir headers básicos
+  const headers: Record<string, string> = {
+    'Content-Type': 'application/json',
+    ...options.headers,
+  };
+
+  // Añadir token de autenticación si existe
+  if (options.token) {
+    headers['Authorization'] = `Bearer ${options.token}`;
+  } else {
+    // Intentar obtener el token del localStorage
+    const storedToken = localStorage.getItem('accessToken');
+    if (storedToken) {
+      headers['Authorization'] = `Bearer ${storedToken}`;
     }
-    return config;
-  },
-  (error) => Promise.reject(error)
-);
+  }
 
-// Servicios de autenticación
-export const authService = {
-  // Corregido: Asegura que los endpoints coincidan con las rutas del backend
-  login: (email: string, password: string) => 
-    api.post('/auth/login', { email, password }),
+  console.log(`API Request: ${method} ${url}`);
   
-  register: (nombre: string, email: string, password: string) =>
-    api.post('/auth/register', { nombre, email, password }),
-  
-  verifyToken: () => 
-    api.get('/auth/me'), // Corregido: Usa la ruta correcta para verificar el token
-  
-  // Añadido: Método para cerrar sesión (si es necesario en el backend)
-  logout: () => api.post('/auth/logout')
-};
+  try {
+    const response = await fetch(url, {
+      method,
+      headers,
+      body: body ? JSON.stringify(body) : undefined,
+    });
+    
+    console.log(`API Response: ${response.status} from ${url}`);
+    
+    let data;
+    const contentType = response.headers.get('content-type');
+    
+    if (contentType && contentType.includes('application/json')) {
+      data = await response.json();
+      console.log('Response data:', data);
+    } else {
+      data = await response.text();
+      console.log('Response text:', data);
+    }
+    
+    if (!response.ok) {
+      console.error('API Error:', data);
+      return {
+        error: data.message || `Error ${response.status}: ${response.statusText}`,
+        status: response.status,
+      };
+    }
+    
+    return {
+      data,
+      status: response.status,
+    };
+  } catch (error: any) {
+    console.error('API Request failed:', error);
+    
+    return {
+      error: error.message || 'Error en la comunicación con el servidor',
+      status: 0,
+    };
+  }
+}
 
-// Servicios de retos
-export const challengesService = {
-  getAll: () => api.get('/retos'),
-  getById: (id: string) => api.get(`/retos/${id}`),
-  create: (data: any) => api.post('/retos', data),
-  join: (id: string) => api.post(`/retos/${id}/join`),
-};
-
-// Servicios de planes de estudio
-export const studyPlansService = {
-  getAll: () => api.get('/planes'),
-  getById: (id: string) => api.get(`/planes/${id}`),
-  create: (data: any) => api.post('/planes', data),
-};
+export default { get, post, put, del };

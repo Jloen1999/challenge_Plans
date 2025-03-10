@@ -1,0 +1,31 @@
+<!-- filepath: c:\Users\JLOel\Desktop\OPT8-Frameworks\practica2\challenge_Plans\frontend\public\images\logo.svg -->
+<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 200 200">
+  <!-- Fondo del logo con degradado -->
+  <defs>
+    <linearGradient id="logoGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#4a6cf7" />
+      <stop offset="100%" stop-color="#2563eb" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Círculo de fondo con un leve efecto de brillo -->
+  <circle cx="100" cy="100" r="95" fill="white" />
+  <circle cx="100" cy="100" r="85" fill="url(#logoGradient)" />
+  
+  <!-- Letras "CP" en blanco -->
+  <text x="100" y="125" 
+        font-family="Arial, sans-serif" 
+        font-weight="bold" 
+        font-size="80" 
+        text-anchor="middle" 
+        fill="white">
+    CP
+  </text>
+  
+  <!-- Elemento decorativo: línea curva que simboliza el "desafío" o "challenge" -->
+  <path d="M55,145 Q100,170 145,145" 
+        stroke="white" 
+        stroke-width="6" 
+        fill="none" 
+        stroke-linecap="round" />
+</svg>

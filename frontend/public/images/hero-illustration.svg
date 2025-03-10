@@ -1,0 +1,22 @@
+<!-- filepath: c:\Users\JLOel\Desktop\OPT8-Frameworks\practica2\challenge_Plans\frontend\public\images\hero-illustration.svg -->
+<svg width="600" height="400" viewBox="0 0 600 400" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <g opacity="0.8">
+    <path d="M300 50C300 36.193 311.193 25 325 25H575C588.807 25 600 36.193 600 50V350C600 363.807 588.807 375 575 375H325C311.193 375 300 363.807 300 350V50Z" fill="#4A6CF7" fill-opacity="0.2"/>
+    <path d="M0 75C0 61.193 11.193 50 25 50H275C288.807 50 300 61.193 300 75V325C300 338.807 288.807 350 275 350H25C11.193 350 0 338.807 0 325V75Z" fill="#4A6CF7" fill-opacity="0.1"/>
+    <path d="M150 150C194.183 150 230 114.183 230 70C230 25.8172 194.183 -10 150 -10C105.817 -10 70 25.8172 70 70C70 114.183 105.817 150 150 150Z" fill="#4A6CF7" fill-opacity="0.15"/>
+    <path d="M450 100C472.091 100 490 82.0914 490 60C490 37.9086 472.091 20 450 20C427.909 20 410 37.9086 410 60C410 82.0914 427.909 100 450 100Z" fill="#4A6CF7" fill-opacity="0.15"/>
+    <path d="M380 300C424.183 300 460 264.183 460 220C460 175.817 424.183 140 380 140C335.817 140 300 175.817 300 220C300 264.183 335.817 300 380 300Z" fill="#4A6CF7" fill-opacity="0.15"/>
+    <rect x="120" y="180" width="60" height="60" rx="10" fill="#4A6CF7"/>
+    <rect x="120" y="260" width="60" height="60" rx="10" fill="#4A6CF7" fill-opacity="0.8"/>
+    <rect x="200" y="180" width="60" height="140" rx="10" fill="#4A6CF7" fill-opacity="0.6"/>
+    <rect x="340" y="180" width="60" height="100" rx="10" fill="#4A6CF7" fill-opacity="0.8"/>
+    <rect x="420" y="180" width="60" height="140" rx="10" fill="#4A6CF7"/>
+    <rect x="500" y="180" width="60" height="60" rx="10" fill="#4A6CF7" fill-opacity="0.6"/>
+    <path d="M100 160L200 100L300 200L400 120L500 180" stroke="#4A6CF7" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+    <circle cx="100" cy="160" r="8" fill="#4A6CF7"/>
+    <circle cx="200" cy="100" r="8" fill="#4A6CF7"/>
+    <circle cx="300" cy="200" r="8" fill="#4A6CF7"/>
+    <circle cx="400" cy="120" r="8" fill="#4A6CF7"/>
+    <circle cx="500" cy="180" r="8" fill="#4A6CF7"/>
+  </g>
+</svg>

@@ -1,52 +1,50 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { AuthProvider } from './contexts/AuthContext';
-import Home from './pages/Home';
-import Login from './pages/Login';
-import Register from './pages/Register';
-import Dashboard from './pages/Dashboard';
-import About from './pages/About';
-import Challenges from './pages/Challenges';
-import PlanesEstudio from './pages/PlanesEstudio';
-import Apuntes from './pages/Apuntes';
-import CreateChallenge from './pages/CreateChallenge';
-import ChallengeDetail from './pages/ChallengeDetail';
-import PlanDetail from './pages/PlanDetail';
-import ApunteDetail from './pages/ApunteDetail';
-import ProtectedRoute from './components/auth/ProtectedRoute';
-import CreateApunte from './pages/CreateApunte';
-import './assets/styles/App.css';
+import React, { useEffect } from 'react';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import { Provider } from 'react-redux';
+import { store } from './redux/store';
+import { Toaster } from 'react-hot-toast';
 
-function App() {
+// Importación de páginas y componentes
+import HomePage from './pages/Home/HomePage';
+import LoginPage from './pages/Auth/LoginPage';
+import RegisterPage from './pages/Auth/RegisterPage';
+import NotFoundPage from './pages/NotFound/NotFoundPage';
+import RetosPage from './pages/Retos/RetosPage';
+import DetalleRetoPage from './pages/Retos/DetalleRetoPage';
+import RetoProgresoPage from './pages/Retos/RetoProgresoPage';
+// Podríamos necesitar importar páginas adicionales para tareas en el futuro
+import NavBar from './components/layout/Navbar';
+import Footer from './components/layout/Footer';
+
+// Importación de estilos
+import './styles/variables.css';
+
+const App: React.FC = () => {
   return (
-    <AuthProvider>
+    <Provider store={store}>
       <Router>
-        <Routes>
-          {/* Rutas públicas */}
-          <Route path="/" element={<Home />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/registro" element={<Register />} />
-          <Route path="/acerca" element={<About />} />
-          
-          {/* Rutas para exploración */}
-          <Route path="/retos" element={<Challenges />} />
-          <Route path="/planes" element={<PlanesEstudio />} />
-          <Route path="/apuntes" element={<Apuntes />} />
-          
-          {/* Rutas para visualización de detalles */}
-          <Route path="/retos/:id" element={<ChallengeDetail />} />
-          <Route path="/planes/:id" element={<PlanDetail />} />
-          <Route path="/apuntes/:id" element={<ApunteDetail />} />
-          
-          {/* Rutas protegidas */}
-          <Route element={<ProtectedRoute />}>
-            <Route path="/dashboard" element={<Dashboard />} />
-            <Route path="/crear-reto" element={<CreateChallenge />} />
-            <Route path="/apuntes/crear" element={<CreateApunte />} />
-          </Route>
-        </Routes>
+        <div className="app-container">
+          <Toaster position="top-center" toastOptions={{
+            // ...existing code...
+          }} />
+          <NavBar />
+          <main className="main-content">
+            <Routes>
+              <Route path="/" element={<HomePage />} />
+              <Route path="/login" element={<LoginPage />} />
+              <Route path="/register" element={<RegisterPage />} />
+              <Route path="/retos" element={<RetosPage />} />
+              <Route path="/retos/:id" element={<DetalleRetoPage />} />
+              <Route path="/retos/:id/progress" element={<RetoProgresoPage />} />
+              {/* Añadir rutas adicionales para tareas si se necesitan */}
+              <Route path="*" element={<NotFoundPage />} />
+            </Routes>
+          </main>
+          <Footer />
+        </div>
       </Router>
-    </AuthProvider>
+    </Provider>
   );
-}
+};
 
 export default App;
