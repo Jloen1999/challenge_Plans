@@ -1,31 +1,33 @@
 import { Router } from 'express';
 import { RetosController } from '../controllers/retos.controller';
-import { authenticate } from '../middlewares/auth.middleware';
 import { body, param, query } from 'express-validator';
-import { verifyToken } from '../utils/jwt';
-import { Request, Response, NextFunction } from 'express';
+import { authenticate, authorize } from '../middlewares/auth.middleware';
 
 const router = Router();
 const retosController = new RetosController();
 
-// Middleware de autenticación opcional
-const optionalAuthenticate = (req: Request, res: Response, next: NextFunction) => {
-  const token = req.header('Authorization')?.replace('Bearer ', '');
-  if (token) {
-    try {
-      const decoded = verifyToken(token);
-      if (decoded && decoded.id) {
-        req.user = { id: decoded.id };
-      }
-    } catch (error) {
-      // No bloqueamos, simplemente seguimos sin user
-      console.log('Error in optional authentication:', error);
-    }
-  }
-  next();
-};
+// Middleware de validación para reto
+const validateReto = [
+  body('titulo').notEmpty().withMessage('El título es obligatorio'),
+  body('descripcion').optional(),
+  body('fecha_inicio').isDate().withMessage('Fecha de inicio inválida'),
+  body('fecha_fin').isDate().withMessage('Fecha de fin inválida'),
+  body('dificultad').optional().isIn(['principiante', 'intermedio', 'avanzado']).withMessage('Dificultad inválida'),
+  body('es_publico').optional().isBoolean().withMessage('Es público debe ser un valor booleano')
+];
 
-// Ruta para obtener estadísticas populares - esta debe ir ANTES de la ruta con parámetro :id
+/**
+ * @route GET /api/retos
+ * @desc Obtiene todos los retos públicos o todos si el usuario es admin
+ * @access Public/Private (Autenticación opcional)
+ */
+router.get('/', retosController.getAllRetos);
+
+/**
+ * @route GET /api/retos/stats/popular
+ * @desc Obtiene los retos más populares basados en participaciones
+ * @access Public
+ */
 router.get(
   '/stats/popular',
   [
@@ -39,36 +41,55 @@ router.get(
  * @desc Obtiene los retos en los que participa un usuario
  * @access Private
  */
-router.get(
-  '/user/participations',
-  authenticate, // Autenticación obligatoria
-  retosController.getUserParticipations
-);
+router.get('/user/participations', authenticate, retosController.getUserParticipations);
 
 /**
- * @route GET /api/retos
- * @desc Obtiene todos los retos públicos o todos si es admin
- * @access Public/Private (Autenticación opcional)
+ * @route GET /api/retos/user/completed
+ * @desc Obtiene los retos completados por un usuario
+ * @access Private
  */
-router.get(
-  '/',
-  optionalAuthenticate, // Autenticación opcional para mostrar más retos si es admin
-  retosController.getAllRetos
-);
+router.get('/user/completed', authenticate, retosController.getCompletedRetos);
+
+/**
+ * @route GET /api/retos/user/badges
+ * @desc Obtiene los badges del usuario en todos los retos
+ * @access Private
+ */
+router.get('/user/badges', authenticate, retosController.getUserBadges);
 
 /**
  * @route GET /api/retos/:id
- * @desc Obtiene un reto por su ID (público o privado según permisos)
- * @access Mixed - Retos públicos: Public / Retos privados: Private
+ * @desc Obtiene un reto por su ID
+ * @access Public/Private (dependiendo si es público o privado)
  */
 router.get(
   '/:id',
   [
     param('id').isUUID().withMessage('ID de reto inválido')
   ],
-  optionalAuthenticate, // Usar el middleware reutilizable
   retosController.getRetoById
 );
+
+/**
+ * @route GET /api/retos/:id/tareas
+ * @desc Obtiene todas las tareas de un reto específico
+ * @access Public/Private (dependiendo si el reto es público o privado)
+ */
+router.get('/:id/tareas', retosController.getTareasReto);
+
+/**
+ * @route GET /api/retos/:id/participation
+ * @desc Verifica si un usuario está participando en un reto específico
+ * @access Private
+ */
+router.get('/:id/participation', authenticate, retosController.checkUserParticipation);
+
+/**
+ * @route GET /api/retos/:id/progress
+ * @desc Obtiene el progreso detallado de un usuario en un reto específico
+ * @access Private
+ */
+router.get('/:id/progress', authenticate, retosController.getUserProgress);
 
 /**
  * @route POST /api/retos
@@ -78,51 +99,33 @@ router.get(
 router.post(
   '/',
   authenticate,
-  [
-    body('titulo').notEmpty().withMessage('El título es requerido'),
-    body('fecha_inicio').isISO8601().withMessage('Fecha de inicio inválida'),
-    body('fecha_fin').isISO8601().withMessage('Fecha de finalización inválida'),
-    body('dificultad').optional().isIn(['principiante', 'intermedio', 'avanzado']).withMessage('Dificultad inválida'),
-    body('es_publico').optional().isBoolean().withMessage('es_publico debe ser un valor booleano'),
-    body('categorias_ids').optional().isArray().withMessage('categorias_ids debe ser un array'),
-    body('categorias_ids.*').optional().isUUID().withMessage('ID de categoría inválido'),
-  ],
+  authorize(['crear_reto']),
+  validateReto,
   retosController.createReto
 );
 
 /**
  * @route PUT /api/retos/:id
  * @desc Actualiza un reto existente
- * @access Private
+ * @access Private (dueño del reto)
  */
 router.put(
   '/:id',
   authenticate,
-  [
-    param('id').isUUID().withMessage('ID de reto inválido'),
-    body('titulo').optional().notEmpty().withMessage('El título no puede estar vacío'),
-    body('fecha_inicio').optional().isISO8601().withMessage('Fecha de inicio inválida'),
-    body('fecha_fin').optional().isISO8601().withMessage('Fecha de finalización inválida'),
-    body('dificultad').optional().isIn(['principiante', 'intermedio', 'avanzado']).withMessage('Dificultad inválida'),
-    body('estado').optional().isIn(['borrador', 'activo', 'finalizado']).withMessage('Estado inválido'),
-    body('es_publico').optional().isBoolean().withMessage('es_publico debe ser un valor booleano'),
-    body('categorias_ids').optional().isArray().withMessage('categorias_ids debe ser un array'),
-    body('categorias_ids.*').optional().isUUID().withMessage('ID de categoría inválido'),
-  ],
+  authorize(['editar_reto']),
+  validateReto,
   retosController.updateReto
 );
 
 /**
  * @route DELETE /api/retos/:id
- * @desc Elimina un reto existente
- * @access Private
+ * @desc Elimina un reto
+ * @access Private (dueño del reto o admin)
  */
 router.delete(
   '/:id',
   authenticate,
-  [
-    param('id').isUUID().withMessage('ID de reto inválido')
-  ],
+  authorize(['eliminar_reto']),
   retosController.deleteReto
 );
 
@@ -134,67 +137,29 @@ router.delete(
 router.post(
   '/:id/join',
   authenticate,
-  [
-    param('id').isUUID().withMessage('ID de reto inválido')
-  ],
+  authorize(['participar_reto']),
   retosController.joinReto
 );
 
 /**
  * @route DELETE /api/retos/:id/leave
  * @desc Permite a un usuario abandonar un reto
- * @access Private (solo usuarios participantes)
+ * @access Private (solo participantes)
  */
-router.delete(
-  '/:id/leave',
-  authenticate,
-  [
-    param('id').isUUID().withMessage('ID de reto inválido')
-  ],
-  retosController.leaveReto
-);
-
-/**
- * @route GET /api/retos/:id/participation
- * @desc Verifica si un usuario está participando en un reto
- * @access Private
- */
-router.get(
-  '/:id/participation',
-  authenticate,
-  [
-    param('id').isUUID().withMessage('ID de reto inválido')
-  ],
-  retosController.checkUserParticipation
-);
+router.delete('/:id/leave', authenticate, retosController.leaveReto);
 
 /**
  * @route PATCH /api/retos/:id/progress
  * @desc Actualiza el progreso de un usuario en un reto
- * @access Private
+ * @access Private (solo participantes)
  */
 router.patch(
   '/:id/progress',
   authenticate,
   [
-    param('id').isUUID().withMessage('ID de reto inválido'),
-    body('progreso').isInt({ min: 0, max: 100 }).withMessage('Progreso debe ser un número entre 0 y 100')
+    body('progreso').isInt({ min: 0, max: 100 }).withMessage('El progreso debe ser un número entre 0 y 100')
   ],
   retosController.updateProgress
-);
-
-/**
- * @route GET /api/retos/:id/progress
- * @desc Obtiene el progreso detallado del usuario en un reto
- * @access Private
- */
-router.get(
-  '/:id/progress',
-  authenticate,
-  [
-    param('id').isUUID().withMessage('ID de reto inválido')
-  ],
-  retosController.getUserProgress
 );
 
 /**
@@ -202,13 +167,13 @@ router.get(
  * @desc Marca una tarea como completada
  * @access Private
  */
-router.post(
-  '/tareas/:id/complete',
-  authenticate,
-  [
-    param('id').isUUID().withMessage('ID de tarea inválido')
-  ],
-  retosController.completeTarea
-);
+router.post('/tareas/:id/complete', authenticate, retosController.completeTarea);
+
+/**
+ * @route DELETE /api/retos/tareas/:id/complete
+ * @desc Desmarca una tarea como completada
+ * @access Private
+ */
+router.delete('/tareas/:id/complete', authenticate, retosController.uncompleteTarea);
 
 export default router;

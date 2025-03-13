@@ -1,0 +1,3 @@
+- Función que proporciona datos de prueba para mostrar cuando hay errores de API
+- Teniendo en cuenta las nuevas modificaciones de #file:retos.service.ts  , ahora procedemos con la actualización de #file:retos.controller.ts y #file:retos.routes.ts ya que se debe mantener una coherencia total y lógica.
+- Actualiza los servicios de #file:retos.service.ts ya que algunos no están completos debido a que cuando se añade un registro en una tabla es posible que también se deba añadir registros en otras tablas. Para ello analiza nuevamente el #file:README.md , la base de datos #file:bd.sql para entender las relaciones entre las tablas y los triggers #file:1741440000000-TriggersAndFunctions.ts 

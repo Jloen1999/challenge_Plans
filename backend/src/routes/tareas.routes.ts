@@ -108,7 +108,9 @@ router.post(
   '/:id/complete',
   authenticate,
   [
-    param('id').isUUID().withMessage('ID de tarea inválido')
+    param('id').isUUID().withMessage('ID de tarea inválido'),
+    body('progreso').optional().isInt({ min: 0, max: 100 }).withMessage('El progreso debe ser un número entre 0 y 100'),
+    body('comentario').optional().isString().withMessage('El comentario debe ser texto')
   ],
   tareasController.completeTarea
 );

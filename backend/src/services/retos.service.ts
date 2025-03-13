@@ -3,6 +3,10 @@ import { Reto } from '../entities/reto.entity';
 import { ParticipacionRetos } from '../entities/participacion-retos.entity';
 import { RetoCategoria } from '../entities/reto-categorias.entity';
 import { Categoria } from '../entities/categoria.entity';
+import { HistorialProgreso } from '../entities/historial-progreso.entity';
+import { Recompensa } from '../entities/recompensa.entity';
+import { UsuarioRecompensas } from '../entities/usuario-recompensas.entity';
+import { Notificacion } from '../entities/notificacion.entity';
 import { NotFoundError, ForbiddenError, ConflictError, BadRequestError } from '../utils/custom-errors';
 import { In, DeepPartial } from 'typeorm';
 import { Usuario } from '../entities/usuario.entity';
@@ -411,7 +415,7 @@ export class RetosService {
    * @param progreso Nuevo progreso (0-100)
    * @returns Datos de participación actualizados
    */
-  async updateProgress(retoId: string, userId: string, progreso: number): Promise<ParticipacionRetos> {
+ /*  async updateProgress(retoId: string, userId: string, progreso: number): Promise<ParticipacionRetos> {
     if (progreso < 0 || progreso > 100) {
       throw new BadRequestError('El progreso debe estar entre 0 y 100');
     }
@@ -439,7 +443,7 @@ export class RetosService {
     
     return await this.participacionRepository.save(participacion);
   }
-
+ */
   /**
    * Obtiene la lista de participaciones de un usuario
    * @param userId ID del usuario
@@ -592,11 +596,12 @@ export class RetosService {
       const reto = await this.findById(retoId, userId);
 
       // 3. Obtener las tareas completadas vs total
-      // Se corrige la consulta usando tarea_id en lugar de id
       const tareasStats = await AppDataSource.query(`
         SELECT
           COUNT(t.id) as tareas_totales,
-          COUNT(tc.tarea_id) as tareas_completadas
+          COUNT(tc.tarea_id) as tareas_completadas,
+          SUM(t.puntos) as puntos_totales,
+          COALESCE(SUM(CASE WHEN tc.tarea_id IS NOT NULL THEN t.puntos ELSE 0 END), 0) as puntos_obtenidos
         FROM tareas t
         LEFT JOIN tareas_completadas tc ON 
           tc.tarea_id = t.id AND tc.usuario_id = $1
@@ -604,28 +609,19 @@ export class RetosService {
       `, [userId, retoId]);
 
       // 4. Obtener detalle de cada tarea y su estado de completado
-      // Se corrige la consulta usando tarea_id en lugar de id
-      const tareasConEstado = await AppDataSource.query(`
-        SELECT
-          t.*,
-          CASE WHEN tc.tarea_id IS NOT NULL THEN true ELSE false END as completada,
-          tc.fecha_completado
-        FROM tareas t
-        LEFT JOIN tareas_completadas tc ON 
-          tc.tarea_id = t.id AND tc.usuario_id = $1
-        WHERE t.reto_id = $2
-        ORDER BY t.id ASC
-      `, [userId, retoId]);
+      const tareasConEstado = await this.getTareasReto(retoId, userId);
 
       // 5. Obtener historial de progreso si existe
       const historialProgreso = await AppDataSource.query(`
-        SELECT fecha, progreso
+        SELECT fecha, progreso_anterior, progreso_nuevo
         FROM historial_progreso
         WHERE usuario_id = $1 AND reto_id = $2
         ORDER BY fecha ASC
       `, [userId, retoId]);
 
-      // 6. Construir respuesta completa
+      
+
+      // 7. Construir respuesta completa
       return {
         participacion: {
           fecha_union: participacion.fecha_union,
@@ -645,6 +641,8 @@ export class RetosService {
         estadisticas: {
           tareas_totales: parseInt(tareasStats[0].tareas_totales),
           tareas_completadas: parseInt(tareasStats[0].tareas_completadas),
+          puntos_totales: parseInt(tareasStats[0].puntos_totales || 0),
+          puntos_obtenidos: parseInt(tareasStats[0].puntos_obtenidos || 0),
           porcentaje_completado: tareasStats[0].tareas_totales > 0 
             ? Math.round((parseInt(tareasStats[0].tareas_completadas) / parseInt(tareasStats[0].tareas_totales)) * 100) 
             : 0
@@ -704,17 +702,18 @@ export class RetosService {
       }
 
       // Marcar la tarea como completada
+      const fechaCompletado = new Date();
       await AppDataSource.query(`
         INSERT INTO tareas_completadas (tarea_id, usuario_id, fecha_completado)
-        VALUES ($1, $2, NOW())
-      `, [tareaId, userId]);
+        VALUES ($1, $2, $3)
+      `, [tareaId, userId, fechaCompletado]);
 
-      // Actualizar el progreso del usuario en el reto
-      // (Esto podría ser manejado automáticamente por un trigger en la BD)
+      // Actualizar el progreso del usuario en el reto - esto es manejado por el trigger actualizar_progreso_usuario
+      // Pero necesitamos obtener el nuevo progreso para la respuesta
       const tareasStats = await AppDataSource.query(`
         SELECT
           COUNT(t.id) as tareas_totales,
-          COUNT(tc.id) as tareas_completadas
+          COUNT(tc.tarea_id) as tareas_completadas
         FROM tareas t
         LEFT JOIN tareas_completadas tc ON 
           tc.tarea_id = t.id AND tc.usuario_id = $1
@@ -725,13 +724,20 @@ export class RetosService {
         ? Math.round((parseInt(tareasStats[0].tareas_completadas) / parseInt(tareasStats[0].tareas_totales)) * 100)
         : 0;
 
-      // Actualizar el progreso
-      await this.updateProgress(tarea[0].reto_id, userId, nuevoProgreso);
+      // Verificar y otorgar recompensas/badges si corresponde
+      // El trigger check_badge_completion manejará la asignación automática de insignias por completar tareas
+      
+      // Actualizar historial_progreso - Esto también es manejado por el trigger registrar_cambio_progreso
+      
+      // Comprobar si todas las tareas están completadas para marcar el reto como completado
+      // El trigger gestionar_estado_participacion se encarga de esto
 
       return {
         completada: true,
         tarea_id: tareaId,
-        nuevo_progreso: nuevoProgreso
+        fecha_completado: fechaCompletado,
+        nuevo_progreso: nuevoProgreso,
+        tarea_puntos: tarea[0].puntos
       };
     } catch (error) {
       if (error instanceof NotFoundError || error instanceof ForbiddenError || error instanceof ConflictError) {
@@ -741,4 +747,343 @@ export class RetosService {
       throw new BadRequestError('Error al completar la tarea');
     }
   }
+
+  /**
+   * Desmarca una tarea como completada para un usuario
+   * @param tareaId ID de la tarea
+   * @param userId ID del usuario
+   * @returns Resultado de la operación
+   */
+  async uncompleteTarea(tareaId: string, userId: string): Promise<any> {
+    try {
+      // Verificar que la tarea existe
+      const tarea = await AppDataSource.query(`
+        SELECT t.*, r.id as reto_id
+        FROM tareas t
+        JOIN retos r ON t.reto_id = r.id
+        WHERE t.id = $1
+      `, [tareaId]);
+
+      if (tarea.length === 0) {
+        throw new NotFoundError('Tarea no encontrada');
+      }
+
+      // Verificar que el usuario participa en el reto
+      const participacion = await this.participacionRepository.findOne({
+        where: {
+          reto_id: tarea[0].reto_id,
+          usuario_id: userId
+        }
+      });
+
+      if (!participacion) {
+        throw new ForbiddenError('No estás participando en este reto');
+      }
+
+      // Verificar si la tarea fue completada por el usuario
+      const tareaCompletada = await AppDataSource.query(`
+        SELECT * FROM tareas_completadas
+        WHERE tarea_id = $1 AND usuario_id = $2
+      `, [tareaId, userId]);
+
+      if (tareaCompletada.length === 0) {
+        throw new NotFoundError('Esta tarea no ha sido completada todavía');
+      }
+
+      // Desmarcar la tarea (eliminar registro de tareas_completadas)
+      await AppDataSource.query(`
+        DELETE FROM tareas_completadas
+        WHERE tarea_id = $1 AND usuario_id = $2
+      `, [tareaId, userId]);
+
+      // Obtener el nuevo progreso después de eliminar la tarea completada
+      // Los triggers manejarán la actualización del progreso, pero necesitamos calcular el nuevo valor para la respuesta
+      const tareasStats = await AppDataSource.query(`
+        SELECT
+          COUNT(t.id) as tareas_totales,
+          COUNT(tc.tarea_id) as tareas_completadas
+        FROM tareas t
+        LEFT JOIN tareas_completadas tc ON 
+          tc.tarea_id = t.id AND tc.usuario_id = $1
+        WHERE t.reto_id = $2
+      `, [userId, tarea[0].reto_id]);
+
+      const nuevoProgreso = tareasStats[0].tareas_totales > 0
+        ? Math.round((parseInt(tareasStats[0].tareas_completadas) / parseInt(tareasStats[0].tareas_totales)) * 100)
+        : 0;
+
+      return {
+        completada: false,
+        tarea_id: tareaId,
+        nuevo_progreso: nuevoProgreso,
+        tarea_puntos: tarea[0].puntos
+      };
+    } catch (error) {
+      if (error instanceof NotFoundError || error instanceof ForbiddenError) {
+        throw error;
+      }
+      console.error('Error al desmarcar tarea como completada:', error);
+      throw new BadRequestError('Error al desmarcar la tarea como completada');
+    }
+  }
+
+  /**
+   * Obtiene todas las tareas de un reto con su estado de completado para un usuario
+   * @param retoId ID del reto
+   * @param userId ID del usuario (opcional)
+   * @returns Lista de tareas con estado de completado
+   */
+  async getTareasReto(retoId: string, userId?: string): Promise<any[]> {
+    try {
+      // Validar que el reto existe
+      const reto = await this.retoRepository.findOne({
+        where: { id: retoId }
+      });
+
+      if (!reto) {
+        throw new NotFoundError('Reto no encontrado');
+      }
+
+      // Obtener tareas con estado de completado si hay usuario
+      if (userId) {
+        return await AppDataSource.query(`
+          SELECT 
+            t.*,
+            CASE WHEN tc.tarea_id IS NOT NULL THEN true ELSE false END as completada,
+            tc.fecha_completado
+          FROM tareas t
+          LEFT JOIN tareas_completadas tc ON 
+            tc.tarea_id = t.id AND tc.usuario_id = $1
+          WHERE t.reto_id = $2
+          ORDER BY t.id ASC
+        `, [userId, retoId]);
+      } else {
+        // Si no hay usuario, solo devolver las tareas
+        return await AppDataSource.query(`
+          SELECT t.*
+          FROM tareas t
+          WHERE t.reto_id = $1
+          ORDER BY t.id ASC
+        `, [retoId]);
+      }
+    } catch (error) {
+      if (error instanceof NotFoundError) {
+        throw error;
+      }
+      console.error('Error al obtener tareas del reto:', error);
+      throw new BadRequestError('Error al obtener las tareas del reto');
+    }
+  }
+
+  /**
+   * Obtiene los retos completados por un usuario
+   * @param userId ID del usuario
+   * @returns Lista de retos completados con estadísticas
+   */
+  async getCompletedRetos(userId: string): Promise<any[]> {
+    try {
+      return await AppDataSource.query(`
+        SELECT 
+          r.id, r.titulo, r.descripcion, r.dificultad, r.puntos_totales,
+          pr.progreso, pr.fecha_completado,
+          COUNT(t.id) as total_tareas,
+          COUNT(tc.tarea_id) as tareas_completadas,
+          (
+            SELECT STRING_AGG(c.nombre, ', ')
+            FROM reto_categorias rc
+            JOIN categorias c ON rc.categoria_id = c.id
+            WHERE rc.reto_id = r.id
+          ) as categorias,
+          (
+            SELECT COUNT(*) 
+            FROM usuario_badges ub
+            WHERE ub.usuario_id = $1 AND ub.reto_id = r.id
+          ) as badges_obtenidos
+        FROM participacion_retos pr
+        JOIN retos r ON pr.reto_id = r.id
+        LEFT JOIN tareas t ON t.reto_id = r.id
+        LEFT JOIN tareas_completadas tc ON tc.tarea_id = t.id AND tc.usuario_id = $1
+        WHERE pr.usuario_id = $1 AND pr.estado = 'completado'
+        GROUP BY r.id, r.titulo, r.descripcion, r.dificultad, r.puntos_totales, pr.progreso, pr.fecha_completado
+        ORDER BY pr.fecha_completado DESC
+      `, [userId]);
+    } catch (error) {
+      console.error('Error al obtener retos completados:', error);
+      throw new BadRequestError('Error al obtener los retos completados');
+    }
+  }
+
+  /**
+   * Obtiene los badges del usuario en todos los retos
+   * @param userId ID del usuario
+   * @returns Lista de badges obtenidos
+   */
+  async getUserBadges(userId: string): Promise<any[]> {
+    try {
+      return await AppDataSource.query(`
+        SELECT 
+          b.*, 
+          ub.fecha_obtencion,
+          r.id as reto_id,
+          r.titulo as reto_titulo
+        FROM usuario_badges ub
+        JOIN badges b ON ub.badge_id = b.id
+        LEFT JOIN retos r ON ub.reto_id = r.id
+        WHERE ub.usuario_id = $1
+        ORDER BY ub.fecha_obtencion DESC
+      `, [userId]);
+    } catch (error) {
+      console.error('Error al obtener badges del usuario:', error);
+      throw new BadRequestError('Error al obtener los badges');
+    }
+  }
+
+  /**
+ * Actualiza el progreso del usuario en un reto
+ * @param retoId ID del reto
+ * @param userId ID del usuario
+ * @param progreso Nuevo valor de progreso (0-100)
+ * @returns Datos del progreso actualizado
+ */
+async updateProgress(retoId: string, userId: string, progreso: number): Promise<any> {
+  // Iniciar transacción para garantizar consistencia
+  const queryRunner = AppDataSource.createQueryRunner();
+  await queryRunner.connect();
+  await queryRunner.startTransaction();
+  
+  try {
+    // Verificar que el usuario está participando en el reto
+    const participacion = await queryRunner.manager.findOne(ParticipacionRetos, {
+      where: { reto_id: retoId, usuario_id: userId }
+    });
+
+    if (!participacion) {
+      throw new NotFoundError('No estás participando en este reto');
+    }
+
+    // Obtener el progreso anterior y los puntos del reto para cálculos posteriores
+    const progresoAnterior = participacion.progreso;
+    const reto = await queryRunner.manager.findOne(Reto, { where: { id: retoId } });
+
+    if (!reto) {
+      throw new NotFoundError('Reto no encontrado');
+    }
+
+    // Actualizar el progreso
+    await queryRunner.manager.update(ParticipacionRetos, 
+      { reto_id: retoId, usuario_id: userId },
+      { progreso }
+    );
+
+    // Registrar cambio de progreso en historial
+    await queryRunner.manager.insert(HistorialProgreso, {
+      usuario_id: userId,
+      reto_id: retoId,
+      progreso_anterior: progresoAnterior,
+      progreso_nuevo: progreso,
+      fecha: new Date(),
+      evento: progreso === 100 ? 'reto_completado' : 'actualizacion_progreso'
+    });
+
+    // GESTIÓN DE PUNTOS
+    // 1. Si el progreso llegó a 100% (completado) y antes era menor
+    if (progreso === 100 && progresoAnterior < 100) {
+      // Marcar como completado
+      await queryRunner.manager.update(ParticipacionRetos,
+        { reto_id: retoId, usuario_id: userId },
+        { estado: 'completado', fecha_completado: new Date() }
+      );
+
+      // Otorgar puntos directamente al usuario por completar el reto
+      await queryRunner.manager.query(`
+        UPDATE usuarios 
+        SET puntaje = puntaje + $1 
+        WHERE id = $2
+      `, [reto.puntos_totales, userId]);
+
+      // Registrar los puntos en usuario_puntos para historial
+      /* await queryRunner.manager.insert(UsuarioPuntos, {
+        usuario_id: userId,
+        puntos: reto.puntos_totales,
+        concepto: `Completar Reto: ${reto.titulo}`,
+        fecha: new Date()
+      }); */
+
+      // Otorgar recompensa por completar reto si existe
+      const recompensa = await queryRunner.manager.findOne(Recompensa, {
+        where: { tipo: 'puntos' }
+      });
+
+      if (recompensa) {
+        try {
+          await queryRunner.manager.insert(UsuarioRecompensas, {
+            usuario_id: userId,
+            recompensa_id: recompensa.id,
+            fecha_obtencion: new Date()
+          });
+          
+          // No es necesario actualizar manualmente los puntos aquí, el trigger se encarga
+        } catch (err) {
+          // Ignorar errores de duplicado (CONFLICT)
+          console.log('Recompensa ya otorgada previamente o error al otorgar:', err);
+        }
+      }
+
+      // Enviar notificación
+      await queryRunner.manager.insert(Notificacion, {
+        usuario_id: userId,
+        tipo: 'logro',
+        titulo: '¡Reto completado!',
+        mensaje: `Has completado el reto "${reto.titulo}" y has ganado ${reto.puntos_totales} puntos.`,
+        leida: false,
+        fecha_creacion: new Date()
+      });
+    } 
+    // 2. Si el progreso bajó de 100% (reversión de completado)
+    else if (progreso < 100 && progresoAnterior === 100) {
+      // Cambiar estado de nuevo a activo
+      await queryRunner.manager.update(ParticipacionRetos,
+        { reto_id: retoId, usuario_id: userId },
+        { estado: 'activo', fecha_completado: undefined }
+      );
+
+      // Restar los puntos otorgados previamente
+      await queryRunner.manager.query(`
+        UPDATE usuarios 
+        SET puntaje = GREATEST(0, puntaje - $1)
+        WHERE id = $2
+      `, [reto.puntos_totales, userId]);
+
+     /*  // Registrar los puntos negativos en usuario_puntos para historial
+      await queryRunner.manager.insert(UsuarioPuntos, {
+        usuario_id: userId,
+        puntos: -reto.puntos_totales,
+        concepto: `Reversión de reto completado: ${reto.titulo}`,
+        fecha: new Date()
+      }); */
+
+      // Nota: Las recompensas permanecen, no las eliminamos
+    }
+
+    // Confirmar la transacción
+    await queryRunner.commitTransaction();
+
+    // Obtener el progreso actualizado para la respuesta
+    const progressData = await this.getUserProgress(retoId, userId);
+    
+    return progressData;
+  } catch (error) {
+    // Revertir cambios si hay error
+    await queryRunner.rollbackTransaction();
+    
+    if (error instanceof NotFoundError) {
+      throw error;
+    }
+    console.error('Error al actualizar progreso:', error);
+    throw new BadRequestError('Error al actualizar el progreso');
+  } finally {
+    // Liberar el queryRunner
+    await queryRunner.release();
+  }
+}
 }

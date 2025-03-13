@@ -1,0 +1,2191 @@
+<!DOCTYPE html>
+        <html>
+        <head>
+            <meta charset="UTF-8">
+            <title>&#x1f4d8; Express&period;js para Principiantes Absolutos</title>
+            <style>
+/* From extension vscode.github */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+.vscode-dark img[src$=\#gh-light-mode-only],
+.vscode-light img[src$=\#gh-dark-mode-only],
+.vscode-high-contrast:not(.vscode-high-contrast-light) img[src$=\#gh-light-mode-only],
+.vscode-high-contrast-light img[src$=\#gh-dark-mode-only] {
+	display: none;
+}
+
+/* From extension zhuangtongfa.material-theme */
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body {
+  box-sizing: border-box;
+  min-width: 200px;
+}
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body blockquote, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body blockquote, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body blockquote, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body blockquote {
+  background-color: initial;
+}
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body pre, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body pre, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body pre, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body pre {
+  color: initial;
+}
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body code, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body code, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body code, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body code {
+  color: inherit;
+}
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body pre code, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body pre code, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body pre code, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body pre code {
+  color: initial;
+}
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body code > div, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body code > div, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body code > div, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body code > div {
+  background: none;
+}
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body table th, .vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body table td, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body table th, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body table td, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body table th, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body table td, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body table th, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body table td {
+  border: 1px solid rgba(171, 178, 191, 0.5) !important;
+}
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body.showEditorSelection .code-active-line:before, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body.showEditorSelection .code-active-line:before, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body.showEditorSelection .code-active-line:before, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body.showEditorSelection .code-active-line:before {
+  border-left: none;
+}
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body.showEditorSelection .code-line:hover:before, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body.showEditorSelection .code-line:hover:before, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body.showEditorSelection .code-line:hover:before, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body.showEditorSelection .code-line:hover:before {
+  border-left: none;
+}
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body.showEditorSelection .code-line .code-line:hover:before, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body.showEditorSelection .code-line .code-line:hover:before, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body.showEditorSelection .code-line .code-line:hover:before, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body.showEditorSelection .code-line .code-line:hover:before {
+  border-left: none;
+}
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body p, .vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body blockquote, .vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body ul, .vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body ol, .vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body dl, .vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body table, .vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body pre, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body p, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body blockquote, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body ul, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body ol, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body dl, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body table, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body pre, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body p, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body blockquote, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body ul, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body ol, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body dl, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body table, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body pre, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body p, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body blockquote, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body ul, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body ol, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body dl, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body table, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body pre {
+  margin-top: 16px;
+  margin-bottom: 16px;
+}
+
+/* Generated from 'node_modules/github-markdown-css/github-markdown.css' */
+@font-face {
+  font-family: octicons-link;
+  src: url(data:font/woff;charset=utf-8;base64,d09GRgABAAAAAAZwABAAAAAACFQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABEU0lHAAAGaAAAAAgAAAAIAAAAAUdTVUIAAAZcAAAACgAAAAoAAQAAT1MvMgAAAyQAAABJAAAAYFYEU3RjbWFwAAADcAAAAEUAAACAAJThvmN2dCAAAATkAAAABAAAAAQAAAAAZnBnbQAAA7gAAACyAAABCUM+8IhnYXNwAAAGTAAAABAAAAAQABoAI2dseWYAAAFsAAABPAAAAZwcEq9taGVhZAAAAsgAAAA0AAAANgh4a91oaGVhAAADCAAAABoAAAAkCA8DRGhtdHgAAAL8AAAADAAAAAwGAACfbG9jYQAAAsAAAAAIAAAACABiATBtYXhwAAACqAAAABgAAAAgAA8ASm5hbWUAAAToAAABQgAAAlXu73sOcG9zdAAABiwAAAAeAAAAME3QpOBwcmVwAAAEbAAAAHYAAAB/aFGpk3jaTY6xa8JAGMW/O62BDi0tJLYQincXEypYIiGJjSgHniQ6umTsUEyLm5BV6NDBP8Tpts6F0v+k/0an2i+itHDw3v2+9+DBKTzsJNnWJNTgHEy4BgG3EMI9DCEDOGEXzDADU5hBKMIgNPZqoD3SilVaXZCER3/I7AtxEJLtzzuZfI+VVkprxTlXShWKb3TBecG11rwoNlmmn1P2WYcJczl32etSpKnziC7lQyWe1smVPy/Lt7Kc+0vWY/gAgIIEqAN9we0pwKXreiMasxvabDQMM4riO+qxM2ogwDGOZTXxwxDiycQIcoYFBLj5K3EIaSctAq2kTYiw+ymhce7vwM9jSqO8JyVd5RH9gyTt2+J/yUmYlIR0s04n6+7Vm1ozezUeLEaUjhaDSuXHwVRgvLJn1tQ7xiuVv/ocTRF42mNgZGBgYGbwZOBiAAFGJBIMAAizAFoAAABiAGIAznjaY2BkYGAA4in8zwXi+W2+MjCzMIDApSwvXzC97Z4Ig8N/BxYGZgcgl52BCSQKAA3jCV8CAABfAAAAAAQAAEB42mNgZGBg4f3vACQZQABIMjKgAmYAKEgBXgAAeNpjYGY6wTiBgZWBg2kmUxoDA4MPhGZMYzBi1AHygVLYQUCaawqDA4PChxhmh/8ODDEsvAwHgMKMIDnGL0x7gJQCAwMAJd4MFwAAAHjaY2BgYGaA4DAGRgYQkAHyGMF8NgYrIM3JIAGVYYDT+AEjAwuDFpBmA9KMDEwMCh9i/v8H8sH0/4dQc1iAmAkALaUKLgAAAHjaTY9LDsIgEIbtgqHUPpDi3gPoBVyRTmTddOmqTXThEXqrob2gQ1FjwpDvfwCBdmdXC5AVKFu3e5MfNFJ29KTQT48Ob9/lqYwOGZxeUelN2U2R6+cArgtCJpauW7UQBqnFkUsjAY/kOU1cP+DAgvxwn1chZDwUbd6CFimGXwzwF6tPbFIcjEl+vvmM/byA48e6tWrKArm4ZJlCbdsrxksL1AwWn/yBSJKpYbq8AXaaTb8AAHja28jAwOC00ZrBeQNDQOWO//sdBBgYGRiYWYAEELEwMTE4uzo5Zzo5b2BxdnFOcALxNjA6b2ByTswC8jYwg0VlNuoCTWAMqNzMzsoK1rEhNqByEyerg5PMJlYuVueETKcd/89uBpnpvIEVomeHLoMsAAe1Id4AAAAAAAB42oWQT07CQBTGv0JBhagk7HQzKxca2sJCE1hDt4QF+9JOS0nbaaYDCQfwCJ7Au3AHj+LO13FMmm6cl7785vven0kBjHCBhfpYuNa5Ph1c0e2Xu3jEvWG7UdPDLZ4N92nOm+EBXuAbHmIMSRMs+4aUEd4Nd3CHD8NdvOLTsA2GL8M9PODbcL+hD7C1xoaHeLJSEao0FEW14ckxC+TU8TxvsY6X0eLPmRhry2WVioLpkrbp84LLQPGI7c6sOiUzpWIWS5GzlSgUzzLBSikOPFTOXqly7rqx0Z1Q5BAIoZBSFihQYQOOBEdkCOgXTOHA07HAGjGWiIjaPZNW13/+lm6S9FT7rLHFJ6fQbkATOG1j2OFMucKJJsxIVfQORl+9Jyda6Sl1dUYhSCm1dyClfoeDve4qMYdLEbfqHf3O/AdDumsjAAB42mNgYoAAZQYjBmyAGYQZmdhL8zLdDEydARfoAqIAAAABAAMABwAKABMAB///AA8AAQAAAAAAAAAAAAAAAAABAAAAAA==) format("woff");
+}
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body {
+  -ms-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+  line-height: 1.5;
+  color: rgb(171, 178, 191);
+  line-height: 1.5;
+  word-wrap: break-word;
+  background: #282c34;
+  padding-top: 20px;
+}
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body .pl-c, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body .pl-c, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body .pl-c, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body .pl-c {
+  color: #6a737d;
+}
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body .pl-c1, .vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body .pl-s .pl-v, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body .pl-c1, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body .pl-s .pl-v, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body .pl-c1, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body .pl-s .pl-v, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body .pl-c1, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body .pl-s .pl-v {
+  color: #005cc5;
+}
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body .pl-e, .vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body .pl-en, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body .pl-e, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body .pl-en, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body .pl-e, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body .pl-en, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body .pl-e, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body .pl-en {
+  color: #6f42c1;
+}
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body .pl-smi, .vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body .pl-s .pl-s1, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body .pl-smi, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body .pl-s .pl-s1, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body .pl-smi, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body .pl-s .pl-s1, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body .pl-smi, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body .pl-s .pl-s1 {
+  color: #24292e;
+}
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body .pl-ent, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body .pl-ent, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body .pl-ent, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body .pl-ent {
+  color: #22863a;
+}
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body .pl-k, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body .pl-k, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body .pl-k, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body .pl-k {
+  color: #d73a49;
+}
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body .pl-s, .vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body .pl-pds, .vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body .pl-s .pl-pse .pl-s1, .vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body .pl-sr, .vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body .pl-sr .pl-cce, .vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body .pl-sr .pl-sre, .vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body .pl-sr .pl-sra, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body .pl-s, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body .pl-pds, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body .pl-s .pl-pse .pl-s1, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body .pl-sr, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body .pl-sr .pl-cce, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body .pl-sr .pl-sre, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body .pl-sr .pl-sra, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body .pl-s, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body .pl-pds, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body .pl-s .pl-pse .pl-s1, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body .pl-sr, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body .pl-sr .pl-cce, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body .pl-sr .pl-sre, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body .pl-sr .pl-sra, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body .pl-s, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body .pl-pds, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body .pl-s .pl-pse .pl-s1, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body .pl-sr, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body .pl-sr .pl-cce, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body .pl-sr .pl-sre, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body .pl-sr .pl-sra {
+  color: #032f62;
+}
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body .pl-v, .vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body .pl-smw, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body .pl-v, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body .pl-smw, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body .pl-v, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body .pl-smw, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body .pl-v, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body .pl-smw {
+  color: #e36209;
+}
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body .pl-bu, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body .pl-bu, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body .pl-bu, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body .pl-bu {
+  color: #b31d28;
+}
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body .pl-ii, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body .pl-ii, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body .pl-ii, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body .pl-ii {
+  color: #fafbfc;
+  background-color: #b31d28;
+}
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body .pl-c2, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body .pl-c2, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body .pl-c2, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body .pl-c2 {
+  color: #fafbfc;
+  background-color: #d73a49;
+}
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body .pl-c2::before, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body .pl-c2::before, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body .pl-c2::before, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body .pl-c2::before {
+  content: "^M";
+}
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body .pl-sr .pl-cce, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body .pl-sr .pl-cce, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body .pl-sr .pl-cce, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body .pl-sr .pl-cce {
+  font-weight: bold;
+  color: #22863a;
+}
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body .pl-ml, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body .pl-ml, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body .pl-ml, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body .pl-ml {
+  color: #735c0f;
+}
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body .pl-mh, .vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body .pl-mh .pl-en, .vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body .pl-ms, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body .pl-mh, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body .pl-mh .pl-en, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body .pl-ms, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body .pl-mh, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body .pl-mh .pl-en, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body .pl-ms, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body .pl-mh, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body .pl-mh .pl-en, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body .pl-ms {
+  font-weight: bold;
+  color: #005cc5;
+}
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body .pl-mi, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body .pl-mi, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body .pl-mi, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body .pl-mi {
+  font-style: italic;
+  color: #24292e;
+}
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body .pl-mb, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body .pl-mb, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body .pl-mb, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body .pl-mb {
+  font-weight: bold;
+  color: #24292e;
+}
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body .pl-md, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body .pl-md, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body .pl-md, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body .pl-md {
+  color: #b31d28;
+  background-color: #ffeef0;
+}
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body .pl-mi1, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body .pl-mi1, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body .pl-mi1, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body .pl-mi1 {
+  color: #22863a;
+  background-color: #f0fff4;
+}
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body .pl-mc, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body .pl-mc, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body .pl-mc, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body .pl-mc {
+  color: #e36209;
+  background-color: #ffebda;
+}
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body .pl-mi2, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body .pl-mi2, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body .pl-mi2, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body .pl-mi2 {
+  color: #f6f8fa;
+  background-color: #005cc5;
+}
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body .pl-mdr, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body .pl-mdr, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body .pl-mdr, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body .pl-mdr {
+  font-weight: bold;
+  color: #6f42c1;
+}
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body .pl-ba, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body .pl-ba, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body .pl-ba, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body .pl-ba {
+  color: #586069;
+}
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body .pl-sg, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body .pl-sg, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body .pl-sg, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body .pl-sg {
+  color: #959da5;
+}
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body .pl-corl, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body .pl-corl, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body .pl-corl, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body .pl-corl {
+  text-decoration: underline;
+  color: #032f62;
+}
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body .octicon, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body .octicon, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body .octicon, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body .octicon {
+  display: inline-block;
+  vertical-align: text-top;
+  fill: currentColor;
+}
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body a, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body a, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body a, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body a {
+  background-color: transparent;
+}
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body a:active, .vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body a:hover, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body a:active, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body a:hover, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body a:active, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body a:hover, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body a:active, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body a:hover {
+  outline-width: 0;
+}
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body strong, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body strong, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body strong, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body strong {
+  font-weight: inherit;
+}
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body strong, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body strong, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body strong, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body strong {
+  font-weight: bolder;
+}
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body h1, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body h1, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body h1, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body h1 {
+  margin: 0.67em 0;
+}
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body img, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body img, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body img, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body img {
+  border-style: none;
+}
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body hr, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body hr, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body hr, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body hr {
+  box-sizing: content-box;
+  height: 0;
+  overflow: visible;
+}
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body input, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body input, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body input, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body input {
+  font: inherit;
+  margin: 0;
+}
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body input, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body input, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body input, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body input {
+  overflow: visible;
+}
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body [type=checkbox], .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body [type=checkbox], .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body [type=checkbox], .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body [type=checkbox] {
+  box-sizing: border-box;
+  padding: 0;
+}
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body *, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body *, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body *, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body * {
+  box-sizing: border-box;
+}
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body input, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body input, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body input, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body input {
+  font-family: inherit;
+  line-height: inherit;
+}
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body a, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body a, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body a, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body a {
+  color: #528bff;
+  text-decoration: none;
+}
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body a:hover, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body a:hover, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body a:hover, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body a:hover {
+  text-decoration: underline;
+}
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body strong, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body strong, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body strong, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body strong {
+  font-weight: 600;
+}
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body hr, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body hr, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body hr, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body hr {
+  height: 0;
+  margin: 15px 0;
+  overflow: hidden;
+  background: transparent;
+  border: 0;
+  border-bottom: 1px solid #dfe2e5;
+}
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body hr::before, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body hr::before, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body hr::before, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body hr::before {
+  display: table;
+  content: "";
+}
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body hr::after, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body hr::after, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body hr::after, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body hr::after {
+  display: table;
+  clear: both;
+  content: "";
+}
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body table, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body table, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body table, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body table {
+  border-spacing: 0;
+  border-collapse: collapse;
+}
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body td, .vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body th, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body td, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body th, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body td, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body th, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body td, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body th {
+  padding: 0;
+}
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body h1, .vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body h2, .vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body h3, .vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body h4, .vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body h5, .vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body h6, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body h1, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body h2, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body h3, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body h4, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body h5, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body h6, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body h1, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body h2, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body h3, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body h4, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body h5, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body h6, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body h1, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body h2, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body h3, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body h4, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body h5, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body h6 {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body h1, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body h1, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body h1, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body h1 {
+  font-weight: 600;
+}
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body h2, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body h2, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body h2, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body h2 {
+  font-weight: 600;
+}
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body h3, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body h3, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body h3, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body h3 {
+  font-weight: 600;
+}
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body h4, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body h4, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body h4, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body h4 {
+  font-weight: 600;
+}
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body h5, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body h5, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body h5, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body h5 {
+  font-weight: 600;
+}
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body h6, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body h6, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body h6, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body h6 {
+  font-weight: 600;
+}
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body p, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body p, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body p, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body p {
+  margin-top: 0;
+  margin-bottom: 10px;
+}
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body blockquote, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body blockquote, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body blockquote, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body blockquote {
+  margin: 0;
+}
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body ul, .vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body ol, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body ul, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body ol, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body ul, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body ol, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body ul, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body ol {
+  padding-left: 0;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body ol ol, .vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body ul ol, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body ol ol, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body ul ol, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body ol ol, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body ul ol, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body ol ol, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body ul ol {
+  list-style-type: lower-roman;
+}
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body ul ul ol, .vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body ul ol ol, .vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body ol ul ol, .vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body ol ol ol, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body ul ul ol, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body ul ol ol, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body ol ul ol, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body ol ol ol, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body ul ul ol, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body ul ol ol, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body ol ul ol, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body ol ol ol, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body ul ul ol, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body ul ol ol, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body ol ul ol, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body ol ol ol {
+  list-style-type: lower-alpha;
+}
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body dd, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body dd, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body dd, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body dd {
+  margin-left: 0;
+}
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body pre, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body pre, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body pre, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body pre {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body .octicon, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body .octicon, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body .octicon, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body .octicon {
+  vertical-align: text-bottom;
+}
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body .pl-0, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body .pl-0, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body .pl-0, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body .pl-0 {
+  padding-left: 0 !important;
+}
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body .pl-1, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body .pl-1, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body .pl-1, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body .pl-1 {
+  padding-left: 4px !important;
+}
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body .pl-2, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body .pl-2, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body .pl-2, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body .pl-2 {
+  padding-left: 8px !important;
+}
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body .pl-3, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body .pl-3, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body .pl-3, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body .pl-3 {
+  padding-left: 16px !important;
+}
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body .pl-4, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body .pl-4, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body .pl-4, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body .pl-4 {
+  padding-left: 24px !important;
+}
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body .pl-5, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body .pl-5, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body .pl-5, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body .pl-5 {
+  padding-left: 32px !important;
+}
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body .pl-6, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body .pl-6, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body .pl-6, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body .pl-6 {
+  padding-left: 40px !important;
+}
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body::before, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body::before, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body::before, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body::before {
+  display: table;
+  content: "";
+}
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body::after, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body::after, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body::after, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body::after {
+  display: table;
+  clear: both;
+  content: "";
+}
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body > *:first-child, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body > *:first-child, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body > *:first-child, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body > *:first-child {
+  margin-top: 0 !important;
+}
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body > *:last-child, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body > *:last-child, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body > *:last-child, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body > *:last-child {
+  margin-bottom: 0 !important;
+}
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body a:not([href]), .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body a:not([href]), .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body a:not([href]), .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body a:not([href]) {
+  color: inherit;
+  text-decoration: none;
+}
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body .anchor, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body .anchor, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body .anchor, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body .anchor {
+  float: left;
+  padding-right: 4px;
+  margin-left: -20px;
+  line-height: 1;
+}
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body .anchor:focus, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body .anchor:focus, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body .anchor:focus, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body .anchor:focus {
+  outline: none;
+}
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body p, .vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body blockquote, .vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body ul, .vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body ol, .vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body dl, .vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body table, .vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body pre, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body p, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body blockquote, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body ul, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body ol, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body dl, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body table, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body pre, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body p, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body blockquote, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body ul, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body ol, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body dl, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body table, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body pre, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body p, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body blockquote, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body ul, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body ol, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body dl, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body table, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body pre {
+  margin-top: 0;
+  margin-bottom: 16px;
+}
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body hr, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body hr, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body hr, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body hr {
+  height: 0.25em;
+  padding: 0;
+  margin: 24px 0;
+  background-color: #e1e4e8;
+  border: 0;
+}
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body blockquote, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body blockquote, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body blockquote, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body blockquote {
+  /* padding: 0 1em;
+  color: #6a737d;
+  border-left: 0.25em solid #dfe2e5; */
+  padding: 8.5px 17px;
+  margin: 1.5em 0;
+  color: #7c879c;
+  border-color: #4b5362;
+  border-width: 4px;
+  border-left: 5px solid #4b5362;
+  background: transparent;
+}
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body blockquote > :first-child, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body blockquote > :first-child, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body blockquote > :first-child, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body blockquote > :first-child {
+  margin-top: 0;
+}
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body blockquote > :last-child, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body blockquote > :last-child, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body blockquote > :last-child, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body blockquote > :last-child {
+  margin-bottom: 0;
+}
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body kbd, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body kbd, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body kbd, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body kbd {
+  display: inline-block;
+  padding: 3px 5px;
+  line-height: 10px;
+  color: #444d56;
+  vertical-align: middle;
+  background-color: #fafbfc;
+  border: solid 1px #c6cbd1;
+  border-bottom-color: #959da5;
+  border-radius: 3px;
+  box-shadow: inset 0 -1px 0 #959da5;
+}
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body h1, .vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body h2, .vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body h3, .vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body h4, .vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body h5, .vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body h6, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body h1, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body h2, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body h3, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body h4, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body h5, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body h6, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body h1, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body h2, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body h3, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body h4, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body h5, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body h6, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body h1, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body h2, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body h3, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body h4, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body h5, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body h6 {
+  margin-top: 24px;
+  margin-bottom: 16px;
+  font-weight: 600;
+  line-height: 1.25;
+  color: rgb(240, 240, 240);
+  border-bottom: none;
+}
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body h1 .octicon-link, .vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body h2 .octicon-link, .vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body h3 .octicon-link, .vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body h4 .octicon-link, .vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body h5 .octicon-link, .vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body h6 .octicon-link, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body h1 .octicon-link, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body h2 .octicon-link, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body h3 .octicon-link, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body h4 .octicon-link, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body h5 .octicon-link, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body h6 .octicon-link, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body h1 .octicon-link, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body h2 .octicon-link, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body h3 .octicon-link, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body h4 .octicon-link, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body h5 .octicon-link, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body h6 .octicon-link, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body h1 .octicon-link, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body h2 .octicon-link, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body h3 .octicon-link, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body h4 .octicon-link, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body h5 .octicon-link, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body h6 .octicon-link {
+  color: #1b1f23;
+  vertical-align: middle;
+  visibility: hidden;
+}
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body h1:hover .anchor, .vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body h2:hover .anchor, .vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body h3:hover .anchor, .vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body h4:hover .anchor, .vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body h5:hover .anchor, .vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body h6:hover .anchor, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body h1:hover .anchor, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body h2:hover .anchor, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body h3:hover .anchor, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body h4:hover .anchor, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body h5:hover .anchor, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body h6:hover .anchor, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body h1:hover .anchor, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body h2:hover .anchor, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body h3:hover .anchor, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body h4:hover .anchor, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body h5:hover .anchor, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body h6:hover .anchor, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body h1:hover .anchor, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body h2:hover .anchor, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body h3:hover .anchor, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body h4:hover .anchor, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body h5:hover .anchor, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body h6:hover .anchor {
+  text-decoration: none;
+}
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body h1:hover .anchor .octicon-link, .vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body h2:hover .anchor .octicon-link, .vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body h3:hover .anchor .octicon-link, .vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body h4:hover .anchor .octicon-link, .vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body h5:hover .anchor .octicon-link, .vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body h6:hover .anchor .octicon-link, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body h1:hover .anchor .octicon-link, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body h2:hover .anchor .octicon-link, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body h3:hover .anchor .octicon-link, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body h4:hover .anchor .octicon-link, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body h5:hover .anchor .octicon-link, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body h6:hover .anchor .octicon-link, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body h1:hover .anchor .octicon-link, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body h2:hover .anchor .octicon-link, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body h3:hover .anchor .octicon-link, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body h4:hover .anchor .octicon-link, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body h5:hover .anchor .octicon-link, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body h6:hover .anchor .octicon-link, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body h1:hover .anchor .octicon-link, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body h2:hover .anchor .octicon-link, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body h3:hover .anchor .octicon-link, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body h4:hover .anchor .octicon-link, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body h5:hover .anchor .octicon-link, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body h6:hover .anchor .octicon-link {
+  visibility: visible;
+}
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body h1, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body h1, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body h1, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body h1 {
+  padding-bottom: 0.3em;
+}
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body h2, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body h2, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body h2, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body h2 {
+  padding-bottom: 0.3em;
+}
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body h6, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body h6, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body h6, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body h6 {
+  color: #6a737d;
+}
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body ul, .vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body ol, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body ul, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body ol, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body ul, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body ol, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body ul, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body ol {
+  padding-left: 2em;
+}
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body ul ul, .vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body ul ol, .vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body ol ol, .vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body ol ul, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body ul ul, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body ul ol, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body ol ol, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body ol ul, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body ul ul, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body ul ol, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body ol ol, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body ol ul, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body ul ul, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body ul ol, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body ol ol, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body ol ul {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body li, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body li, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body li, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body li {
+  word-wrap: break-all;
+}
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body li > p, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body li > p, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body li > p, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body li > p {
+  margin-top: 16px;
+}
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body li + li, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body li + li, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body li + li, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body li + li {
+  margin-top: 0.25em;
+}
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body dl, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body dl, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body dl, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body dl {
+  padding: 0;
+}
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body dl dt, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body dl dt, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body dl dt, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body dl dt {
+  padding: 0;
+  margin-top: 16px;
+  font-style: italic;
+  font-weight: 600;
+}
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body dl dd, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body dl dd, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body dl dd, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body dl dd {
+  padding: 0 16px;
+  margin-bottom: 16px;
+}
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body table, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body table, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body table, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body table {
+  display: block;
+  width: 100%;
+  overflow: auto;
+}
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body table th, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body table th, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body table th, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body table th {
+  font-weight: 700;
+}
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body table th, .vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body table td, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body table th, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body table td, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body table th, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body table td, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body table th, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body table td {
+  padding: 6px 13px;
+  /* border: 1px solid #dfe2e5; */
+}
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body img, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body img, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body img, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body img {
+  max-width: 100%;
+  box-sizing: content-box;
+  display: inline-block;
+}
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body img[align=right], .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body img[align=right], .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body img[align=right], .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body img[align=right] {
+  padding-left: 20px;
+}
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body img[align=left], .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body img[align=left], .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body img[align=left], .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body img[align=left] {
+  padding-right: 20px;
+}
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body code, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body code, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body code, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body code {
+  padding: 0.2em 0.4em;
+  margin: 0;
+  background-color: #3a3f4b;
+  border-radius: 3px;
+  color: white;
+  margin: 0 1px;
+}
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body pre, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body pre, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body pre, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body pre {
+  word-wrap: normal;
+}
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body pre > code, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body pre > code, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body pre > code, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body pre > code {
+  padding: 0;
+  margin: 0;
+  word-break: normal;
+  white-space: pre;
+  background: transparent;
+  border: 0;
+}
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body .highlight, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body .highlight, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body .highlight, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body .highlight {
+  margin-bottom: 16px;
+}
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body .highlight pre, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body .highlight pre, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body .highlight pre, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body .highlight pre {
+  margin-bottom: 0;
+  word-break: normal;
+}
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body .highlight pre, .vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body pre, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body .highlight pre, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body pre, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body .highlight pre, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body pre, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body .highlight pre, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body pre {
+  padding: 16px;
+  overflow: auto;
+  line-height: 1.45;
+  /* background-color: #f6f8fa; */
+  border-radius: 3px;
+  background-color: #31363f;
+}
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body pre code, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body pre code, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body pre code, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body pre code {
+  display: inline;
+  max-width: auto;
+  padding: 0;
+  margin: 0;
+  overflow: visible;
+  line-height: inherit;
+  word-wrap: normal;
+  background-color: transparent;
+  border: 0;
+  color: rgb(171, 178, 191);
+}
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body .full-commit .btn-outline:not(:disabled):hover, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body .full-commit .btn-outline:not(:disabled):hover, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body .full-commit .btn-outline:not(:disabled):hover, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body .full-commit .btn-outline:not(:disabled):hover {
+  color: #005cc5;
+  border-color: #005cc5;
+}
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body kbd, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body kbd, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body kbd, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body kbd {
+  display: inline-block;
+  padding: 3px 5px;
+  line-height: 10px;
+  color: #444d56;
+  vertical-align: middle;
+  background-color: #fafbfc;
+  border: solid 1px #d1d5da;
+  border-bottom-color: #c6cbd1;
+  border-radius: 3px;
+  box-shadow: inset 0 -1px 0 #c6cbd1;
+}
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body :checked + .radio-label, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body :checked + .radio-label, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body :checked + .radio-label, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body :checked + .radio-label {
+  position: relative;
+  z-index: 1;
+  border-color: #0366d6;
+}
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body .task-list-item, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body .task-list-item, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body .task-list-item, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body .task-list-item {
+  list-style-type: none;
+}
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body .task-list-item + .task-list-item, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body .task-list-item + .task-list-item, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body .task-list-item + .task-list-item, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body .task-list-item + .task-list-item {
+  margin-top: 3px;
+}
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body .task-list-item input, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body .task-list-item input, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body .task-list-item input, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body .task-list-item input {
+  margin: 0 0.2em 0.25em -1.6em;
+  vertical-align: middle;
+}
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"].vscode-body hr, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"].vscode-body hr, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"].vscode-body hr, .vscode-dark[data-vscode-theme-name="One Dark Pro"].vscode-body hr {
+  border-bottom-color: #eee;
+}
+
+/*
+
+Atom One Dark by Daniel Gamage
+Original One Dark Syntax theme from https://github.com/atom/one-dark-syntax
+
+base:    #282c34
+mono-1:  #abb2bf
+mono-2:  #818896
+mono-3:  #5c6370
+hue-1:   #56b6c2
+hue-2:   #61aeee
+hue-3:   #c678dd
+hue-4:   #98c379
+hue-5:   #e06c75
+hue-5-2: #be5046
+hue-6:   #d19a66
+hue-6-2: #e6c07b
+
+*/
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"] .hljs, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"] .hljs, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"] .hljs, .vscode-dark[data-vscode-theme-name="One Dark Pro"] .hljs {
+  display: block;
+  overflow-x: auto;
+  padding: 0.5em;
+  color: #abb2bf;
+  background: #282c34;
+}
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"] .hljs-comment,
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"] .hljs-quote, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"] .hljs-comment,
+.vscode-dark[data-vscode-theme-name="One Dark Pro Flat"] .hljs-quote, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"] .hljs-comment,
+.vscode-dark[data-vscode-theme-name="One Dark Pro Darker"] .hljs-quote, .vscode-dark[data-vscode-theme-name="One Dark Pro"] .hljs-comment,
+.vscode-dark[data-vscode-theme-name="One Dark Pro"] .hljs-quote {
+  color: #5c6370;
+  font-style: italic;
+}
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"] .hljs-doctag,
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"] .hljs-keyword,
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"] .hljs-formula, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"] .hljs-doctag,
+.vscode-dark[data-vscode-theme-name="One Dark Pro Flat"] .hljs-keyword,
+.vscode-dark[data-vscode-theme-name="One Dark Pro Flat"] .hljs-formula, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"] .hljs-doctag,
+.vscode-dark[data-vscode-theme-name="One Dark Pro Darker"] .hljs-keyword,
+.vscode-dark[data-vscode-theme-name="One Dark Pro Darker"] .hljs-formula, .vscode-dark[data-vscode-theme-name="One Dark Pro"] .hljs-doctag,
+.vscode-dark[data-vscode-theme-name="One Dark Pro"] .hljs-keyword,
+.vscode-dark[data-vscode-theme-name="One Dark Pro"] .hljs-formula {
+  color: #c678dd;
+}
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"] .hljs-section,
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"] .hljs-name,
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"] .hljs-selector-tag,
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"] .hljs-deletion,
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"] .hljs-subst, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"] .hljs-section,
+.vscode-dark[data-vscode-theme-name="One Dark Pro Flat"] .hljs-name,
+.vscode-dark[data-vscode-theme-name="One Dark Pro Flat"] .hljs-selector-tag,
+.vscode-dark[data-vscode-theme-name="One Dark Pro Flat"] .hljs-deletion,
+.vscode-dark[data-vscode-theme-name="One Dark Pro Flat"] .hljs-subst, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"] .hljs-section,
+.vscode-dark[data-vscode-theme-name="One Dark Pro Darker"] .hljs-name,
+.vscode-dark[data-vscode-theme-name="One Dark Pro Darker"] .hljs-selector-tag,
+.vscode-dark[data-vscode-theme-name="One Dark Pro Darker"] .hljs-deletion,
+.vscode-dark[data-vscode-theme-name="One Dark Pro Darker"] .hljs-subst, .vscode-dark[data-vscode-theme-name="One Dark Pro"] .hljs-section,
+.vscode-dark[data-vscode-theme-name="One Dark Pro"] .hljs-name,
+.vscode-dark[data-vscode-theme-name="One Dark Pro"] .hljs-selector-tag,
+.vscode-dark[data-vscode-theme-name="One Dark Pro"] .hljs-deletion,
+.vscode-dark[data-vscode-theme-name="One Dark Pro"] .hljs-subst {
+  color: #e06c75;
+}
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"] .hljs-literal, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"] .hljs-literal, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"] .hljs-literal, .vscode-dark[data-vscode-theme-name="One Dark Pro"] .hljs-literal {
+  color: #56b6c2;
+}
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"] .hljs-string,
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"] .hljs-regexp,
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"] .hljs-addition,
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"] .hljs-attribute,
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"] .hljs-meta-string, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"] .hljs-string,
+.vscode-dark[data-vscode-theme-name="One Dark Pro Flat"] .hljs-regexp,
+.vscode-dark[data-vscode-theme-name="One Dark Pro Flat"] .hljs-addition,
+.vscode-dark[data-vscode-theme-name="One Dark Pro Flat"] .hljs-attribute,
+.vscode-dark[data-vscode-theme-name="One Dark Pro Flat"] .hljs-meta-string, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"] .hljs-string,
+.vscode-dark[data-vscode-theme-name="One Dark Pro Darker"] .hljs-regexp,
+.vscode-dark[data-vscode-theme-name="One Dark Pro Darker"] .hljs-addition,
+.vscode-dark[data-vscode-theme-name="One Dark Pro Darker"] .hljs-attribute,
+.vscode-dark[data-vscode-theme-name="One Dark Pro Darker"] .hljs-meta-string, .vscode-dark[data-vscode-theme-name="One Dark Pro"] .hljs-string,
+.vscode-dark[data-vscode-theme-name="One Dark Pro"] .hljs-regexp,
+.vscode-dark[data-vscode-theme-name="One Dark Pro"] .hljs-addition,
+.vscode-dark[data-vscode-theme-name="One Dark Pro"] .hljs-attribute,
+.vscode-dark[data-vscode-theme-name="One Dark Pro"] .hljs-meta-string {
+  color: #98c379;
+}
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"] .hljs-built_in,
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"] .hljs-class .hljs-title, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"] .hljs-built_in,
+.vscode-dark[data-vscode-theme-name="One Dark Pro Flat"] .hljs-class .hljs-title, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"] .hljs-built_in,
+.vscode-dark[data-vscode-theme-name="One Dark Pro Darker"] .hljs-class .hljs-title, .vscode-dark[data-vscode-theme-name="One Dark Pro"] .hljs-built_in,
+.vscode-dark[data-vscode-theme-name="One Dark Pro"] .hljs-class .hljs-title {
+  color: #e6c07b;
+}
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"] .hljs-attr,
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"] .hljs-variable,
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"] .hljs-template-variable,
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"] .hljs-type,
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"] .hljs-selector-class,
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"] .hljs-selector-attr,
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"] .hljs-selector-pseudo,
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"] .hljs-number, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"] .hljs-attr,
+.vscode-dark[data-vscode-theme-name="One Dark Pro Flat"] .hljs-variable,
+.vscode-dark[data-vscode-theme-name="One Dark Pro Flat"] .hljs-template-variable,
+.vscode-dark[data-vscode-theme-name="One Dark Pro Flat"] .hljs-type,
+.vscode-dark[data-vscode-theme-name="One Dark Pro Flat"] .hljs-selector-class,
+.vscode-dark[data-vscode-theme-name="One Dark Pro Flat"] .hljs-selector-attr,
+.vscode-dark[data-vscode-theme-name="One Dark Pro Flat"] .hljs-selector-pseudo,
+.vscode-dark[data-vscode-theme-name="One Dark Pro Flat"] .hljs-number, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"] .hljs-attr,
+.vscode-dark[data-vscode-theme-name="One Dark Pro Darker"] .hljs-variable,
+.vscode-dark[data-vscode-theme-name="One Dark Pro Darker"] .hljs-template-variable,
+.vscode-dark[data-vscode-theme-name="One Dark Pro Darker"] .hljs-type,
+.vscode-dark[data-vscode-theme-name="One Dark Pro Darker"] .hljs-selector-class,
+.vscode-dark[data-vscode-theme-name="One Dark Pro Darker"] .hljs-selector-attr,
+.vscode-dark[data-vscode-theme-name="One Dark Pro Darker"] .hljs-selector-pseudo,
+.vscode-dark[data-vscode-theme-name="One Dark Pro Darker"] .hljs-number, .vscode-dark[data-vscode-theme-name="One Dark Pro"] .hljs-attr,
+.vscode-dark[data-vscode-theme-name="One Dark Pro"] .hljs-variable,
+.vscode-dark[data-vscode-theme-name="One Dark Pro"] .hljs-template-variable,
+.vscode-dark[data-vscode-theme-name="One Dark Pro"] .hljs-type,
+.vscode-dark[data-vscode-theme-name="One Dark Pro"] .hljs-selector-class,
+.vscode-dark[data-vscode-theme-name="One Dark Pro"] .hljs-selector-attr,
+.vscode-dark[data-vscode-theme-name="One Dark Pro"] .hljs-selector-pseudo,
+.vscode-dark[data-vscode-theme-name="One Dark Pro"] .hljs-number {
+  color: #d19a66;
+}
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"] .hljs-symbol,
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"] .hljs-bullet,
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"] .hljs-link,
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"] .hljs-meta,
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"] .hljs-selector-id,
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"] .hljs-title, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"] .hljs-symbol,
+.vscode-dark[data-vscode-theme-name="One Dark Pro Flat"] .hljs-bullet,
+.vscode-dark[data-vscode-theme-name="One Dark Pro Flat"] .hljs-link,
+.vscode-dark[data-vscode-theme-name="One Dark Pro Flat"] .hljs-meta,
+.vscode-dark[data-vscode-theme-name="One Dark Pro Flat"] .hljs-selector-id,
+.vscode-dark[data-vscode-theme-name="One Dark Pro Flat"] .hljs-title, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"] .hljs-symbol,
+.vscode-dark[data-vscode-theme-name="One Dark Pro Darker"] .hljs-bullet,
+.vscode-dark[data-vscode-theme-name="One Dark Pro Darker"] .hljs-link,
+.vscode-dark[data-vscode-theme-name="One Dark Pro Darker"] .hljs-meta,
+.vscode-dark[data-vscode-theme-name="One Dark Pro Darker"] .hljs-selector-id,
+.vscode-dark[data-vscode-theme-name="One Dark Pro Darker"] .hljs-title, .vscode-dark[data-vscode-theme-name="One Dark Pro"] .hljs-symbol,
+.vscode-dark[data-vscode-theme-name="One Dark Pro"] .hljs-bullet,
+.vscode-dark[data-vscode-theme-name="One Dark Pro"] .hljs-link,
+.vscode-dark[data-vscode-theme-name="One Dark Pro"] .hljs-meta,
+.vscode-dark[data-vscode-theme-name="One Dark Pro"] .hljs-selector-id,
+.vscode-dark[data-vscode-theme-name="One Dark Pro"] .hljs-title {
+  color: #61aeee;
+}
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"] .hljs-emphasis, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"] .hljs-emphasis, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"] .hljs-emphasis, .vscode-dark[data-vscode-theme-name="One Dark Pro"] .hljs-emphasis {
+  font-style: italic;
+}
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"] .hljs-strong, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"] .hljs-strong, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"] .hljs-strong, .vscode-dark[data-vscode-theme-name="One Dark Pro"] .hljs-strong {
+  font-weight: bold;
+}
+.vscode-dark[data-vscode-theme-name="One Dark Pro Mix"] .hljs-link, .vscode-dark[data-vscode-theme-name="One Dark Pro Flat"] .hljs-link, .vscode-dark[data-vscode-theme-name="One Dark Pro Darker"] .hljs-link, .vscode-dark[data-vscode-theme-name="One Dark Pro"] .hljs-link {
+  text-decoration: underline;
+}
+
+</style>
+            <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex/dist/katex.min.css">
+<link href="https://cdn.jsdelivr.net/npm/katex-copytex@latest/dist/katex-copytex.min.css" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/markdown.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/highlight.css">
+<style>
+            body {
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe WPC', 'Segoe UI', system-ui, 'Ubuntu', 'Droid Sans', sans-serif;
+                font-size: 14px;
+                line-height: 1.6;
+            }
+        </style>
+        <style>
+.task-list-item {
+    list-style-type: none;
+}
+
+.task-list-item-checkbox {
+    margin-left: -20px;
+    vertical-align: middle;
+    pointer-events: none;
+}
+</style>
+<style>
+:root {
+  --color-note: #0969da;
+  --color-tip: #1a7f37;
+  --color-warning: #9a6700;
+  --color-severe: #bc4c00;
+  --color-caution: #d1242f;
+  --color-important: #8250df;
+}
+
+</style>
+<style>
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-note: #2f81f7;
+    --color-tip: #3fb950;
+    --color-warning: #d29922;
+    --color-severe: #db6d28;
+    --color-caution: #f85149;
+    --color-important: #a371f7;
+  }
+}
+
+</style>
+<style>
+.markdown-alert {
+  padding: 0.5rem 1rem;
+  margin-bottom: 16px;
+  color: inherit;
+  border-left: .25em solid #888;
+}
+
+.markdown-alert>:first-child {
+  margin-top: 0
+}
+
+.markdown-alert>:last-child {
+  margin-bottom: 0
+}
+
+.markdown-alert .markdown-alert-title {
+  display: flex;
+  font-weight: 500;
+  align-items: center;
+  line-height: 1
+}
+
+.markdown-alert .markdown-alert-title .octicon {
+  margin-right: 0.5rem;
+  display: inline-block;
+  overflow: visible !important;
+  vertical-align: text-bottom;
+  fill: currentColor;
+}
+
+.markdown-alert.markdown-alert-note {
+  border-left-color: var(--color-note);
+}
+
+.markdown-alert.markdown-alert-note .markdown-alert-title {
+  color: var(--color-note);
+}
+
+.markdown-alert.markdown-alert-important {
+  border-left-color: var(--color-important);
+}
+
+.markdown-alert.markdown-alert-important .markdown-alert-title {
+  color: var(--color-important);
+}
+
+.markdown-alert.markdown-alert-warning {
+  border-left-color: var(--color-warning);
+}
+
+.markdown-alert.markdown-alert-warning .markdown-alert-title {
+  color: var(--color-warning);
+}
+
+.markdown-alert.markdown-alert-tip {
+  border-left-color: var(--color-tip);
+}
+
+.markdown-alert.markdown-alert-tip .markdown-alert-title {
+  color: var(--color-tip);
+}
+
+.markdown-alert.markdown-alert-caution {
+  border-left-color: var(--color-caution);
+}
+
+.markdown-alert.markdown-alert-caution .markdown-alert-title {
+  color: var(--color-caution);
+}
+
+</style>
+        
+        </head>
+        <body class="vscode-body vscode-light">
+            <h1 id="-expressjs-para-principiantes-absolutos">📘 Express.js para Principiantes Absolutos</h1>
+<h2 id="un-manual-amigable-para-aprender-express-con-la-plataforma-challenge-plans">Un manual amigable para aprender Express con la plataforma Challenge Plans</h2>
+<p><img src="file:////docs/express.png" alt="Express.js Logo"></p>
+<h2 id="-índice">📋 Índice</h2>
+<ul>
+<li><a href="#-expressjs-para-principiantes-absolutos">📘 Express.js para Principiantes Absolutos</a>
+<ul>
+<li><a href="#un-manual-amigable-para-aprender-express-con-la-plataforma-challenge-plans">Un manual amigable para aprender Express con la plataforma Challenge Plans</a></li>
+<li><a href="#-%C3%ADndice">📋 Índice</a></li>
+<li><a href="#1--bienvenida-qu%C3%A9-es-express-y-por-qu%C3%A9-usarlo">1. 👋 Bienvenida: ¿Qué es Express y por qué usarlo?</a>
+<ul>
+<li><a href="#qu%C3%A9-es-express-exactamente">¿Qué es Express exactamente?</a></li>
+<li><a href="#por-qu%C3%A9-la-gente-adora-express">¿Por qué la gente adora Express?</a></li>
+</ul>
+</li>
+<li><a href="#2-%EF%B8%8F-primeros-pasos-creando-tu-servidor-web">2. 🚶‍♀️ Primeros Pasos: Creando tu Servidor Web</a>
+<ul>
+<li><a href="#instalaci%C3%B3n-preparando-el-terreno">Instalación: Preparando el terreno</a></li>
+<li><a href="#tu-primer-servidor-express-hola-mundo">Tu Primer Servidor Express: ¡Hola Mundo!</a></li>
+<li><a href="#la-estructura-b%C3%A1sica-de-un-proyecto">La Estructura Básica de un Proyecto</a></li>
+</ul>
+</li>
+<li><a href="#3--conceptos-fundamentales-las-piezas-del-rompecabezas">3. 🧩 Conceptos Fundamentales: Las Piezas del Rompecabezas</a>
+<ul>
+<li><a href="#la-aplicaci%C3%B3n-express">La Aplicación Express</a></li>
+<li><a href="#las-peticiones-request-o-req">Las Peticiones (Request o req)</a></li>
+<li><a href="#las-respuestas-response-o-res">Las Respuestas (Response o res)</a></li>
+</ul>
+</li>
+<li><a href="#4-%EF%B8%8F-rutas-los-caminos-de-tu-aplicaci%C3%B3n">4. 🛣️ Rutas: Los Caminos de tu Aplicación</a>
+<ul>
+<li><a href="#m%C3%A9todos-http-diferentes-verbos-para-diferentes-acciones">Métodos HTTP: Diferentes Verbos para Diferentes Acciones</a></li>
+<li><a href="#par%C3%A1metros-en-rutas-rutas-din%C3%A1micas">Parámetros en Rutas: Rutas Dinámicas</a></li>
+<li><a href="#query-strings-informaci%C3%B3n-extra-en-la-url">Query Strings: Información Extra en la URL</a></li>
+<li><a href="#organizando-rutas-mant%C3%A9n-tu-c%C3%B3digo-ordenado">Organizando Rutas: Mantén Tu Código Ordenado</a></li>
+</ul>
+</li>
+<li><a href="#5--middlewares-los-ayudantes-de-express">5. 🔄 Middlewares: Los Ayudantes de Express</a>
+<ul>
+<li><a href="#qu%C3%A9-son-los-middlewares">¿Qué son los Middlewares?</a></li>
+<li><a href="#middlewares-integrados-y-populares">Middlewares Integrados y Populares</a></li>
+<li><a href="#creando-tu-propio-middleware">Creando tu Propio Middleware</a></li>
+<li><a href="#middleware-de-autenticaci%C3%B3n-un-ejemplo-pr%C3%A1ctico">Middleware de Autenticación: Un Ejemplo Práctico</a></li>
+</ul>
+</li>
+<li><a href="#6--controladores-donde-sucede-la-acci%C3%B3n">6. 🎮 Controladores: Donde Sucede la Acción</a>
+<ul>
+<li><a href="#qu%C3%A9-es-un-controlador">¿Qué es un Controlador?</a></li>
+<li><a href="#estructura-de-un-controlador">Estructura de un Controlador</a></li>
+<li><a href="#ejemplo-pr%C3%A1ctico-controlador-de-retos">Ejemplo Práctico: Controlador de Retos</a></li>
+</ul>
+</li>
+<li><a href="#7--servicios-separando-la-l%C3%B3gica-de-negocio">7. 🏭 Servicios: Separando la Lógica de Negocio</a>
+<ul>
+<li><a href="#por-qu%C3%A9-necesitamos-servicios">¿Por qué Necesitamos Servicios?</a></li>
+<li><a href="#ejemplo-de-un-servicio-retosservice">Ejemplo de un Servicio: RetosService</a></li>
+</ul>
+</li>
+<li><a href="#8--manejo-de-errores-cuando-las-cosas-salen-mal">8. ❌ Manejo de Errores: Cuando las Cosas Salen Mal</a>
+<ul>
+<li><a href="#errores-en-express">Errores en Express</a></li>
+<li><a href="#middleware-de-errores-personalizado">Middleware de Errores Personalizado</a></li>
+<li><a href="#clases-de-error-personalizadas">Clases de Error Personalizadas</a></li>
+</ul>
+</li>
+<li><a href="#9--conectando-con-la-base-de-datos">9. 🔌 Conectando con la Base de Datos</a>
+<ul>
+<li><a href="#typeorm-un-puente-entre-express-y-la-base-de-datos">TypeORM: Un Puente Entre Express y la Base de Datos</a></li>
+<li><a href="#configuraci%C3%B3n-de-la-conexi%C3%B3n">Configuración de la Conexión</a></li>
+</ul>
+</li>
+<li><a href="#10-%EF%B8%8F-autenticaci%C3%B3n-y-seguridad">10. 🛡️ Autenticación y Seguridad</a>
+<ul>
+<li><a href="#autenticaci%C3%B3n-con-jwt">Autenticación con JWT</a></li>
+<li><a href="#protegiendo-rutas-con-middleware">Protegiendo Rutas con Middleware</a></li>
+<li><a href="#buenas-pr%C3%A1cticas-de-seguridad">Buenas Prácticas de Seguridad</a></li>
+</ul>
+</li>
+<li><a href="#11--validaci%C3%B3n-de-datos">11. 📦 Validación de Datos</a>
+<ul>
+<li><a href="#por-qu%C3%A9-validar-los-datos">Por Qué Validar los Datos</a></li>
+<li><a href="#usando-express-validator">Usando express-validator</a></li>
+<li><a href="#validaciones-personalizadas">Validaciones Personalizadas</a></li>
+</ul>
+</li>
+<li><a href="#12--pruebas-y-depuraci%C3%B3n">12. ✅ Pruebas y Depuración</a>
+<ul>
+<li><a href="#pruebas-en-express">Pruebas en Express</a></li>
+<li><a href="#depuraci%C3%B3n-efectiva">Depuración Efectiva</a></li>
+</ul>
+</li>
+<li><a href="#13--despliegue-y-producci%C3%B3n">13. 🚀 Despliegue y Producción</a>
+<ul>
+<li><a href="#preparando-para-producci%C3%B3n">Preparando para Producción</a></li>
+<li><a href="#opciones-de-despliegue">Opciones de Despliegue</a></li>
+</ul>
+</li>
+<li><a href="#14--glosario-t%C3%A9rminos-que-debes-conocer">14. 📝 Glosario: Términos que Debes Conocer</a></li>
+<li><a href="#15--recursos-adicionales">15. 📚 Recursos Adicionales</a></li>
+</ul>
+</li>
+</ul>
+<h2 id="1--bienvenida-qué-es-express-y-por-qué-usarlo">1. 👋 Bienvenida: ¿Qué es Express y por qué usarlo?</h2>
+<h3 id="qué-es-express-exactamente">¿Qué es Express exactamente?</h3>
+<p>Imagina que quieres construir una casa. Podrías empezar desde cero, fabricando cada ladrillo, mezclando el cemento, cortando la madera... ¡o podrías usar materiales prefabricados que hacen el trabajo mucho más rápido! <strong>Express.js</strong> es como ese conjunto de materiales prefabricados, pero para crear aplicaciones web con JavaScript.</p>
+<p>En términos más técnicos, Express es un <strong>framework</strong> (un marco de trabajo) para Node.js que simplifica la creación de servidores web y APIs. Es como un ayudante que te proporciona herramientas y estructuras ya preparadas para que no tengas que escribir todo desde cero.</p>
+<pre><code class="language-javascript"><span class="hljs-comment">// Así de simple es crear un servidor web con Express</span>
+<span class="hljs-keyword">const</span> express = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;express&#x27;</span>);
+<span class="hljs-keyword">const</span> app = <span class="hljs-title function_">express</span>();
+
+app.<span class="hljs-title function_">get</span>(<span class="hljs-string">&#x27;/&#x27;</span>, <span class="hljs-function">(<span class="hljs-params">req, res</span>) =&gt;</span> {
+  res.<span class="hljs-title function_">send</span>(<span class="hljs-string">&#x27;¡Hola! Bienvenido a mi primera app con Express&#x27;</span>);
+});
+
+app.<span class="hljs-title function_">listen</span>(<span class="hljs-number">3000</span>, <span class="hljs-function">() =&gt;</span> {
+  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;Servidor funcionando en http://localhost:3000&#x27;</span>);
+});
+</code></pre>
+<h3 id="por-qué-la-gente-adora-express">¿Por qué la gente adora Express?</h3>
+<ol>
+<li>
+<p><strong>Es simple y no te complica la vida</strong>: Express no te obliga a seguir reglas estrictas. Es como un lienzo en blanco donde tú decides cómo organizar tu código.</p>
+</li>
+<li>
+<p><strong>Es rápido y ligero</strong>: No viene con un montón de funciones que quizás nunca uses. Solo incluye lo esencial, y tú añades lo que necesites.</p>
+</li>
+<li>
+<p><strong>Tiene una comunidad enorme</strong>: Si te encuentras con un problema, es casi seguro que alguien ya lo ha solucionado antes.</p>
+</li>
+<li>
+<p><strong>Es muy flexible</strong>: Puedes usarlo para crear desde una pequeña API hasta una aplicación web compleja como nuestra plataforma Challenge Plans.</p>
+</li>
+</ol>
+<h2 id="2-️-primeros-pasos-creando-tu-servidor-web">2. 🚶‍♀️ Primeros Pasos: Creando tu Servidor Web</h2>
+<h3 id="instalación-preparando-el-terreno">Instalación: Preparando el terreno</h3>
+<p>Para empezar a usar Express, necesitas tener Node.js instalado en tu computadora. Luego, crear un proyecto es tan sencillo como:</p>
+<pre><code class="language-bash"><span class="hljs-comment"># Crear una carpeta para tu proyecto</span>
+<span class="hljs-built_in">mkdir</span> mi-primera-app-express
+<span class="hljs-built_in">cd</span> mi-primera-app-express
+
+<span class="hljs-comment"># Inicializar un proyecto de Node.js</span>
+npm init -y
+
+<span class="hljs-comment"># Instalar Express</span>
+```bash
+<span class="hljs-comment"># Instalar Express y otros módulos recomendados</span>
+npm install express helmet morgan compression cors
+</code></pre>
+<h3 id="tu-primer-servidor-express-hola-mundo">Tu Primer Servidor Express: ¡Hola Mundo!</h3>
+<p>Vamos a crear el ejemplo más básico posible. Crea un archivo llamado <code>app.js</code> con este contenido:</p>
+<pre><code class="language-javascript"><span class="hljs-comment">// 1. Importamos Express</span>
+<span class="hljs-keyword">const</span> express = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;express&#x27;</span>);
+
+<span class="hljs-comment">// 2. Creamos una &quot;app&quot; (aplicación) de Express</span>
+<span class="hljs-keyword">const</span> app = <span class="hljs-title function_">express</span>();
+
+<span class="hljs-comment">// 3. Definimos una ruta para la página principal</span>
+app.<span class="hljs-title function_">get</span>(<span class="hljs-string">&#x27;/&#x27;</span>, <span class="hljs-function">(<span class="hljs-params">req, res</span>) =&gt;</span> {
+  res.<span class="hljs-title function_">send</span>(<span class="hljs-string">&#x27;¡Hola, mundo! Este es mi primer servidor con Express&#x27;</span>);
+});
+
+<span class="hljs-comment">// 4. Iniciamos el servidor en el puerto 3000</span>
+app.<span class="hljs-title function_">listen</span>(<span class="hljs-number">3000</span>, <span class="hljs-function">() =&gt;</span> {
+  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;¡Servidor encendido! Visita http://localhost:3000&#x27;</span>);
+});
+</code></pre>
+<p>Para ejecutar este servidor, abre una terminal y escribe:</p>
+<pre><code class="language-bash">node app.js
+</code></pre>
+<p>Ahora, abre tu navegador y visita <code>http://localhost:3000</code>. ¡Deberías ver tu mensaje!</p>
+<h3 id="la-estructura-básica-de-un-proyecto">La Estructura Básica de un Proyecto</h3>
+<p>En Challenge Plans, organizamos nuestro código de manera ordenada para que sea fácil de mantener. Así se ve una estructura típica:</p>
+<pre><code>mi-proyecto/
+├── src/                  # Código fuente
+│   ├── controllers/      # Controladores: manejan la lógica de las rutas
+│   ├── routes/           # Definición de rutas: qué URLs acepta tu aplicación
+│   ├── services/         # Servicios: lógica de negocio y acceso a datos
+│   ├── middlewares/      # Middlewares: funciones que procesan las peticiones
+│   ├── app.js            # Configuración principal de Express
+│   └── index.js          # Punto de entrada de la aplicación
+├── .env                  # Variables de entorno (configuraciones privadas)
+└── package.json          # Dependencias y scripts
+</code></pre>
+<p>En proyectos pequeños, puedes empezar con una estructura más simple y expandirla cuando sea necesario.</p>
+<h2 id="3--conceptos-fundamentales-las-piezas-del-rompecabezas">3. 🧩 Conceptos Fundamentales: Las Piezas del Rompecabezas</h2>
+<h3 id="la-aplicación-express">La Aplicación Express</h3>
+<p>Todo comienza con la creación de una aplicación Express. Piensa en ella como el &quot;cerebro&quot; de tu servidor:</p>
+<pre><code class="language-javascript"><span class="hljs-keyword">const</span> express = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;express&#x27;</span>);
+<span class="hljs-keyword">const</span> app = <span class="hljs-title function_">express</span>();
+</code></pre>
+<p>Esta <code>app</code> es el objeto principal que usarás para configurar todo tu servidor. Algunas cosas que puedes hacer con ella:</p>
+<ul>
+<li>Definir rutas (<code>app.get()</code>, <code>app.post()</code>, etc.)</li>
+<li>Configurar middlewares (<code>app.use()</code>)</li>
+<li>Iniciar el servidor (<code>app.listen()</code>)</li>
+</ul>
+<p>En nuestro proyecto Challenge Plans, configuramos la app en <code>src/app.ts</code>:</p>
+<pre><code class="language-typescript"><span class="hljs-comment">// src/app.ts simplificado</span>
+<span class="hljs-keyword">import</span> express <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;express&#x27;</span>;
+<span class="hljs-keyword">import</span> cors <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;cors&#x27;</span>;
+<span class="hljs-keyword">import</span> { routes } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;./routes&#x27;</span>;
+<span class="hljs-keyword">import</span> { errorMiddleware } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;./middlewares/error.middleware&#x27;</span>;
+
+<span class="hljs-comment">// Crear la aplicación Express</span>
+<span class="hljs-keyword">const</span> app = <span class="hljs-title function_">express</span>();
+
+<span class="hljs-comment">// Configurar middlewares</span>
+app.<span class="hljs-title function_">use</span>(express.<span class="hljs-title function_">json</span>());  <span class="hljs-comment">// Para entender JSON</span>
+app.<span class="hljs-title function_">use</span>(<span class="hljs-title function_">cors</span>());          <span class="hljs-comment">// Para permitir peticiones desde otros dominios</span>
+
+<span class="hljs-comment">// Configurar rutas</span>
+app.<span class="hljs-title function_">use</span>(<span class="hljs-string">&#x27;/api&#x27;</span>, routes);
+
+<span class="hljs-comment">// Middleware para manejar errores</span>
+app.<span class="hljs-title function_">use</span>(errorMiddleware);
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> app;
+</code></pre>
+<h3 id="las-peticiones-request-o-req">Las Peticiones (Request o req)</h3>
+<p>Cuando alguien visita tu sitio web o usa tu API, envía una <strong>petición</strong> (request) a tu servidor. Esta petición contiene mucha información útil:</p>
+<ul>
+<li><strong>req.params</strong>: Parámetros en la URL (como <code>/usuarios/123</code>, donde <code>123</code> es un parámetro)</li>
+<li><strong>req.query</strong>: Información en la query string (como <code>/buscar?nombre=Juan</code>)</li>
+<li><strong>req.body</strong>: Datos enviados en el cuerpo de la petición (por ejemplo, desde un formulario)</li>
+<li><strong>req.headers</strong>: Cabeceras HTTP con metadatos de la petición</li>
+</ul>
+<pre><code class="language-javascript"><span class="hljs-comment">// Ejemplo: accediendo a la información de la petición</span>
+app.<span class="hljs-title function_">get</span>(<span class="hljs-string">&#x27;/saludo/:nombre&#x27;</span>, <span class="hljs-function">(<span class="hljs-params">req, res</span>) =&gt;</span> {
+  <span class="hljs-keyword">const</span> nombre = req.<span class="hljs-property">params</span>.<span class="hljs-property">nombre</span>;        <span class="hljs-comment">// Viene de la URL</span>
+  <span class="hljs-keyword">const</span> idioma = req.<span class="hljs-property">query</span>.<span class="hljs-property">idioma</span> || <span class="hljs-string">&#x27;es&#x27;</span>; <span class="hljs-comment">// Viene de ?idioma=en</span>
+  
+  <span class="hljs-keyword">if</span> (idioma === <span class="hljs-string">&#x27;en&#x27;</span>) {
+    res.<span class="hljs-title function_">send</span>(<span class="hljs-string">`Hello, <span class="hljs-subst">${nombre}</span>!`</span>);
+  } <span class="hljs-keyword">else</span> {
+    res.<span class="hljs-title function_">send</span>(<span class="hljs-string">`¡Hola, <span class="hljs-subst">${nombre}</span>!`</span>);
+  }
+});
+</code></pre>
+<h3 id="las-respuestas-response-o-res">Las Respuestas (Response o res)</h3>
+<p>Después de procesar una petición, necesitas enviar una <strong>respuesta</strong> (response). Hay muchas formas de responder:</p>
+<ul>
+<li><strong>res.send()</strong>: Envía una respuesta básica (texto, HTML, etc.)</li>
+<li><strong>res.json()</strong>: Envía datos en formato JSON (ideal para APIs)</li>
+<li><strong>res.render()</strong>: Renderiza una vista (para aplicaciones con frontend)</li>
+<li><strong>res.status()</strong>: Establece el código de estado HTTP (200 para éxito, 404 para no encontrado, etc.)</li>
+</ul>
+<pre><code class="language-javascript"><span class="hljs-comment">// Ejemplo: diferentes tipos de respuesta</span>
+app.<span class="hljs-title function_">get</span>(<span class="hljs-string">&#x27;/api/usuario&#x27;</span>, <span class="hljs-function">(<span class="hljs-params">req, res</span>) =&gt;</span> {
+  <span class="hljs-keyword">const</span> usuario = { <span class="hljs-attr">nombre</span>: <span class="hljs-string">&#x27;Ana&#x27;</span>, <span class="hljs-attr">edad</span>: <span class="hljs-number">28</span> };
+  res.<span class="hljs-title function_">json</span>(usuario);  <span class="hljs-comment">// Envía el objeto como JSON</span>
+});
+
+app.<span class="hljs-title function_">get</span>(<span class="hljs-string">&#x27;/bienvenida&#x27;</span>, <span class="hljs-function">(<span class="hljs-params">req, res</span>) =&gt;</span> {
+  res.<span class="hljs-title function_">send</span>(<span class="hljs-string">&#x27;&lt;h1&gt;Bienvenido a mi sitio&lt;/h1&gt;&#x27;</span>);  <span class="hljs-comment">// Envía HTML</span>
+});
+
+app.<span class="hljs-title function_">get</span>(<span class="hljs-string">&#x27;/no-existe&#x27;</span>, <span class="hljs-function">(<span class="hljs-params">req, res</span>) =&gt;</span> {
+  res.<span class="hljs-title function_">status</span>(<span class="hljs-number">404</span>).<span class="hljs-title function_">send</span>(<span class="hljs-string">&#x27;Página no encontrada&#x27;</span>);  <span class="hljs-comment">// Establece código 404</span>
+});
+</code></pre>
+<h2 id="4-️-rutas-los-caminos-de-tu-aplicación">4. 🛣️ Rutas: Los Caminos de tu Aplicación</h2>
+<p>Las rutas son como las &quot;direcciones&quot; de tu aplicación. Definen qué debe hacer tu servidor cuando alguien visita una URL específica.</p>
+<pre><code class="language-javascript"><span class="hljs-comment">// Estructura básica de una ruta</span>
+app.<span class="hljs-property">m</span>é<span class="hljs-title function_">todo</span>(<span class="hljs-string">&#x27;/ruta&#x27;</span>, <span class="hljs-function">(<span class="hljs-params">req, res</span>) =&gt;</span> {
+  <span class="hljs-comment">// Código que se ejecuta cuando alguien visita esta ruta</span>
+});
+</code></pre>
+<h3 id="métodos-http-diferentes-verbos-para-diferentes-acciones">Métodos HTTP: Diferentes Verbos para Diferentes Acciones</h3>
+<p>HTTP define varios &quot;verbos&quot; o métodos para interactuar con recursos:</p>
+<ul>
+<li><strong>GET</strong>: Para obtener información (como leer un artículo)</li>
+<li><strong>POST</strong>: Para crear nueva información (como publicar un comentario)</li>
+<li><strong>PUT/PATCH</strong>: Para actualizar información existente (como editar tu perfil)</li>
+<li><strong>DELETE</strong>: Para eliminar información (como borrar una cuenta)</li>
+</ul>
+<pre><code class="language-javascript"><span class="hljs-comment">// Ejemplos de rutas con diferentes métodos</span>
+app.<span class="hljs-title function_">get</span>(<span class="hljs-string">&#x27;/usuarios&#x27;</span>, <span class="hljs-function">(<span class="hljs-params">req, res</span>) =&gt;</span> {
+  <span class="hljs-comment">// Código para obtener todos los usuarios</span>
+});
+
+app.<span class="hljs-title function_">post</span>(<span class="hljs-string">&#x27;/usuarios&#x27;</span>, <span class="hljs-function">(<span class="hljs-params">req, res</span>) =&gt;</span> {
+  <span class="hljs-comment">// Código para crear un nuevo usuario</span>
+});
+
+app.<span class="hljs-title function_">put</span>(<span class="hljs-string">&#x27;/usuarios/:id&#x27;</span>, <span class="hljs-function">(<span class="hljs-params">req, res</span>) =&gt;</span> {
+  <span class="hljs-comment">// Código para actualizar un usuario específico</span>
+});
+
+app.<span class="hljs-title function_">delete</span>(<span class="hljs-string">&#x27;/usuarios/:id&#x27;</span>, <span class="hljs-function">(<span class="hljs-params">req, res</span>) =&gt;</span> {
+  <span class="hljs-comment">// Código para eliminar un usuario específico</span>
+});
+</code></pre>
+<h3 id="parámetros-en-rutas-rutas-dinámicas">Parámetros en Rutas: Rutas Dinámicas</h3>
+<p>Los parámetros en rutas te permiten capturar valores variables de la URL. Se definen con dos puntos <code>:</code> seguidos del nombre del parámetro:</p>
+<pre><code class="language-javascript"><span class="hljs-comment">// Ruta con un parámetro</span>
+app.<span class="hljs-title function_">get</span>(<span class="hljs-string">&#x27;/usuarios/:id&#x27;</span>, <span class="hljs-function">(<span class="hljs-params">req, res</span>) =&gt;</span> {
+  <span class="hljs-keyword">const</span> userId = req.<span class="hljs-property">params</span>.<span class="hljs-property">id</span>;  <span class="hljs-comment">// Captura el valor de &quot;id&quot; de la URL</span>
+  res.<span class="hljs-title function_">send</span>(<span class="hljs-string">`Mostrando información del usuario <span class="hljs-subst">${userId}</span>`</span>);
+});
+</code></pre>
+<p>Si alguien visita <code>/usuarios/42</code>, el valor de <code>req.params.id</code> será <code>&quot;42&quot;</code>.</p>
+<h3 id="query-strings-información-extra-en-la-url">Query Strings: Información Extra en la URL</h3>
+<p>Las query strings (cadenas de consulta) son pares clave-valor que aparecen después de un signo de interrogación <code>?</code> en la URL:</p>
+<pre><code class="language-javascript"><span class="hljs-comment">// Ruta con query string</span>
+app.<span class="hljs-title function_">get</span>(<span class="hljs-string">&#x27;/productos&#x27;</span>, <span class="hljs-function">(<span class="hljs-params">req, res</span>) =&gt;</span> {
+  <span class="hljs-keyword">const</span> categoria = req.<span class="hljs-property">query</span>.<span class="hljs-property">categoria</span>;
+  <span class="hljs-keyword">const</span> ordenarPor = req.<span class="hljs-property">query</span>.<span class="hljs-property">ordenar</span> || <span class="hljs-string">&#x27;precio&#x27;</span>;
+  
+  res.<span class="hljs-title function_">send</span>(<span class="hljs-string">`Mostrando productos de <span class="hljs-subst">${categoria}</span>, ordenados por <span class="hljs-subst">${ordenarPor}</span>`</span>);
+});
+</code></pre>
+<p>Si alguien visita <code>/productos?categoria=electronica&amp;ordenar=nombre</code>, tendrás:</p>
+<ul>
+<li><code>req.query.categoria</code> = <code>&quot;electronica&quot;</code></li>
+<li><code>req.query.ordenar</code> = <code>&quot;nombre&quot;</code></li>
+</ul>
+<h3 id="organizando-rutas-mantén-tu-código-ordenado">Organizando Rutas: Mantén Tu Código Ordenado</h3>
+<p>En aplicaciones más grandes como Challenge Plans, es mejor organizar tus rutas en archivos separados usando <code>Router</code>:</p>
+<pre><code class="language-javascript"><span class="hljs-comment">// archivo: routes/usuarios.js</span>
+<span class="hljs-keyword">const</span> express = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;express&#x27;</span>);
+<span class="hljs-keyword">const</span> router = express.<span class="hljs-title class_">Router</span>();
+
+<span class="hljs-comment">// Ahora usamos &quot;router&quot; en vez de &quot;app&quot;</span>
+router.<span class="hljs-title function_">get</span>(<span class="hljs-string">&#x27;/&#x27;</span>, <span class="hljs-function">(<span class="hljs-params">req, res</span>) =&gt;</span> {
+  <span class="hljs-comment">// GET /usuarios</span>
+});
+
+router.<span class="hljs-title function_">post</span>(<span class="hljs-string">&#x27;/&#x27;</span>, <span class="hljs-function">(<span class="hljs-params">req, res</span>) =&gt;</span> {
+  <span class="hljs-comment">// POST /usuarios</span>
+});
+
+router.<span class="hljs-title function_">get</span>(<span class="hljs-string">&#x27;/:id&#x27;</span>, <span class="hljs-function">(<span class="hljs-params">req, res</span>) =&gt;</span> {
+  <span class="hljs-comment">// GET /usuarios/:id</span>
+});
+
+<span class="hljs-variable language_">module</span>.<span class="hljs-property">exports</span> = router;
+</code></pre>
+<p>Luego, en tu archivo principal:</p>
+<pre><code class="language-javascript"><span class="hljs-comment">// archivo: app.js</span>
+<span class="hljs-keyword">const</span> express = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;express&#x27;</span>);
+<span class="hljs-keyword">const</span> usuariosRoutes = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;./routes/usuarios&#x27;</span>);
+
+<span class="hljs-keyword">const</span> app = <span class="hljs-title function_">express</span>();
+
+<span class="hljs-comment">// Todas las rutas en usuariosRoutes tendrán el prefijo &quot;/usuarios&quot;</span>
+app.<span class="hljs-title function_">use</span>(<span class="hljs-string">&#x27;/usuarios&#x27;</span>, usuariosRoutes);
+</code></pre>
+<p>Este enfoque es lo que seguimos en Challenge Plans con archivos como <code>/routes/retos.routes.ts</code>, <code>/routes/apuntes.routes.ts</code>, etc.</p>
+<h2 id="5--middlewares-los-ayudantes-de-express">5. 🔄 Middlewares: Los Ayudantes de Express</h2>
+<h3 id="qué-son-los-middlewares">¿Qué son los Middlewares?</h3>
+<p>Los middlewares son probablemente el concepto más importante para entender Express. <strong>Un middleware es simplemente una función que se ejecuta entre la recepción de una petición y el envío de una respuesta</strong>.</p>
+<p>Imagina una fábrica donde un producto pasa por varias estaciones antes de estar completo. Cada estación añade o modifica algo. Los middlewares son como esas estaciones para las peticiones HTTP.</p>
+<pre><code class="language-javascript"><span class="hljs-comment">// Estructura básica de un middleware</span>
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">miMiddleware</span>(<span class="hljs-params">req, res, next</span>) {
+  <span class="hljs-comment">// 1. Hacer algo con la petición (req)</span>
+  <span class="hljs-comment">// 2. Hacer algo con la respuesta (res)</span>
+  <span class="hljs-comment">// 3. Llamar a next() para pasar al siguiente middleware</span>
+  <span class="hljs-title function_">next</span>();
+}
+
+<span class="hljs-comment">// Usar el middleware en toda la aplicación</span>
+app.<span class="hljs-title function_">use</span>(miMiddleware);
+</code></pre>
+<p>El parámetro <code>next</code> es crucial: es una función que, cuando se llama, pasa la petición al siguiente middleware en la cadena.</p>
+<h3 id="middlewares-integrados-y-populares">Middlewares Integrados y Populares</h3>
+<p>Express incluye algunos middlewares útiles, y hay muchos más disponibles como paquetes npm:</p>
+<pre><code class="language-javascript"><span class="hljs-comment">// Middleware para procesar JSON en las peticiones</span>
+app.<span class="hljs-title function_">use</span>(express.<span class="hljs-title function_">json</span>());
+
+<span class="hljs-comment">// Middleware para procesar datos de formularios</span>
+app.<span class="hljs-title function_">use</span>(express.<span class="hljs-title function_">urlencoded</span>({ <span class="hljs-attr">extended</span>: <span class="hljs-literal">true</span> }));
+
+<span class="hljs-comment">// Middleware para servir archivos estáticos (imágenes, CSS, etc.)</span>
+app.<span class="hljs-title function_">use</span>(express.<span class="hljs-title function_">static</span>(<span class="hljs-string">&#x27;public&#x27;</span>));
+</code></pre>
+<p>En Challenge Plans, usamos varios middlewares populares:</p>
+<pre><code class="language-typescript"><span class="hljs-comment">// De src/app.ts</span>
+app.<span class="hljs-title function_">use</span>(<span class="hljs-title function_">helmet</span>());         <span class="hljs-comment">// Añade cabeceras de seguridad</span>
+app.<span class="hljs-title function_">use</span>(<span class="hljs-title function_">compression</span>());    <span class="hljs-comment">// Comprime respuestas para mejorar rendimiento</span>
+app.<span class="hljs-title function_">use</span>(<span class="hljs-title function_">morgan</span>(<span class="hljs-string">&#x27;dev&#x27;</span>));    <span class="hljs-comment">// Registra peticiones para debugging</span>
+app.<span class="hljs-title function_">use</span>(<span class="hljs-title function_">cors</span>());           <span class="hljs-comment">// Permite peticiones desde otros dominios</span>
+app.<span class="hljs-title function_">use</span>(express.<span class="hljs-title function_">json</span>());   <span class="hljs-comment">// Procesa cuerpos JSON</span>
+</code></pre>
+<h3 id="creando-tu-propio-middleware">Creando tu Propio Middleware</h3>
+<p>Crear tu propio middleware es simple. Aquí hay un ejemplo de un middleware de registro que anota cuándo ocurre cada petición:</p>
+<pre><code class="language-javascript"><span class="hljs-comment">// Middleware de registro</span>
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">loggerMiddleware</span>(<span class="hljs-params">req, res, next</span>) {
+  <span class="hljs-keyword">const</span> timestamp = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Date</span>().<span class="hljs-title function_">toISOString</span>();
+  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">`[<span class="hljs-subst">${timestamp}</span>] <span class="hljs-subst">${req.method}</span> <span class="hljs-subst">${req.url}</span>`</span>);
+  <span class="hljs-title function_">next</span>(); <span class="hljs-comment">// ¡No olvides llamar a next()!</span>
+}
+
+<span class="hljs-comment">// Usar el middleware</span>
+app.<span class="hljs-title function_">use</span>(loggerMiddleware);
+</code></pre>
+<p>Los middlewares se pueden aplicar:</p>
+<ul>
+<li>A toda la aplicación: <code>app.use(middleware)</code></li>
+<li>A una ruta específica: <code>app.use('/api', middleware)</code></li>
+<li>A un método HTTP específico: <code>app.get('/api', middleware, controlador)</code></li>
+</ul>
+<h3 id="middleware-de-autenticación-un-ejemplo-práctico">Middleware de Autenticación: Un Ejemplo Práctico</h3>
+<p>Un uso común de middlewares es verificar si un usuario está autenticado antes de permitirle acceder a ciertas rutas. En Challenge Plans, usamos JWT (JSON Web Tokens) para autenticación:</p>
+<pre><code class="language-typescript"><span class="hljs-comment">// Versión simplificada de nuestro middleware de autenticación</span>
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> <span class="hljs-title function_">authenticate</span> = (<span class="hljs-params">req, res, next</span>) =&gt; {
+  <span class="hljs-keyword">try</span> {
+    <span class="hljs-comment">// 1. Obtener el token del header de autorización</span>
+    <span class="hljs-keyword">const</span> authHeader = req.<span class="hljs-property">headers</span>.<span class="hljs-property">authorization</span>;
+    <span class="hljs-keyword">if</span> (!authHeader) {
+      <span class="hljs-keyword">return</span> res.<span class="hljs-title function_">status</span>(<span class="hljs-number">401</span>).<span class="hljs-title function_">json</span>({ <span class="hljs-attr">message</span>: <span class="hljs-string">&#x27;No hay token&#x27;</span> });
+    }
+    
+    <span class="hljs-comment">// 2. Extraer el token (viene como &quot;Bearer [token]&quot;)</span>
+    <span class="hljs-keyword">const</span> token = authHeader.<span class="hljs-title function_">split</span>(<span class="hljs-string">&#x27; &#x27;</span>)[<span class="hljs-number">1</span>];
+    
+    <span class="hljs-comment">// 3. Verificar el token</span>
+    <span class="hljs-keyword">const</span> decodedToken = jwt.<span class="hljs-title function_">verify</span>(token, process.<span class="hljs-property">env</span>.<span class="hljs-property">JWT_SECRET</span>);
+    
+    <span class="hljs-comment">// 4. Añadir la información del usuario a la petición</span>
+    req.<span class="hljs-property">usuario</span> = decodedToken;
+    
+    <span class="hljs-comment">// 5. Continuar con el siguiente middleware o controlador</span>
+    <span class="hljs-title function_">next</span>();
+  } <span class="hljs-keyword">catch</span> (error) {
+    <span class="hljs-keyword">return</span> res.<span class="hljs-title function_">status</span>(<span class="hljs-number">401</span>).<span class="hljs-title function_">json</span>({ <span class="hljs-attr">message</span>: <span class="hljs-string">&#x27;Token inválido&#x27;</span> });
+  }
+};
+</code></pre>
+<p>Y luego lo usamos para proteger rutas:</p>
+<pre><code class="language-typescript"><span class="hljs-comment">// Rutas públicas (no necesitan autenticación)</span>
+router.<span class="hljs-title function_">use</span>(<span class="hljs-string">&#x27;/auth&#x27;</span>, authRoutes);
+
+<span class="hljs-comment">// Rutas protegidas (requieren autenticación)</span>
+router.<span class="hljs-title function_">use</span>(<span class="hljs-string">&#x27;/retos&#x27;</span>, authenticate, retosRoutes);
+router.<span class="hljs-title function_">use</span>(<span class="hljs-string">&#x27;/planes&#x27;</span>, authenticate, planesRoutes);
+</code></pre>
+<h2 id="6--controladores-donde-sucede-la-acción">6. 🎮 Controladores: Donde Sucede la Acción</h2>
+<h3 id="qué-es-un-controlador">¿Qué es un Controlador?</h3>
+<p>Un controlador es una función (o grupo de funciones) que maneja la lógica asociada a una ruta específica. Los controladores reciben la petición, procesan los datos necesarios, y envían una respuesta.</p>
+<p>Si las rutas son como las direcciones de tu aplicación, los controladores son como las personas que atienden esas direcciones.</p>
+<pre><code class="language-javascript"><span class="hljs-comment">// Ejemplo básico de un controlador</span>
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">obtenerUsuarios</span>(<span class="hljs-params">req, res</span>) {
+  <span class="hljs-comment">// Lógica para obtener usuarios de la base de datos</span>
+  <span class="hljs-keyword">const</span> usuarios = [{ <span class="hljs-attr">nombre</span>: <span class="hljs-string">&#x27;Ana&#x27;</span> }, { <span class="hljs-attr">nombre</span>: <span class="hljs-string">&#x27;Carlos&#x27;</span> }];
+  res.<span class="hljs-title function_">json</span>(usuarios);
+}
+
+<span class="hljs-comment">// Usar el controlador con una ruta</span>
+app.<span class="hljs-title function_">get</span>(<span class="hljs-string">&#x27;/usuarios&#x27;</span>, obtenerUsuarios);
+</code></pre>
+<h3 id="estructura-de-un-controlador">Estructura de un Controlador</h3>
+<p>En proyectos más grandes como Challenge Plans, organizamos los controladores en clases para agrupar funcionalidades relacionadas:</p>
+<pre><code class="language-typescript"><span class="hljs-comment">// Estructura típica de un controlador en nuestro proyecto</span>
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">UsuariosController</span> {
+  <span class="hljs-comment">// GET /usuarios</span>
+  <span class="hljs-keyword">public</span> obtenerTodos = <span class="hljs-keyword">async</span> (req, res) =&gt; {
+    <span class="hljs-keyword">try</span> {
+      <span class="hljs-keyword">const</span> usuarios = <span class="hljs-keyword">await</span> <span class="hljs-title function_">obtenerUsuariosDeBD</span>();
+      <span class="hljs-keyword">return</span> res.<span class="hljs-title function_">status</span>(<span class="hljs-number">200</span>).<span class="hljs-title function_">json</span>(usuarios);
+    } <span class="hljs-keyword">catch</span> (error) {
+      <span class="hljs-keyword">return</span> res.<span class="hljs-title function_">status</span>(<span class="hljs-number">500</span>).<span class="hljs-title function_">json</span>({ <span class="hljs-attr">message</span>: <span class="hljs-string">&#x27;Error al obtener usuarios&#x27;</span> });
+    }
+  };
+  
+  <span class="hljs-comment">// GET /usuarios/:id</span>
+  <span class="hljs-keyword">public</span> obtenerPorId = <span class="hljs-keyword">async</span> (req, res) =&gt; {
+    <span class="hljs-keyword">try</span> {
+      <span class="hljs-keyword">const</span> { id } = req.<span class="hljs-property">params</span>;
+      <span class="hljs-keyword">const</span> usuario = <span class="hljs-keyword">await</span> <span class="hljs-title function_">obtenerUsuarioPorIdDeBD</span>(id);
+      
+      <span class="hljs-keyword">if</span> (!usuario) {
+        <span class="hljs-keyword">return</span> res.<span class="hljs-title function_">status</span>(<span class="hljs-number">404</span>).<span class="hljs-title function_">json</span>({ <span class="hljs-attr">message</span>: <span class="hljs-string">&#x27;Usuario no encontrado&#x27;</span> });
+      }
+      
+      <span class="hljs-keyword">return</span> res.<span class="hljs-title function_">status</span>(<span class="hljs-number">200</span>).<span class="hljs-title function_">json</span>(usuario);
+    } <span class="hljs-keyword">catch</span> (error) {
+      <span class="hljs-keyword">return</span> res.<span class="hljs-title function_">status</span>(<span class="hljs-number">500</span>).<span class="hljs-title function_">json</span>({ <span class="hljs-attr">message</span>: <span class="hljs-string">&#x27;Error al obtener el usuario&#x27;</span> });
+    }
+  };
+  
+  <span class="hljs-comment">// Más métodos para crear, actualizar y eliminar usuarios...</span>
+}
+
+<span class="hljs-comment">// Crear una instancia para usar en las rutas</span>
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> usuariosController = <span class="hljs-keyword">new</span> <span class="hljs-title class_">UsuariosController</span>();
+</code></pre>
+<h3 id="ejemplo-práctico-controlador-de-retos">Ejemplo Práctico: Controlador de Retos</h3>
+<p>Veamos un ejemplo simplificado basado en nuestro controlador de retos en Challenge Plans:</p>
+<pre><code class="language-typescript"><span class="hljs-comment">// Versión simplificada de controllers/retos.controller.ts</span>
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">RetosController</span> {
+  <span class="hljs-keyword">private</span> retosService = <span class="hljs-keyword">new</span> <span class="hljs-title class_">RetosService</span>();
+  
+  <span class="hljs-comment">// Obtener todos los retos</span>
+  <span class="hljs-keyword">public</span> obtenerTodos = <span class="hljs-keyword">async</span> (req, res) =&gt; {
+    <span class="hljs-keyword">try</span> {
+      <span class="hljs-comment">// 1. Extraer parámetros de filtrado de la query string</span>
+      <span class="hljs-keyword">const</span> filtros = req.<span class="hljs-property">query</span>;
+      
+      <span class="hljs-comment">// 2. Usar el servicio para obtener datos</span>
+      <span class="hljs-keyword">const</span> retos = <span class="hljs-keyword">await</span> <span class="hljs-variable language_">this</span>.<span class="hljs-property">retosService</span>.<span class="hljs-title function_">obtenerTodos</span>(filtros);
+      
+      <span class="hljs-comment">// 3. Responder con los datos</span>
+      <span class="hljs-keyword">return</span> res.<span class="hljs-title function_">status</span>(<span class="hljs-number">200</span>).<span class="hljs-title function_">json</span>(retos);
+    } <span class="hljs-keyword">catch</span> (error) {
+      <span class="hljs-comment">// 4. Manejar posibles errores</span>
+      <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">error</span>(<span class="hljs-string">&#x27;Error al obtener retos:&#x27;</span>, error);
+      <span class="hljs-keyword">return</span> res.<span class="hljs-title function_">status</span>(<span class="hljs-number">500</span>).<span class="hljs-title function_">json</span>({ 
+        <span class="hljs-attr">message</span>: <span class="hljs-string">&#x27;Error al obtener los retos&#x27;</span> 
+      });
+    }
+  };
+  
+  <span class="hljs-comment">// Crear un nuevo reto</span>
+  <span class="hljs-keyword">public</span> crear = <span class="hljs-keyword">async</span> (req, res) =&gt; {
+    <span class="hljs-keyword">try</span> {
+      <span class="hljs-comment">// 1. Obtener datos del cuerpo de la petición</span>
+      <span class="hljs-keyword">const</span> datosReto = req.<span class="hljs-property">body</span>;
+      
+      <span class="hljs-comment">// 2. Añadir el ID del creador (viene del token de autenticación)</span>
+      datosReto.<span class="hljs-property">creador_id</span> = req.<span class="hljs-property">usuario</span>.<span class="hljs-property">id</span>;
+      
+      <span class="hljs-comment">// 3. Usar el servicio para crear el reto</span>
+      <span class="hljs-keyword">const</span> nuevoReto = <span class="hljs-keyword">await</span> <span class="hljs-variable language_">this</span>.<span class="hljs-property">retosService</span>.<span class="hljs-title function_">crear</span>(datosReto);
+      
+      <span class="hljs-comment">// 4. Responder con el nuevo reto creado</span>
+      <span class="hljs-keyword">return</span> res.<span class="hljs-title function_">status</span>(<span class="hljs-number">201</span>).<span class="hljs-title function_">json</span>(nuevoReto);
+    } <span class="hljs-keyword">catch</span> (error) {
+      <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">error</span>(<span class="hljs-string">&#x27;Error al crear reto:&#x27;</span>, error);
+      <span class="hljs-keyword">return</span> res.<span class="hljs-title function_">status</span>(<span class="hljs-number">500</span>).<span class="hljs-title function_">json</span>({ 
+        <span class="hljs-attr">message</span>: <span class="hljs-string">&#x27;Error al crear el reto&#x27;</span> 
+      });
+    }
+  };
+  
+  <span class="hljs-comment">// Más métodos para actualizar, eliminar, etc.</span>
+}
+</code></pre>
+<h2 id="7--servicios-separando-la-lógica-de-negocio">7. 🏭 Servicios: Separando la Lógica de Negocio</h2>
+<h3 id="por-qué-necesitamos-servicios">¿Por qué Necesitamos Servicios?</h3>
+<p>Los servicios son una capa adicional que separa la lógica de negocio (las reglas de cómo funciona tu aplicación) de los controladores (que manejan las peticiones HTTP).</p>
+<p>Imagina que tienes una tienda online. Los controladores serían como los vendedores que atienden a los clientes, mientras que los servicios serían como el equipo de almacén que realmente busca los productos, verifica el inventario, etc.</p>
+<p>Beneficios de usar servicios:</p>
+<ol>
+<li><strong>Reutilización</strong>: La misma lógica puede usarse en diferentes controladores</li>
+<li><strong>Pruebas más fáciles</strong>: Puedes probar la lógica sin simular peticiones HTTP</li>
+<li><strong>Código más limpio</strong>: Los controladores solo se preocupan de manejar HTTP, no de las reglas de negocio</li>
+</ol>
+<h3 id="ejemplo-de-un-servicio-retosservice">Ejemplo de un Servicio: RetosService</h3>
+<p>Veamos un ejemplo simplificado del servicio de retos en Challenge Plans:</p>
+<pre><code class="language-typescript"><span class="hljs-comment">// Versión simplificada de services/retos.service.ts</span>
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">RetosService</span> {
+  <span class="hljs-comment">// Repositorio para acceder a la base de datos</span>
+  <span class="hljs-keyword">private</span> retoRepository = <span class="hljs-title function_">getRepository</span>(<span class="hljs-title class_">Reto</span>);
+  
+  <span class="hljs-comment">// Obtener todos los retos con filtros opcionales</span>
+  <span class="hljs-keyword">async</span> <span class="hljs-title function_">obtenerTodos</span>(<span class="hljs-params">filtros = {}</span>) {
+    <span class="hljs-keyword">try</span> {
+      <span class="hljs-comment">// Construir la consulta según los filtros</span>
+      <span class="hljs-keyword">const</span> consulta = <span class="hljs-variable language_">this</span>.<span class="hljs-title function_">buildQuery</span>(filtros);
+      
+      <span class="hljs-comment">// Ejecutar la consulta y devolver resultados</span>
+      <span class="hljs-keyword">const</span> retos = <span class="hljs-keyword">await</span> <span class="hljs-variable language_">this</span>.<span class="hljs-property">retoRepository</span>.<span class="hljs-title function_">find</span>(consulta);
+      <span class="hljs-keyword">return</span> retos;
+    } <span class="hljs-keyword">catch</span> (error) {
+      <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Error</span>(<span class="hljs-string">`Error al obtener retos: <span class="hljs-subst">${error.message}</span>`</span>);
+    }
+  }
+  
+  <span class="hljs-comment">// Obtener un reto específico por ID</span>
+  <span class="hljs-keyword">async</span> <span class="hljs-title function_">obtenerPorId</span>(<span class="hljs-params">id: <span class="hljs-built_in">string</span></span>) {
+    <span class="hljs-keyword">try</span> {
+      <span class="hljs-keyword">const</span> reto = <span class="hljs-keyword">await</span> <span class="hljs-variable language_">this</span>.<span class="hljs-property">retoRepository</span>.<span class="hljs-title function_">findOne</span>({
+        <span class="hljs-attr">where</span>: { id },
+        <span class="hljs-attr">relations</span>: [<span class="hljs-string">&#x27;tareas&#x27;</span>, <span class="hljs-string">&#x27;categorias&#x27;</span>] <span class="hljs-comment">// Incluir relaciones</span>
+      });
+      
+      <span class="hljs-keyword">if</span> (!reto) {
+        <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Error</span>(<span class="hljs-string">&#x27;Reto no encontrado&#x27;</span>);
+      }
+      
+      <span class="hljs-keyword">return</span> reto;
+    } <span class="hljs-keyword">catch</span> (error) {
+      <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Error</span>(<span class="hljs-string">`Error al obtener el reto: <span class="hljs-subst">${error.message}</span>`</span>);
+    }
+  }
+  
+  <span class="hljs-comment">// Crear un nuevo reto</span>
+  <span class="hljs-keyword">async</span> <span class="hljs-title function_">crear</span>(<span class="hljs-params">datosReto</span>) {
+    <span class="hljs-keyword">try</span> {
+      <span class="hljs-comment">// Validar datos (podrías usar una función separada)</span>
+      <span class="hljs-variable language_">this</span>.<span class="hljs-title function_">validarDatosReto</span>(datosReto);
+      
+      <span class="hljs-comment">// Crear entidad y guardar</span>
+      <span class="hljs-keyword">const</span> nuevoReto = <span class="hljs-variable language_">this</span>.<span class="hljs-property">retoRepository</span>.<span class="hljs-title function_">create</span>(datosReto);
+      <span class="hljs-keyword">await</span> <span class="hljs-variable language_">this</span>.<span class="hljs-property">retoRepository</span>.<span class="hljs-title function_">save</span>(nuevoReto);
+      <span class="hljs-keyword">return</span> nuevoReto;
+    }
+  }
+  
+  <span class="hljs-comment">// Actualizar un reto existente</span>
+  <span class="hljs-keyword">async</span> <span class="hljs-title function_">actualizar</span>(<span class="hljs-params">id: <span class="hljs-built_in">string</span>, datosReto</span>) {
+    <span class="hljs-keyword">try</span> {
+      <span class="hljs-comment">// Verificar que el reto existe</span>
+      <span class="hljs-keyword">const</span> retoExistente = <span class="hljs-keyword">await</span> <span class="hljs-variable language_">this</span>.<span class="hljs-title function_">obtenerPorId</span>(id);
+      
+      <span class="hljs-comment">// Actualizar los campos con los nuevos datos</span>
+      <span class="hljs-title class_">Object</span>.<span class="hljs-title function_">assign</span>(retoExistente, datosReto);
+      
+      <span class="hljs-comment">// Guardar los cambios</span>
+      <span class="hljs-keyword">const</span> retoActualizado = <span class="hljs-keyword">await</span> <span class="hljs-variable language_">this</span>.<span class="hljs-property">retoRepository</span>.<span class="hljs-title function_">save</span>(retoExistente);
+      <span class="hljs-keyword">return</span> retoActualizado;
+    } <span class="hljs-keyword">catch</span> (error) {
+      <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Error</span>(<span class="hljs-string">`Error al actualizar el reto: <span class="hljs-subst">${error.message}</span>`</span>);
+    }
+  }
+  
+  <span class="hljs-comment">// Eliminar un reto</span>
+  <span class="hljs-keyword">async</span> <span class="hljs-title function_">eliminar</span>(<span class="hljs-params">id: <span class="hljs-built_in">string</span></span>) {
+    <span class="hljs-keyword">try</span> {
+      <span class="hljs-comment">// Verificar que el reto existe</span>
+      <span class="hljs-keyword">const</span> retoExistente = <span class="hljs-keyword">await</span> <span class="hljs-variable language_">this</span>.<span class="hljs-title function_">obtenerPorId</span>(id);
+      
+      <span class="hljs-comment">// Eliminar el reto</span>
+      <span class="hljs-keyword">await</span> <span class="hljs-variable language_">this</span>.<span class="hljs-property">retoRepository</span>.<span class="hljs-title function_">remove</span>(retoExistente);
+      <span class="hljs-keyword">return</span> { <span class="hljs-attr">success</span>: <span class="hljs-literal">true</span>, <span class="hljs-attr">message</span>: <span class="hljs-string">&#x27;Reto eliminado correctamente&#x27;</span> };
+    } <span class="hljs-keyword">catch</span> (error) {
+      <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Error</span>(<span class="hljs-string">`Error al eliminar el reto: <span class="hljs-subst">${error.message}</span>`</span>);
+    }
+  }
+}
+</code></pre>
+<h2 id="8--manejo-de-errores-cuando-las-cosas-salen-mal">8. ❌ Manejo de Errores: Cuando las Cosas Salen Mal</h2>
+<h3 id="errores-en-express">Errores en Express</h3>
+<p>En toda aplicación, las cosas pueden salir mal. Una base de datos puede estar caída, un usuario puede enviar datos incorrectos, o simplemente podemos tener un error en nuestro código. Express facilita el manejo centralizado de estos errores.</p>
+<p>En Express, los errores se manejan principalmente de dos formas:</p>
+<ol>
+<li><strong>Try/Catch en controladores</strong>: Para capturar errores en funciones asíncronas</li>
+<li><strong>Middleware de errores</strong>: Para procesar todos los errores de manera centralizada</li>
+</ol>
+<pre><code class="language-javascript"><span class="hljs-comment">// Ejemplo de try/catch en un controlador</span>
+app.<span class="hljs-title function_">get</span>(<span class="hljs-string">&#x27;/usuarios/:id&#x27;</span>, <span class="hljs-keyword">async</span> (req, res, next) =&gt; {
+  <span class="hljs-keyword">try</span> {
+    <span class="hljs-comment">// Esto podría fallar (por ejemplo, si la base de datos está caída)</span>
+    <span class="hljs-keyword">const</span> usuario = <span class="hljs-keyword">await</span> <span class="hljs-title function_">obtenerUsuario</span>(req.<span class="hljs-property">params</span>.<span class="hljs-property">id</span>);
+    
+    <span class="hljs-comment">// Si el usuario no existe, respondemos con un 404</span>
+    <span class="hljs-keyword">if</span> (!usuario) {
+      <span class="hljs-keyword">return</span> res.<span class="hljs-title function_">status</span>(<span class="hljs-number">404</span>).<span class="hljs-title function_">send</span>(<span class="hljs-string">&#x27;Usuario no encontrado&#x27;</span>);
+    }
+    
+    <span class="hljs-comment">// Si todo va bien, enviamos el usuario</span>
+    res.<span class="hljs-title function_">json</span>(usuario);
+  } <span class="hljs-keyword">catch</span> (error) {
+    <span class="hljs-comment">// Si ocurre un error, lo pasamos al middleware de errores</span>
+    <span class="hljs-title function_">next</span>(error);
+  }
+});
+</code></pre>
+<h3 id="middleware-de-errores-personalizado">Middleware de Errores Personalizado</h3>
+<p>El middleware de errores es como un &quot;atrapador&quot; que captura cualquier error que ocurra durante el procesamiento de una petición. Se define con 4 parámetros (en lugar de los 3 habituales):</p>
+<pre><code class="language-javascript"><span class="hljs-comment">// Middleware de errores básico</span>
+app.<span class="hljs-title function_">use</span>(<span class="hljs-function">(<span class="hljs-params">error, req, res, next</span>) =&gt;</span> {
+  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">error</span>(<span class="hljs-string">&#x27;Error:&#x27;</span>, error);
+  
+  res.<span class="hljs-title function_">status</span>(<span class="hljs-number">500</span>).<span class="hljs-title function_">json</span>({
+    <span class="hljs-attr">mensaje</span>: <span class="hljs-string">&#x27;Algo salió mal&#x27;</span>,
+    <span class="hljs-attr">error</span>: process.<span class="hljs-property">env</span>.<span class="hljs-property">NODE_ENV</span> === <span class="hljs-string">&#x27;development&#x27;</span> ? error.<span class="hljs-property">message</span> : {}
+  });
+});
+</code></pre>
+<p>En nuestro proyecto, usamos un middleware de errores más sofisticado que maneja diferentes tipos de errores:</p>
+<pre><code class="language-typescript"><span class="hljs-comment">// middlewares/error.middleware.ts</span>
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> <span class="hljs-title function_">errorMiddleware</span> = (<span class="hljs-params">error, req, res, next</span>) =&gt; {
+  <span class="hljs-comment">// Registrar el error para debugging interno</span>
+  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">error</span>(<span class="hljs-string">`[ERROR] <span class="hljs-subst">${req.method}</span> <span class="hljs-subst">${req.path}</span>:`</span>, error);
+  
+  <span class="hljs-comment">// Diferentes respuestas según el tipo de error</span>
+  <span class="hljs-keyword">if</span> (error <span class="hljs-keyword">instanceof</span> <span class="hljs-title class_">NotFoundError</span>) {
+    <span class="hljs-comment">// Errores 404 - Recurso no encontrado</span>
+    <span class="hljs-keyword">return</span> res.<span class="hljs-title function_">status</span>(<span class="hljs-number">404</span>).<span class="hljs-title function_">json</span>({
+      <span class="hljs-attr">status</span>: <span class="hljs-string">&#x27;error&#x27;</span>,
+      <span class="hljs-attr">message</span>: error.<span class="hljs-property">message</span>
+    });
+  }
+  
+  <span class="hljs-keyword">if</span> (error <span class="hljs-keyword">instanceof</span> <span class="hljs-title class_">ValidationError</span>) {
+    <span class="hljs-comment">// Errores 400 - Datos inválidos</span>
+    <span class="hljs-keyword">return</span> res.<span class="hljs-title function_">status</span>(<span class="hljs-number">400</span>).<span class="hljs-title function_">json</span>({
+      <span class="hljs-attr">status</span>: <span class="hljs-string">&#x27;error&#x27;</span>,
+      <span class="hljs-attr">message</span>: <span class="hljs-string">&#x27;Datos de entrada inválidos&#x27;</span>,
+      <span class="hljs-attr">errors</span>: error.<span class="hljs-property">errors</span>
+    });
+  }
+  
+  <span class="hljs-keyword">if</span> (error <span class="hljs-keyword">instanceof</span> <span class="hljs-title class_">UnauthorizedError</span>) {
+    <span class="hljs-comment">// Errores 401 - No autenticado o no autorizado</span>
+    <span class="hljs-keyword">return</span> res.<span class="hljs-title function_">status</span>(<span class="hljs-number">401</span>).<span class="hljs-title function_">json</span>({
+      <span class="hljs-attr">status</span>: <span class="hljs-string">&#x27;error&#x27;</span>,
+      <span class="hljs-attr">message</span>: error.<span class="hljs-property">message</span>
+    });
+  }
+  
+  <span class="hljs-comment">// Error genérico para cualquier otro caso</span>
+  res.<span class="hljs-title function_">status</span>(<span class="hljs-number">500</span>).<span class="hljs-title function_">json</span>({
+    <span class="hljs-attr">status</span>: <span class="hljs-string">&#x27;error&#x27;</span>,
+    <span class="hljs-attr">message</span>: <span class="hljs-string">&#x27;Error interno del servidor&#x27;</span>,
+    <span class="hljs-comment">// Solo mostrar detalles técnicos en desarrollo</span>
+    <span class="hljs-attr">details</span>: process.<span class="hljs-property">env</span>.<span class="hljs-property">NODE_ENV</span> === <span class="hljs-string">&#x27;development&#x27;</span> ? error.<span class="hljs-property">message</span> : <span class="hljs-literal">undefined</span>
+  });
+};
+</code></pre>
+<h3 id="clases-de-error-personalizadas">Clases de Error Personalizadas</h3>
+<p>Para facilitar el manejo consistente de errores, es útil definir clases de error personalizadas:</p>
+<pre><code class="language-typescript"><span class="hljs-comment">// utils/custom-errors.ts</span>
+
+<span class="hljs-comment">// Error base para todos nuestros errores personalizados</span>
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">CustomError</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_ inherited__">Error</span> {
+  <span class="hljs-attr">statusCode</span>: <span class="hljs-built_in">number</span>;
+  errors?: <span class="hljs-built_in">any</span>[];
+  
+  <span class="hljs-title function_">constructor</span>(<span class="hljs-params">message: <span class="hljs-built_in">string</span>, statusCode: <span class="hljs-built_in">number</span> = <span class="hljs-number">500</span>, errors?: <span class="hljs-built_in">any</span>[]</span>) {
+    <span class="hljs-variable language_">super</span>(message);
+    <span class="hljs-variable language_">this</span>.<span class="hljs-property">statusCode</span> = statusCode;
+    <span class="hljs-variable language_">this</span>.<span class="hljs-property">errors</span> = errors;
+    <span class="hljs-title class_">Object</span>.<span class="hljs-title function_">setPrototypeOf</span>(<span class="hljs-variable language_">this</span>, <span class="hljs-title class_">CustomError</span>.<span class="hljs-property"><span class="hljs-keyword">prototype</span></span>);
+  }
+}
+
+<span class="hljs-comment">// Error para recursos no encontrados (404)</span>
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">NotFoundError</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_ inherited__">CustomError</span> {
+  <span class="hljs-title function_">constructor</span>(<span class="hljs-params">resource: <span class="hljs-built_in">string</span> = <span class="hljs-string">&#x27;Recurso&#x27;</span></span>) {
+    <span class="hljs-variable language_">super</span>(<span class="hljs-string">`<span class="hljs-subst">${resource}</span> no encontrado`</span>, <span class="hljs-number">404</span>);
+    <span class="hljs-title class_">Object</span>.<span class="hljs-title function_">setPrototypeOf</span>(<span class="hljs-variable language_">this</span>, <span class="hljs-title class_">NotFoundError</span>.<span class="hljs-property"><span class="hljs-keyword">prototype</span></span>);
+  }
+}
+
+<span class="hljs-comment">// Error para problemas de autenticación/autorización (401)</span>
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">UnauthorizedError</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_ inherited__">CustomError</span> {
+  <span class="hljs-title function_">constructor</span>(<span class="hljs-params">message: <span class="hljs-built_in">string</span> = <span class="hljs-string">&#x27;No estás autorizado para realizar esta acción&#x27;</span></span>) {
+    <span class="hljs-variable language_">super</span>(message, <span class="hljs-number">401</span>);
+    <span class="hljs-title class_">Object</span>.<span class="hljs-title function_">setPrototypeOf</span>(<span class="hljs-variable language_">this</span>, <span class="hljs-title class_">UnauthorizedError</span>.<span class="hljs-property"><span class="hljs-keyword">prototype</span></span>);
+  }
+}
+
+<span class="hljs-comment">// Error para datos de entrada inválidos (400)</span>
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">ValidationError</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_ inherited__">CustomError</span> {
+  <span class="hljs-title function_">constructor</span>(<span class="hljs-params">errors: <span class="hljs-built_in">any</span>[]</span>) {
+    <span class="hljs-variable language_">super</span>(<span class="hljs-string">&#x27;Error de validación&#x27;</span>, <span class="hljs-number">400</span>, errors);
+    <span class="hljs-title class_">Object</span>.<span class="hljs-title function_">setPrototypeOf</span>(<span class="hljs-variable language_">this</span>, <span class="hljs-title class_">ValidationError</span>.<span class="hljs-property"><span class="hljs-keyword">prototype</span></span>);
+  }
+}
+</code></pre>
+<p>En los servicios, podemos usar estas clases para lanzar errores específicos:</p>
+<pre><code class="language-typescript"><span class="hljs-comment">// Ejemplo de uso en un servicio</span>
+<span class="hljs-keyword">async</span> <span class="hljs-title function_">obtenerPorId</span>(<span class="hljs-params">id: <span class="hljs-built_in">string</span></span>) {
+  <span class="hljs-keyword">const</span> reto = <span class="hljs-keyword">await</span> <span class="hljs-variable language_">this</span>.<span class="hljs-property">retoRepository</span>.<span class="hljs-title function_">findOne</span>({ <span class="hljs-attr">where</span>: { id } });
+  
+  <span class="hljs-keyword">if</span> (!reto) {
+    <span class="hljs-comment">// Lanzamos un error específico para &quot;no encontrado&quot;</span>
+    <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">NotFoundError</span>(<span class="hljs-string">&#x27;Reto&#x27;</span>);
+  }
+  
+  <span class="hljs-keyword">return</span> reto;
+}
+</code></pre>
+<h2 id="9--conectando-con-la-base-de-datos">9. 🔌 Conectando con la Base de Datos</h2>
+<h3 id="typeorm-un-puente-entre-express-y-la-base-de-datos">TypeORM: Un Puente Entre Express y la Base de Datos</h3>
+<p>En nuestro proyecto Challenge Plans, usamos TypeORM para interactuar con la base de datos PostgreSQL. TypeORM es un ORM (Object-Relational Mapping) que nos permite trabajar con la base de datos usando clases y objetos en lugar de SQL puro.</p>
+<p>Imagina TypeORM como un traductor: nosotros hablamos en &quot;JavaScript/TypeScript&quot;, y él traduce nuestras instrucciones a SQL para que la base de datos las entienda.</p>
+<p>Las ventajas de usar TypeORM son:</p>
+<ol>
+<li><strong>Código más limpio</strong>: Trabajamos con objetos en lugar de SQL</li>
+<li><strong>Mayor seguridad</strong>: Previene ataques de inyección SQL</li>
+<li><strong>Independencia del motor de BD</strong>: Podemos cambiar de PostgreSQL a MySQL sin cambiar el código</li>
+<li><strong>Migraciones automáticas</strong>: Genera y ejecuta scripts para actualizar la estructura de la BD</li>
+</ol>
+<h3 id="configuración-de-la-conexión">Configuración de la Conexión</h3>
+<p>La conexión a la base de datos se configura en el archivo <code>data-source.ts</code>:</p>
+<pre><code class="language-typescript"><span class="hljs-comment">// src/data-source.ts</span>
+<span class="hljs-keyword">import</span> { <span class="hljs-title class_">DataSource</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;typeorm&quot;</span>;
+<span class="hljs-keyword">import</span> { config } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;dotenv&quot;</span>;
+<span class="hljs-keyword">import</span> { <span class="hljs-title class_">Usuario</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;./entities/usuario.entity&quot;</span>;
+<span class="hljs-keyword">import</span> { <span class="hljs-title class_">Reto</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;./entities/reto.entity&quot;</span>;
+<span class="hljs-keyword">import</span> { <span class="hljs-title class_">Tarea</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;./entities/tarea.entity&quot;</span>;
+<span class="hljs-comment">// Importar otras entidades...</span>
+
+<span class="hljs-comment">// Cargar variables de entorno</span>
+<span class="hljs-title function_">config</span>();
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> <span class="hljs-title class_">AppDataSource</span> = <span class="hljs-keyword">new</span> <span class="hljs-title class_">DataSource</span>({
+  <span class="hljs-comment">// Tipo de base de datos</span>
+  <span class="hljs-attr">type</span>: <span class="hljs-string">&quot;postgres&quot;</span>,
+  
+  <span class="hljs-comment">// Datos de conexión (desde variables de entorno)</span>
+  <span class="hljs-attr">host</span>: process.<span class="hljs-property">env</span>.<span class="hljs-property">DB_HOST</span> || <span class="hljs-string">&quot;localhost&quot;</span>,
+  <span class="hljs-attr">port</span>: <span class="hljs-title class_">Number</span>(process.<span class="hljs-property">env</span>.<span class="hljs-property">DB_PORT</span>) || <span class="hljs-number">5432</span>,
+  <span class="hljs-attr">username</span>: process.<span class="hljs-property">env</span>.<span class="hljs-property">DB_USERNAME</span> || <span class="hljs-string">&quot;postgres&quot;</span>,
+  <span class="hljs-attr">password</span>: process.<span class="hljs-property">env</span>.<span class="hljs-property">DB_PASSWORD</span> || <span class="hljs-string">&quot;postgres&quot;</span>,
+  <span class="hljs-attr">database</span>: process.<span class="hljs-property">env</span>.<span class="hljs-property">DB_DATABASE</span> || <span class="hljs-string">&quot;challenge_plans&quot;</span>,
+  
+  <span class="hljs-comment">// ¿Sincronizar automáticamente las entidades con la BD? (Solo en desarrollo)</span>
+  <span class="hljs-attr">synchronize</span>: process.<span class="hljs-property">env</span>.<span class="hljs-property">NODE_ENV</span> === <span class="hljs-string">&quot;development&quot;</span>,
+  
+  <span class="hljs-comment">// ¿Mostrar consultas SQL en la consola?</span>
+  <span class="hljs-attr">logging</span>: process.<span class="hljs-property">env</span>.<span class="hljs-property">NODE_ENV</span> === <span class="hljs-string">&quot;development&quot;</span>,
+  
+  <span class="hljs-comment">// Lista de entidades (tablas) de la base de datos</span>
+  <span class="hljs-attr">entities</span>: [
+    <span class="hljs-title class_">Usuario</span>,
+    <span class="hljs-title class_">Reto</span>,
+    <span class="hljs-title class_">Tarea</span>,
+    <span class="hljs-comment">// Otras entidades...</span>
+  ],
+  
+  <span class="hljs-comment">// Configuración de migraciones</span>
+  <span class="hljs-attr">migrations</span>: [<span class="hljs-string">&quot;src/migrations/*.ts&quot;</span>],
+  <span class="hljs-attr">migrationsTableName</span>: <span class="hljs-string">&quot;migrations_history&quot;</span>,
+  
+  <span class="hljs-comment">// Configurar SSL para bases de datos en la nube (como Heroku)</span>
+  <span class="hljs-attr">ssl</span>: process.<span class="hljs-property">env</span>.<span class="hljs-property">DB_SSL</span> === <span class="hljs-string">&quot;true&quot;</span> ? { <span class="hljs-attr">rejectUnauthorized</span>: <span class="hljs-literal">false</span> } : <span class="hljs-literal">false</span>,
+});
+</code></pre>
+<p>En nuestro archivo <code>index.ts</code>, inicializamos la conexión antes de iniciar el servidor:</p>
+<pre><code class="language-typescript"><span class="hljs-comment">// src/index.ts</span>
+<span class="hljs-keyword">import</span> <span class="hljs-string">&quot;reflect-metadata&quot;</span>; <span class="hljs-comment">// Necesario para TypeORM</span>
+<span class="hljs-keyword">import</span> { <span class="hljs-title class_">AppDataSource</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;./data-source&quot;</span>;
+<span class="hljs-keyword">import</span> app <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;./app&quot;</span>;
+
+<span class="hljs-keyword">const</span> <span class="hljs-variable constant_">PORT</span> = process.<span class="hljs-property">env</span>.<span class="hljs-property">PORT</span> || <span class="hljs-number">3000</span>;
+
+<span class="hljs-comment">// Inicializar la conexión a la base de datos</span>
+<span class="hljs-title class_">AppDataSource</span>.<span class="hljs-title function_">initialize</span>()
+  .<span class="hljs-title function_">then</span>(<span class="hljs-function">() =&gt;</span> {
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&quot;✅ Conexión a BD establecida&quot;</span>);
+    
+    <span class="hljs-comment">// Iniciar el servidor Express una vez conectada la BD</span>
+    app.<span class="hljs-title function_">listen</span>(<span class="hljs-variable constant_">PORT</span>, <span class="hljs-function">() =&gt;</span> {
+      <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">`🚀 Servidor corriendo en http://localhost:<span class="hljs-subst">${PORT}</span>`</span>);
+    });
+  })
+  .<span class="hljs-title function_">catch</span>(<span class="hljs-function">(<span class="hljs-params">error</span>) =&gt;</span> {
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">error</span>(<span class="hljs-string">&quot;❌ Error al conectar a la BD:&quot;</span>, error);
+    process.<span class="hljs-title function_">exit</span>(<span class="hljs-number">1</span>); <span class="hljs-comment">// Salir si no podemos conectar a la BD</span>
+  });
+</code></pre>
+<h2 id="10-️-autenticación-y-seguridad">10. 🛡️ Autenticación y Seguridad</h2>
+<h3 id="autenticación-con-jwt">Autenticación con JWT</h3>
+<p>Para proteger nuestras rutas en Challenge Plans, utilizamos JSON Web Tokens (JWT). Los JWT son como &quot;tarjetas de identificación digitales&quot; que el servidor emite cuando un usuario se autentica correctamente.</p>
+<p>El flujo de autenticación funciona así:</p>
+<ol>
+<li>El usuario envía sus credenciales (email y contraseña)</li>
+<li>El servidor verifica las credenciales en la base de datos</li>
+<li>Si son correctas, el servidor crea un token JWT y lo envía al cliente</li>
+<li>El cliente guarda este token y lo envía en cada solicitud posterior</li>
+<li>El servidor verifica el token para identificar al usuario</li>
+</ol>
+<p>Veamos cómo implementamos esto:</p>
+<pre><code class="language-typescript"><span class="hljs-comment">// services/auth.service.ts</span>
+<span class="hljs-keyword">import</span> jwt <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;jsonwebtoken&#x27;</span>;
+<span class="hljs-keyword">import</span> bcrypt <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;bcrypt&#x27;</span>;
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">AuthService</span> {
+  <span class="hljs-keyword">private</span> userRepository = <span class="hljs-title class_">AppDataSource</span>.<span class="hljs-title function_">getRepository</span>(<span class="hljs-title class_">Usuario</span>);
+  
+  <span class="hljs-comment">// Método para autenticar usuario</span>
+  <span class="hljs-keyword">async</span> <span class="hljs-title function_">login</span>(<span class="hljs-params">email: <span class="hljs-built_in">string</span>, password: <span class="hljs-built_in">string</span></span>) {
+    <span class="hljs-comment">// Buscar el usuario por email</span>
+    <span class="hljs-keyword">const</span> usuario = <span class="hljs-keyword">await</span> <span class="hljs-variable language_">this</span>.<span class="hljs-property">userRepository</span>.<span class="hljs-title function_">findOne</span>({ <span class="hljs-attr">where</span>: { email } });
+    
+    <span class="hljs-comment">// Si no existe el usuario o la contraseña es incorrecta</span>
+    <span class="hljs-keyword">if</span> (!usuario || !(<span class="hljs-keyword">await</span> bcrypt.<span class="hljs-title function_">compare</span>(password, usuario.<span class="hljs-property">hash_contrase</span>ña))) {
+      <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">UnauthorizedError</span>(<span class="hljs-string">&#x27;Email o contraseña incorrectos&#x27;</span>);
+    }
+    
+    <span class="hljs-comment">// Generar token JWT</span>
+    <span class="hljs-keyword">const</span> token = <span class="hljs-variable language_">this</span>.<span class="hljs-title function_">generateToken</span>(usuario);
+    
+    <span class="hljs-comment">// Devolver token y datos básicos del usuario</span>
+    <span class="hljs-keyword">return</span> {
+      token,
+      <span class="hljs-attr">usuario</span>: {
+        <span class="hljs-attr">id</span>: usuario.<span class="hljs-property">id</span>,
+        <span class="hljs-attr">nombre</span>: usuario.<span class="hljs-property">nombre</span>,
+        <span class="hljs-attr">email</span>: usuario.<span class="hljs-property">email</span>,
+      }
+    };
+  }
+  
+  <span class="hljs-comment">// Método para registrar nuevo usuario</span>
+  <span class="hljs-keyword">async</span> <span class="hljs-title function_">register</span>(<span class="hljs-params">userData: <span class="hljs-built_in">any</span></span>) {
+    <span class="hljs-comment">// Verificar si ya existe un usuario con ese email</span>
+    <span class="hljs-keyword">const</span> existingUser = <span class="hljs-keyword">await</span> <span class="hljs-variable language_">this</span>.<span class="hljs-property">userRepository</span>.<span class="hljs-title function_">findOne</span>({
+      <span class="hljs-attr">where</span>: { <span class="hljs-attr">email</span>: userData.<span class="hljs-property">email</span> }
+    });
+    
+    <span class="hljs-keyword">if</span> (existingUser) {
+      <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">ValidationError</span>([{ <span class="hljs-attr">field</span>: <span class="hljs-string">&#x27;email&#x27;</span>, <span class="hljs-attr">message</span>: <span class="hljs-string">&#x27;Este email ya está registrado&#x27;</span> }]);
+    }
+    
+    <span class="hljs-comment">// Cifrar la contraseña</span>
+    <span class="hljs-keyword">const</span> hashedPassword = <span class="hljs-keyword">await</span> bcrypt.<span class="hljs-title function_">hash</span>(userData.<span class="hljs-property">password</span>, <span class="hljs-number">10</span>);
+    
+    <span class="hljs-comment">// Crear el nuevo usuario</span>
+    <span class="hljs-keyword">const</span> newUser = <span class="hljs-variable language_">this</span>.<span class="hljs-property">userRepository</span>.<span class="hljs-title function_">create</span>({
+      ...userData,
+      hash_contraseñ<span class="hljs-attr">a</span>: hashedPassword
+    });
+    
+    <span class="hljs-comment">// Guardar en la base de datos</span>
+    <span class="hljs-keyword">const</span> savedUser = <span class="hljs-keyword">await</span> <span class="hljs-variable language_">this</span>.<span class="hljs-property">userRepository</span>.<span class="hljs-title function_">save</span>(newUser);
+    
+    <span class="hljs-comment">// Generar token JWT</span>
+    <span class="hljs-keyword">const</span> token = <span class="hljs-variable language_">this</span>.<span class="hljs-title function_">generateToken</span>(savedUser);
+    
+    <span class="hljs-comment">// Devolver token y datos básicos del usuario</span>
+    <span class="hljs-keyword">return</span> {
+      token,
+      <span class="hljs-attr">usuario</span>: {
+        <span class="hljs-attr">id</span>: savedUser.<span class="hljs-property">id</span>,
+        <span class="hljs-attr">nombre</span>: savedUser.<span class="hljs-property">nombre</span>,
+        <span class="hljs-attr">email</span>: savedUser.<span class="hljs-property">email</span>,
+      }
+    };
+  }
+  
+  <span class="hljs-comment">// Método privado para generar tokens JWT</span>
+  <span class="hljs-keyword">private</span> <span class="hljs-title function_">generateToken</span>(<span class="hljs-params">usuario: Usuario</span>) {
+    <span class="hljs-keyword">return</span> jwt.<span class="hljs-title function_">sign</span>(
+      { <span class="hljs-attr">id</span>: usuario.<span class="hljs-property">id</span>, <span class="hljs-attr">email</span>: usuario.<span class="hljs-property">email</span>, <span class="hljs-attr">nombre</span>: usuario.<span class="hljs-property">nombre</span> },
+      process.<span class="hljs-property">env</span>.<span class="hljs-property">JWT_SECRET</span>!,
+      { <span class="hljs-attr">expiresIn</span>: <span class="hljs-string">&#x27;24h&#x27;</span> }
+    );
+  }
+}
+</code></pre>
+<h3 id="protegiendo-rutas-con-middleware">Protegiendo Rutas con Middleware</h3>
+<p>Una vez que tenemos nuestro sistema de autenticación, necesitamos proteger las rutas que requieren autenticación. Para eso usamos el middleware de autenticación que vimos anteriormente:</p>
+<pre><code class="language-typescript"><span class="hljs-comment">// routes/index.ts</span>
+<span class="hljs-keyword">const</span> router = <span class="hljs-title class_">Router</span>();
+
+<span class="hljs-comment">// Rutas públicas (no requieren autenticación)</span>
+router.<span class="hljs-title function_">use</span>(<span class="hljs-string">&#x27;/auth&#x27;</span>, authRoutes);
+router.<span class="hljs-title function_">use</span>(<span class="hljs-string">&#x27;/categorias&#x27;</span>, categoriasRoutes);
+
+<span class="hljs-comment">// Rutas protegidas (requieren autenticación)</span>
+router.<span class="hljs-title function_">use</span>(<span class="hljs-string">&#x27;/retos&#x27;</span>, authenticate, retosRoutes);
+router.<span class="hljs-title function_">use</span>(<span class="hljs-string">&#x27;/planes&#x27;</span>, authenticate, planesRoutes);
+router.<span class="hljs-title function_">use</span>(<span class="hljs-string">&#x27;/apuntes&#x27;</span>, authenticate, apuntesRoutes);
+router.<span class="hljs-title function_">use</span>(<span class="hljs-string">&#x27;/tareas&#x27;</span>, authenticate, tareasRoutes);
+router.<span class="hljs-title function_">use</span>(<span class="hljs-string">&#x27;/perfil&#x27;</span>, authenticate, perfilRoutes);
+</code></pre>
+<h3 id="buenas-prácticas-de-seguridad">Buenas Prácticas de Seguridad</h3>
+<p>Además de la autenticación JWT, implementamos varias prácticas de seguridad:</p>
+<ol>
+<li>
+<p><strong>Almacenamiento seguro de contraseñas</strong>: Usamos bcrypt para cifrar las contraseñas antes de guardarlas.</p>
+</li>
+<li>
+<p><strong>Headers de seguridad</strong>: Utilizamos el middleware Helmet para establecer cabeceras HTTP de seguridad:</p>
+<pre><code class="language-typescript"><span class="hljs-keyword">import</span> helmet <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;helmet&#x27;</span>;
+app.<span class="hljs-title function_">use</span>(<span class="hljs-title function_">helmet</span>());
+</code></pre>
+</li>
+<li>
+<p><strong>Limitación de intentos de login</strong>: Para prevenir ataques de fuerza bruta, limitamos los intentos de login:</p>
+<pre><code class="language-typescript"><span class="hljs-keyword">import</span> rateLimit <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;express-rate-limit&#x27;</span>;
+
+<span class="hljs-keyword">const</span> loginLimiter = <span class="hljs-title function_">rateLimit</span>({
+  <span class="hljs-attr">windowMs</span>: <span class="hljs-number">15</span> * <span class="hljs-number">60</span> * <span class="hljs-number">1000</span>, <span class="hljs-comment">// 15 minutos</span>
+  <span class="hljs-attr">max</span>: <span class="hljs-number">5</span>, <span class="hljs-comment">// 5 intentos por IP</span>
+  <span class="hljs-attr">message</span>: <span class="hljs-string">&#x27;Demasiados intentos de login, inténtalo de nuevo en 15 minutos&#x27;</span>
+});
+
+router.<span class="hljs-title function_">post</span>(<span class="hljs-string">&#x27;/login&#x27;</span>, loginLimiter, authController.<span class="hljs-property">login</span>);
+</code></pre>
+</li>
+<li>
+<p><strong>Validación de entradas</strong>: Validamos todas las entradas del usuario para prevenir inyecciones y otros tipos de ataques.</p>
+</li>
+<li>
+<p><strong>CORS configurado</strong>: Configuramos CORS para permitir solo a orígenes conocidos acceder a nuestra API:</p>
+<pre><code class="language-typescript"><span class="hljs-keyword">import</span> cors <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;cors&#x27;</span>;
+
+app.<span class="hljs-title function_">use</span>(<span class="hljs-title function_">cors</span>({
+  <span class="hljs-attr">origin</span>: process.<span class="hljs-property">env</span>.<span class="hljs-property">FRONTEND_URL</span> || <span class="hljs-string">&#x27;http://localhost:5173&#x27;</span>,
+  <span class="hljs-attr">credentials</span>: <span class="hljs-literal">true</span>
+}));
+</code></pre>
+</li>
+</ol>
+<h2 id="11--validación-de-datos">11. 📦 Validación de Datos</h2>
+<h3 id="por-qué-validar-los-datos">Por Qué Validar los Datos</h3>
+<p>La validación de datos es crucial para cualquier aplicación. Imagina que tienes un formulario donde los usuarios deben ingresar su email. Si no validas que realmente sea un email válido, podrías tener problemas más adelante (por ejemplo, al intentar enviarles un correo).</p>
+<p>Los datos de entrada pueden ser inválidos por muchas razones:</p>
+<ul>
+<li>El usuario cometió un error al escribir</li>
+<li>Alguien está intentando hacer algo malicioso</li>
+<li>Hay un bug en el frontend</li>
+</ul>
+<p>Por eso, siempre debemos validar los datos antes de procesarlos.</p>
+<h3 id="usando-express-validator">Usando express-validator</h3>
+<p>En Challenge Plans, usamos <code>express-validator</code> para validar las entradas de usuario:</p>
+<pre><code class="language-typescript"><span class="hljs-comment">// controllers/retos.controller.ts con validación</span>
+<span class="hljs-keyword">import</span> { body, param, validationResult } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;express-validator&#x27;</span>;
+
+<span class="hljs-comment">// Definir las reglas de validación</span>
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> crearRetoValidation = [
+  <span class="hljs-title function_">body</span>(<span class="hljs-string">&#x27;titulo&#x27;</span>)
+    .<span class="hljs-title function_">notEmpty</span>().<span class="hljs-title function_">withMessage</span>(<span class="hljs-string">&#x27;El título es obligatorio&#x27;</span>)
+    .<span class="hljs-title function_">isLength</span>({ <span class="hljs-attr">min</span>: <span class="hljs-number">5</span>, <span class="hljs-attr">max</span>: <span class="hljs-number">100</span> }).<span class="hljs-title function_">withMessage</span>(<span class="hljs-string">&#x27;El título debe tener entre 5 y 100 caracteres&#x27;</span>),
+    
+  <span class="hljs-title function_">body</span>(<span class="hljs-string">&#x27;descripcion&#x27;</span>)
+    .<span class="hljs-title function_">optional</span>()
+    .<span class="hljs-title function_">isLength</span>({ <span class="hljs-attr">max</span>: <span class="hljs-number">500</span> }).<span class="hljs-title function_">withMessage</span>(<span class="hljs-string">&#x27;La descripción no debe exceder 500 caracteres&#x27;</span>),
+    
+  <span class="hljs-title function_">body</span>(<span class="hljs-string">&#x27;fecha_inicio&#x27;</span>)
+    .<span class="hljs-title function_">notEmpty</span>().<span class="hljs-title function_">withMessage</span>(<span class="hljs-string">&#x27;La fecha de inicio es obligatoria&#x27;</span>)
+    .<span class="hljs-title function_">isISO8601</span>().<span class="hljs-title function_">withMessage</span>(<span class="hljs-string">&#x27;La fecha debe tener un formato válido (YYYY-MM-DD)&#x27;</span>),
+    
+  <span class="hljs-title function_">body</span>(<span class="hljs-string">&#x27;fecha_fin&#x27;</span>)
+    .<span class="hljs-title function_">notEmpty</span>().<span class="hljs-title function_">withMessage</span>(<span class="hljs-string">&#x27;La fecha de fin es obligatoria&#x27;</span>)
+    .<span class="hljs-title function_">isISO8601</span>().<span class="hljs-title function_">withMessage</span>(<span class="hljs-string">&#x27;La fecha debe tener un formato válido (YYYY-MM-DD)&#x27;</span>)
+    .<span class="hljs-title function_">custom</span>(<span class="hljs-function">(<span class="hljs-params">value, { req }</span>) =&gt;</span> {
+      <span class="hljs-keyword">if</span> (<span class="hljs-keyword">new</span> <span class="hljs-title class_">Date</span>(value) &lt;= <span class="hljs-keyword">new</span> <span class="hljs-title class_">Date</span>(req.<span class="hljs-property">body</span>.<span class="hljs-property">fecha_inicio</span>)) {
+        <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Error</span>(<span class="hljs-string">&#x27;La fecha de fin debe ser posterior a la fecha de inicio&#x27;</span>);
+      }
+      <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
+    }),
+    
+  <span class="hljs-title function_">body</span>(<span class="hljs-string">&#x27;dificultad&#x27;</span>)
+    .<span class="hljs-title function_">isIn</span>([<span class="hljs-string">&#x27;principiante&#x27;</span>, <span class="hljs-string">&#x27;intermedio&#x27;</span>, <span class="hljs-string">&#x27;avanzado&#x27;</span>]).<span class="hljs-title function_">withMessage</span>(<span class="hljs-string">&#x27;La dificultad debe ser principiante, intermedio o avanzado&#x27;</span>),
+    
+  <span class="hljs-comment">// Middleware para verificar los errores</span>
+  <span class="hljs-function">(<span class="hljs-params">req, res, next</span>) =&gt;</span> {
+    <span class="hljs-keyword">const</span> errors = <span class="hljs-title function_">validationResult</span>(req);
+    <span class="hljs-keyword">if</span> (!errors.<span class="hljs-title function_">isEmpty</span>()) {
+      <span class="hljs-keyword">return</span> res.<span class="hljs-title function_">status</span>(<span class="hljs-number">400</span>).<span class="hljs-title function_">json</span>({ <span class="hljs-attr">errors</span>: errors.<span class="hljs-title function_">array</span>() });
+    }
+    <span class="hljs-title function_">next</span>();
+  }
+];
+
+<span class="hljs-comment">// Usar las reglas de validación en la ruta</span>
+router.<span class="hljs-title function_">post</span>(<span class="hljs-string">&#x27;/&#x27;</span>, crearRetoValidation, retosController.<span class="hljs-property">crear</span>);
+</code></pre>
+<h3 id="validaciones-personalizadas">Validaciones Personalizadas</h3>
+<p>A veces necesitamos validaciones más específicas que las que ofrece <code>express-validator</code>. Por ejemplo, verificar si un reto puede ser modificado:</p>
+<pre><code class="language-typescript"><span class="hljs-comment">// Validación personalizada para verificar si un usuario puede editar un reto</span>
+<span class="hljs-keyword">async</span> <span class="hljs-keyword">function</span> <span class="hljs-title function_">puedeEditarReto</span>(<span class="hljs-params">req, res, next</span>) {
+  <span class="hljs-keyword">try</span> {
+    <span class="hljs-keyword">const</span> retoId = req.<span class="hljs-property">params</span>.<span class="hljs-property">id</span>;
+    <span class="hljs-keyword">const</span> usuarioId = req.<span class="hljs-property">usuario</span>.<span class="hljs-property">id</span>;
+    
+    <span class="hljs-comment">// Obtener el reto de la base de datos</span>
+    <span class="hljs-keyword">const</span> reto = <span class="hljs-keyword">await</span> retosService.<span class="hljs-title function_">obtenerPorId</span>(retoId);
+    
+    <span class="hljs-comment">// Verificar si el reto existe</span>
+    <span class="hljs-keyword">if</span> (!reto) {
+      <span class="hljs-keyword">return</span> res.<span class="hljs-title function_">status</span>(<span class="hljs-number">404</span>).<span class="hljs-title function_">json</span>({ <span class="hljs-attr">message</span>: <span class="hljs-string">&#x27;Reto no encontrado&#x27;</span> });
+    }
+    
+    <span class="hljs-comment">// Verificar si el usuario es el creador del reto o un administrador</span>
+    <span class="hljs-keyword">if</span> (reto.<span class="hljs-property">creador_id</span> !== usuarioId &amp;&amp; req.<span class="hljs-property">usuario</span>.<span class="hljs-property">rol</span> !== <span class="hljs-string">&#x27;admin&#x27;</span>) {
+      <span class="hljs-keyword">return</span> res.<span class="hljs-title function_">status</span>(<span class="hljs-number">403</span>).<span class="hljs-title function_">json</span>({ 
+        <span class="hljs-attr">message</span>: <span class="hljs-string">&#x27;No tienes permiso para editar este reto&#x27;</span> 
+      });
+    }
+    
+    <span class="hljs-comment">// Si todo está bien, continuar</span>
+    req.<span class="hljs-property">reto</span> = reto; <span class="hljs-comment">// Pasamos el reto para no tener que buscarlo de nuevo</span>
+    <span class="hljs-title function_">next</span>();
+  } <span class="hljs-keyword">catch</span> (error) {
+    <span class="hljs-title function_">next</span>(error);
+  }
+}
+
+<span class="hljs-comment">// Usar la validación personalizada en la ruta</span>
+router.<span class="hljs-title function_">put</span>(<span class="hljs-string">&#x27;/:id&#x27;</span>, authenticate, puedeEditarReto, retosController.<span class="hljs-property">actualizar</span>);
+</code></pre>
+<h2 id="12--pruebas-y-depuración">12. ✅ Pruebas y Depuración</h2>
+<h3 id="pruebas-en-express">Pruebas en Express</h3>
+<p>Las pruebas son esenciales para cualquier aplicación. En Express, podemos probar diferentes niveles:</p>
+<ol>
+<li><strong>Pruebas unitarias</strong>: Prueban funciones individuales</li>
+<li><strong>Pruebas de integración</strong>: Prueban cómo interactúan diferentes componentes</li>
+<li><strong>Pruebas de API</strong>: Prueban los endpoints HTTP directamente</li>
+</ol>
+<p>En Challenge Plans, usamos Jest y Supertest para nuestras pruebas:</p>
+<pre><code class="language-typescript"><span class="hljs-comment">// tests/retos.test.ts - Prueba de API</span>
+<span class="hljs-keyword">import</span> request <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;supertest&#x27;</span>;
+<span class="hljs-keyword">import</span> { <span class="hljs-title class_">AppDataSource</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;../src/data-source&#x27;</span>;
+<span class="hljs-keyword">import</span> app <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;../src/app&#x27;</span>;
+<span class="hljs-keyword">import</span> { createToken } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;./helpers&#x27;</span>;
+
+<span class="hljs-title function_">describe</span>(<span class="hljs-string">&#x27;API de Retos&#x27;</span>, <span class="hljs-function">() =&gt;</span> {
+  <span class="hljs-keyword">let</span> <span class="hljs-attr">token</span>: <span class="hljs-built_in">string</span>;
+  
+  <span class="hljs-comment">// Antes de todas las pruebas</span>
+  <span class="hljs-title function_">beforeAll</span>(<span class="hljs-keyword">async</span> () =&gt; {
+    <span class="hljs-comment">// Inicializar la conexión a la BD de pruebas</span>
+    <span class="hljs-keyword">await</span> <span class="hljs-title class_">AppDataSource</span>.<span class="hljs-title function_">initialize</span>();
+    
+    <span class="hljs-comment">// Crear un token para las pruebas</span>
+    token = <span class="hljs-title function_">createToken</span>({ <span class="hljs-attr">id</span>: <span class="hljs-string">&#x27;123&#x27;</span>, <span class="hljs-attr">email</span>: <span class="hljs-string">&#x27;test@example.com&#x27;</span> });
+  });
+  
+  <span class="hljs-comment">// Después de todas las pruebas</span>
+  <span class="hljs-title function_">afterAll</span>(<span class="hljs-keyword">async</span> () =&gt; {
+    <span class="hljs-comment">// Cerrar la conexión a la BD</span>
+    <span class="hljs-keyword">await</span> <span class="hljs-title class_">AppDataSource</span>.<span class="hljs-title function_">destroy</span>();
+  });
+  
+  <span class="hljs-comment">// Prueba: obtener todos los retos</span>
+  <span class="hljs-title function_">it</span>(<span class="hljs-string">&#x27;debería obtener la lista de retos&#x27;</span>, <span class="hljs-keyword">async</span> () =&gt; {
+    <span class="hljs-keyword">const</span> response = <span class="hljs-keyword">await</span> <span class="hljs-title function_">request</span>(app)
+      .<span class="hljs-title function_">get</span>(<span class="hljs-string">&#x27;/api/retos&#x27;</span>)
+      .<span class="hljs-title function_">set</span>(<span class="hljs-string">&#x27;Authorization&#x27;</span>, <span class="hljs-string">`Bearer <span class="hljs-subst">${token}</span>`</span>);
+      
+    <span class="hljs-title function_">expect</span>(response.<span class="hljs-property">status</span>).<span class="hljs-title function_">toBe</span>(<span class="hljs-number">200</span>);
+    <span class="hljs-title function_">expect</span>(<span class="hljs-title class_">Array</span>.<span class="hljs-title function_">isArray</span>(response.<span class="hljs-property">body</span>)).<span class="hljs-title function_">toBe</span>(<span class="hljs-literal">true</span>);
+  });
+  
+  <span class="hljs-comment">// Prueba: crear un nuevo reto</span>
+  <span class="hljs-title function_">it</span>(<span class="hljs-string">&#x27;debería crear un nuevo reto&#x27;</span>, <span class="hljs-keyword">async</span> () =&gt; {
+    <span class="hljs-keyword">const</span> retoData = {
+      <span class="hljs-attr">titulo</span>: <span class="hljs-string">&#x27;Reto de prueba&#x27;</span>,
+      <span class="hljs-attr">descripcion</span>: <span class="hljs-string">&#x27;Descripción del reto de prueba&#x27;</span>,
+      <span class="hljs-attr">fecha_inicio</span>: <span class="hljs-string">&#x27;2023-01-01&#x27;</span>,
+      <span class="hljs-attr">fecha_fin</span>: <span class="hljs-string">&#x27;2023-02-01&#x27;</span>,
+      <span class="hljs-attr">dificultad</span>: <span class="hljs-string">&#x27;principiante&#x27;</span>
+    };
+    
+    <span class="hljs-keyword">const</span> response = <span class="hljs-keyword">await</span> <span class="hljs-title function_">request</span>(app)
+      .<span class="hljs-title function_">post</span>(<span class="hljs-string">&#x27;/api/retos&#x27;</span>)
+      .<span class="hljs-title function_">set</span>(<span class="hljs-string">&#x27;Authorization&#x27;</span>, <span class="hljs-string">`Bearer <span class="hljs-subst">${token}</span>`</span>)
+      .<span class="hljs-title function_">send</span>(retoData);
+      
+    <span class="hljs-title function_">expect</span>(response.<span class="hljs-property">status</span>).<span class="hljs-title function_">toBe</span>(<span class="hljs-number">201</span>);
+    <span class="hljs-title function_">expect</span>(response.<span class="hljs-property">body</span>).<span class="hljs-title function_">toHaveProperty</span>(<span class="hljs-string">&#x27;id&#x27;</span>);
+    <span class="hljs-title function_">expect</span>(response.<span class="hljs-property">body</span>.<span class="hljs-property">titulo</span>).<span class="hljs-title function_">toBe</span>(retoData.<span class="hljs-property">titulo</span>);
+  });
+  
+  <span class="hljs-comment">// Más pruebas...</span>
+});
+</code></pre>
+<h3 id="depuración-efectiva">Depuración Efectiva</h3>
+<p>La depuración es un arte esencial para cualquier desarrollador. En Express, tenemos varias herramientas:</p>
+<ol>
+<li>
+<p><strong>Console.log</strong>: El clásico que nunca falla</p>
+<pre><code class="language-javascript"><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;Datos recibidos:&#x27;</span>, req.<span class="hljs-property">body</span>);
+</code></pre>
+</li>
+<li>
+<p><strong>Morgan</strong>: Registra automáticamente todas las solicitudes HTTP</p>
+<pre><code class="language-javascript"><span class="hljs-keyword">import</span> morgan <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;morgan&#x27;</span>;
+app.<span class="hljs-title function_">use</span>(<span class="hljs-title function_">morgan</span>(<span class="hljs-string">&#x27;dev&#x27;</span>));
+</code></pre>
+</li>
+<li>
+<p><strong>Debug</strong>: Módulo para mensajes de depuración más controlados</p>
+<pre><code class="language-javascript"><span class="hljs-keyword">import</span> debug <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;debug&#x27;</span>;
+<span class="hljs-keyword">const</span> log = <span class="hljs-title function_">debug</span>(<span class="hljs-string">&#x27;app:retos&#x27;</span>);
+
+<span class="hljs-comment">// Usar</span>
+<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;Procesando reto:&#x27;</span>, reto.<span class="hljs-property">id</span>);
+</code></pre>
+</li>
+<li>
+<p><strong>Extensión de VSCode para Node.js</strong>: Para depuración paso a paso</p>
+<pre><code class="language-json"><span class="hljs-comment">// .vscode/launch.json</span>
+<span class="hljs-punctuation">{</span>
+  <span class="hljs-attr">&quot;version&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;0.2.0&quot;</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;configurations&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span>
+    <span class="hljs-punctuation">{</span>
+      <span class="hljs-attr">&quot;type&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;node&quot;</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">&quot;request&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;launch&quot;</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">&quot;name&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Debug API&quot;</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">&quot;program&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;${workspaceFolder}/src/index.ts&quot;</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">&quot;preLaunchTask&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;tsc: build - tsconfig.json&quot;</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">&quot;outFiles&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-string">&quot;${workspaceFolder}/dist/**/*.js&quot;</span><span class="hljs-punctuation">]</span>
+    <span class="hljs-punctuation">}</span>
+  <span class="hljs-punctuation">]</span>
+<span class="hljs-punctuation">}</span>
+</code></pre>
+</li>
+</ol>
+<h2 id="13--despliegue-y-producción">13. 🚀 Despliegue y Producción</h2>
+<h3 id="preparando-para-producción">Preparando para Producción</h3>
+<p>Antes de desplegar nuestra aplicación Express, debemos asegurarnos de que está lista para producción:</p>
+<ol>
+<li>
+<p><strong>Variables de entorno</strong>: Asegúrate de que toda la configuración sensible esté en variables de entorno</p>
+<pre><code class="language-typescript"><span class="hljs-comment">// Usa variables de entorno con valores por defecto seguros</span>
+<span class="hljs-keyword">const</span> <span class="hljs-variable constant_">PORT</span> = process.<span class="hljs-property">env</span>.<span class="hljs-property">PORT</span> || <span class="hljs-number">3000</span>;
+<span class="hljs-keyword">const</span> <span class="hljs-variable constant_">JWT_SECRET</span> = process.<span class="hljs-property">env</span>.<span class="hljs-property">JWT_SECRET</span> || <span class="hljs-string">&#x27;dev_secret&#x27;</span>;
+</code></pre>
+</li>
+<li>
+<p><strong>Logging</strong>: Configura un sistema de logging adecuado para producción</p>
+<pre><code class="language-typescript"><span class="hljs-keyword">import</span> winston <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;winston&#x27;</span>;
+
+<span class="hljs-keyword">const</span> logger = winston.<span class="hljs-title function_">createLogger</span>({
+  <span class="hljs-attr">level</span>: process.<span class="hljs-property">env</span>.<span class="hljs-property">NODE_ENV</span> === <span class="hljs-string">&#x27;production&#x27;</span> ? <span class="hljs-string">&#x27;info&#x27;</span> : <span class="hljs-string">&#x27;debug&#x27;</span>,
+  <span class="hljs-attr">format</span>: winston.<span class="hljs-property">format</span>.<span class="hljs-title function_">json</span>(),
+  <span class="hljs-attr">transports</span>: [
+    <span class="hljs-keyword">new</span> winston.<span class="hljs-property">transports</span>.<span class="hljs-title class_">File</span>({ <span class="hljs-attr">filename</span>: <span class="hljs-string">&#x27;error.log&#x27;</span>, <span class="hljs-attr">level</span>: <span class="hljs-string">&#x27;error&#x27;</span> }),
+    <span class="hljs-keyword">new</span> winston.<span class="hljs-property">transports</span>.<span class="hljs-title class_">File</span>({ <span class="hljs-attr">filename</span>: <span class="hljs-string">&#x27;combined.log&#x27;</span> })
+  ]
+});
+
+<span class="hljs-comment">// En desarrollo, también log a la consola</span>
+<span class="hljs-keyword">if</span> (process.<span class="hljs-property">env</span>.<span class="hljs-property">NODE_ENV</span> !== <span class="hljs-string">&#x27;production&#x27;</span>) {
+  logger.<span class="hljs-title function_">add</span>(<span class="hljs-keyword">new</span> winston.<span class="hljs-property">transports</span>.<span class="hljs-title class_">Console</span>({
+    <span class="hljs-attr">format</span>: winston.<span class="hljs-property">format</span>.<span class="hljs-title function_">simple</span>()
+  }));
+}
+</code></pre>
+</li>
+<li>
+<p><strong>Compilación TypeScript</strong>: Si usas TypeScript, compila a JavaScript</p>
+<pre><code class="language-bash"><span class="hljs-comment"># En package.json</span>
+<span class="hljs-string">&quot;scripts&quot;</span>: {
+  <span class="hljs-string">&quot;build&quot;</span>: <span class="hljs-string">&quot;tsc&quot;</span>,
+  <span class="hljs-string">&quot;start&quot;</span>: <span class="hljs-string">&quot;node dist/index.js&quot;</span>
+}
+</code></pre>
+</li>
+<li>
+<p><strong>Configuración de seguridad</strong>: Asegúrate de que todas las configuraciones de seguridad estén activas</p>
+<pre><code class="language-typescript"><span class="hljs-comment">// Asegurar cabeceras HTTP</span>
+app.<span class="hljs-title function_">use</span>(<span class="hljs-title function_">helmet</span>());
+
+<span class="hljs-comment">// Limitar tamaño de las peticiones</span>
+app.<span class="hljs-title function_">use</span>(express.<span class="hljs-title function_">json</span>({ <span class="hljs-attr">limit</span>: <span class="hljs-string">&#x27;10kb&#x27;</span> }));
+
+<span class="hljs-comment">// Protección contra ataques de fuerza bruta</span>
+app.<span class="hljs-title function_">use</span>(<span class="hljs-string">&#x27;/api/auth/login&#x27;</span>, <span class="hljs-title function_">rateLimit</span>({
+  <span class="hljs-attr">windowMs</span>: <span class="hljs-number">15</span> * <span class="hljs-number">60</span> * <span class="hljs-number">1000</span>,
+  <span class="hljs-attr">max</span>: <span class="hljs-number">5</span>
+}));
+</code></pre>
+</li>
+</ol>
+<h3 id="opciones-de-despliegue">Opciones de Despliegue</h3>
+<p>Existen muchas opciones para desplegar una aplicación Express:</p>
+<ol>
+<li>
+<p><strong>Heroku</strong></p>
+<ul>
+<li>Simple para principiantes</li>
+<li>Buena integración con GitHub</li>
+<li>Escala automáticamente</li>
+</ul>
+<pre><code class="language-bash"><span class="hljs-comment"># Configuración para Heroku</span>
+<span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;web: node dist/index.js&quot;</span> &gt; Procfile
+heroku create
+git push heroku main
+</code></pre>
+</li>
+<li>
+<p><strong>DigitalOcean App Platform</strong></p>
+<ul>
+<li>Similar a Heroku pero con opciones más avanzadas</li>
+<li>Buen equilibrio entre simplicidad y control</li>
+<li>Buena documentación</li>
+</ul>
+</li>
+<li>
+<p><strong>AWS Elastic Beanstalk</strong></p>
+<ul>
+<li>Para aplicaciones más complejas</li>
+<li>Parte del ecosistema AWS</li>
+<li>Requiere más configuración</li>
+</ul>
+</li>
+<li>
+<p><strong>Docker + cualquier proveedor</strong></p>
+<ul>
+<li>Máxima portabilidad</li>
+<li>Ejemplo de Dockerfile:</li>
+</ul>
+<pre><code class="language-dockerfile"><span class="hljs-keyword">FROM</span> node:<span class="hljs-number">16</span>-alpine
+
+<span class="hljs-keyword">WORKDIR</span><span class="language-bash"> /app</span>
+
+<span class="hljs-keyword">COPY</span><span class="language-bash"> package*.json ./</span>
+<span class="hljs-keyword">RUN</span><span class="language-bash"> npm ci --only=production</span>
+
+<span class="hljs-keyword">COPY</span><span class="language-bash"> dist/ ./dist/</span>
+
+<span class="hljs-keyword">EXPOSE</span> <span class="hljs-number">3000</span>
+
+<span class="hljs-keyword">CMD</span><span class="language-bash"> [<span class="hljs-string">&quot;node&quot;</span>, <span class="hljs-string">&quot;dist/index.js&quot;</span>]</span>
+</code></pre>
+</li>
+<li>
+<p><strong>VPS (Servidor Virtual Privado)</strong></p>
+<ul>
+<li>Control total</li>
+<li>Requiere configuración manual</li>
+<li>Proceso típico:
+<ol>
+<li>Configurar servidor (nginx, seguridad, etc.)</li>
+<li>Subir código</li>
+<li>Instalar dependencias</li>
+<li>Configurar PM2 para mantener la app corriendo</li>
+<li>Configurar nginx como proxy inverso</li>
+</ol>
+</li>
+</ul>
+</li>
+</ol>
+<h2 id="14--glosario-términos-que-debes-conocer">14. 📝 Glosario: Términos que Debes Conocer</h2>
+<ul>
+<li>
+<p><strong>API (Application Programming Interface)</strong>: Conjunto de reglas que permite a diferentes software comunicarse entre sí.</p>
+</li>
+<li>
+<p><strong>REST (Representational State Transfer)</strong>: Estilo de arquitectura de software para sistemas distribuidos como la World Wide Web.</p>
+</li>
+<li>
+<p><strong>Endpoint</strong>: URL específica donde una API puede acceder a los recursos que necesita.</p>
+</li>
+<li>
+<p><strong>Middleware</strong>: Función que tiene acceso al objeto de solicitud, al objeto de respuesta y a la siguiente función en el ciclo solicitud-respuesta.</p>
+</li>
+<li>
+<p><strong>Router</strong>: Parte de Express que permite organizar rutas en archivos o módulos separados.</p>
+</li>
+<li>
+<p><strong>Controller</strong>: Componente que maneja la lógica de las rutas, procesando solicitudes y enviando respuestas.</p>
+</li>
+<li>
+<p><strong>Service</strong>: Capa que contiene la lógica de negocio, independiente de la capa de presentación (controladores).</p>
+</li>
+<li>
+<p><strong>ORM (Object-Relational Mapping)</strong>: Técnica de programación para convertir datos entre sistemas de tipos incompatibles en lenguajes de programación orientados a objetos.</p>
+</li>
+<li>
+<p><strong>JWT (JSON Web Token)</strong>: Estándar abierto que define una forma compacta y autónoma de transmitir información de forma segura entre las partes como un objeto JSON.</p>
+</li>
+<li>
+<p><strong>Middleware de error</strong>: Función especial con cuatro argumentos (error, req, res, next) que maneja errores en Express.</p>
+</li>
+<li>
+<p><strong>Autenticación</strong>: Proceso de verificar la identidad de un usuario.</p>
+</li>
+<li>
+<p><strong>Autorización</strong>: Proceso de determinar si un usuario tiene permiso para acceder a un recurso específico.</p>
+</li>
+</ul>
+<h2 id="15--recursos-adicionales">15. 📚 Recursos Adicionales</h2>
+<p>Para seguir aprendiendo sobre Express y tecnologías relacionadas:</p>
+<ul>
+<li>
+<p><a href="https://expressjs.com/">Documentación oficial de Express</a>: La mejor referencia, con guías detalladas y ejemplos.</p>
+</li>
+<li>
+<p><a href="https://developer.mozilla.org/es/docs/Learn/Server-side/Express_Nodejs">MDN Web Docs - Express/Node.js</a>: Excelente recurso para principiantes con explicaciones claras.</p>
+</li>
+<li>
+<p><a href="https://typeorm.io/">TypeORM Documentation</a>: Documentación completa de TypeORM para bases de datos.</p>
+</li>
+<li>
+<p><a href="https://jwt.io/">JWT.io</a>: Todo sobre JSON Web Tokens, incluyendo una herramienta para decodificar tokens.</p>
+</li>
+</ul>
+
+            <script async src="https://cdn.jsdelivr.net/npm/katex-copytex@latest/dist/katex-copytex.min.js"></script>
+            
+        </body>
+        </html>

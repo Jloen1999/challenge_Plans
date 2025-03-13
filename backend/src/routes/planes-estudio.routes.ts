@@ -25,6 +25,15 @@ const optionalAuthenticate = (req: Request, res: Response, next: NextFunction) =
   next();
 };
 
+// Middleware de validación para plan de estudio
+const validatePlanEstudio = [
+  body('titulo').notEmpty().withMessage('El título es obligatorio'),
+  body('descripcion').optional(),
+  body('fecha_inicio').optional().isDate().withMessage('Fecha de inicio inválida'),
+  body('duracion_dias').optional().isInt({ min: 1 }).withMessage('La duración debe ser un número entero positivo'),
+  body('es_publico').optional().isBoolean().withMessage('Es público debe ser un valor booleano')
+];
+
 /**
  * @route GET /api/planes-estudio/search
  * @desc Busca planes de estudio por término
@@ -110,14 +119,7 @@ router.get(
 router.post(
   '/',
   authenticate,
-  [
-    body('titulo').notEmpty().withMessage('El título es requerido'),
-    body('fecha_inicio').optional().isISO8601().withMessage('Fecha de inicio inválida'),
-    body('duracion_dias').optional().isInt({ min: 1 }).withMessage('La duración debe ser un número positivo'),
-    body('es_publico').optional().isBoolean().withMessage('es_publico debe ser un valor booleano'),
-    body('retos_ids').optional().isArray().withMessage('retos_ids debe ser un array'),
-    body('retos_ids.*').optional().isUUID().withMessage('ID de reto inválido')
-  ],
+  validatePlanEstudio,
   planesEstudioController.createPlan
 );
 
@@ -129,15 +131,7 @@ router.post(
 router.put(
   '/:id',
   authenticate,
-  [
-    param('id').isUUID().withMessage('ID de plan inválido'),
-    body('titulo').optional().notEmpty().withMessage('El título no puede estar vacío'),
-    body('fecha_inicio').optional().isISO8601().withMessage('Fecha de inicio inválida'),
-    body('duracion_dias').optional().isInt({ min: 1 }).withMessage('La duración debe ser un número positivo'),
-    body('es_publico').optional().isBoolean().withMessage('es_publico debe ser un valor booleano'),
-    body('retos_ids').optional().isArray().withMessage('retos_ids debe ser un array'),
-    body('retos_ids.*').optional().isUUID().withMessage('ID de reto inválido')
-  ],
+  validatePlanEstudio,
   planesEstudioController.updatePlan
 );
 
@@ -179,7 +173,7 @@ router.post(
   authenticate,
   [
     param('id').isUUID().withMessage('ID de plan inválido'),
-    body('retos_ids').isArray().withMessage('retos_ids debe ser un array'),
+    body('retos_ids').isArray().withMessage('Se requiere un array de IDs de retos'),
     body('retos_ids.*').isUUID().withMessage('ID de reto inválido')
   ],
   planesEstudioController.asignarRetos
@@ -197,7 +191,7 @@ router.delete(
     param('id').isUUID().withMessage('ID de plan inválido'),
     param('retoId').isUUID().withMessage('ID de reto inválido')
   ],
-  planesEstudioController.eliminarReto
+  planesEstudioController.eliminarRetoDelPlan
 );
 
 export default router;

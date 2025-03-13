@@ -99,91 +99,49 @@ export class TriggersAndFunctions1741440000000 implements MigrationInterface {
             CREATE OR REPLACE FUNCTION gestionar_estado_participacion()
             RETURNS TRIGGER AS $$
             DECLARE
-                recompensa_id UUID;
-                titulo_reto TEXT;
-                puntos_obtenidos INT;
-                v_evento VARCHAR(50);
+                recompensa_record RECORD;
             BEGIN
-                -- Caso 1: Progreso llega a 100 (completar)
-                IF NEW.progreso = 100 AND (OLD.progreso IS NULL OR OLD.progreso < 100) THEN
+                -- Si el progreso llega a 100, marcar como completado y registrar fecha
+                IF NEW.progreso = 100 AND (OLD.progreso < 100 OR OLD.progreso IS NULL) THEN
                     NEW.estado := 'completado';
                     NEW.fecha_completado := CURRENT_TIMESTAMP;
-                    v_evento := 'reto_completado';
-
-                    -- Obtener información del reto y recompensa en una sola consulta
-                    WITH reto_info AS (
-                        SELECT r.titulo, r.puntos_totales 
-                        FROM retos r WHERE r.id = NEW.reto_id
-                    ),
-                    recompensa_info AS (
-                        SELECT id FROM recompensas 
-                        WHERE tipo = 'puntos' AND criterio_obtencion LIKE '%Completar%reto%'
-                        LIMIT 1
-                    )
-                    SELECT 
-                        ri.titulo, ri.puntos_totales, rec.id INTO titulo_reto, puntos_obtenidos, recompensa_id
-                    FROM reto_info ri, recompensa_info rec;
-
-                    -- Insertar recompensa y registrar logro en una transacción
-                    IF recompensa_id IS NOT NULL THEN
-                        INSERT INTO usuario_recompensas (usuario_id, recompensa_id, fecha_obtencion)
-                        VALUES (NEW.usuario_id, recompensa_id, CURRENT_TIMESTAMP)
-                        ON CONFLICT (usuario_id, recompensa_id) DO NOTHING;
-                    END IF;
-
-                    -- Acciones combinadas para completar el reto
-                    INSERT INTO logros (usuario_id, tipo, descripcion)
+                    
+                    -- Otorgar puntos al usuario por completar el reto
+                    INSERT INTO usuario_puntos (usuario_id, puntos, concepto, fecha)
                     VALUES (
-                        NEW.usuario_id,
-                        'completar_reto',
-                        'Completó el reto: ' || COALESCE(titulo_reto, 'ID: ' || NEW.reto_id)
+                        NEW.usuario_id, 
+                        (SELECT puntos_totales FROM retos WHERE id = NEW.reto_id), 
+                        'Completar Reto', 
+                        CURRENT_TIMESTAMP
                     );
                     
-                    -- Actualizar puntaje del usuario directamente
-                    UPDATE usuarios 
-                    SET puntaje = puntaje + puntos_obtenidos
-                    WHERE id = NEW.usuario_id;
-
-                -- Caso 2: Progreso baja de 100 (revertir completado)
-                ELSIF NEW.progreso < 100 AND OLD.progreso = 100 THEN
+                    -- Otorgar recompensa "Completar Reto" si existe
+                    FOR recompensa_record IN 
+                        SELECT id FROM recompensas 
+                        WHERE tipo = 'completar_reto' 
+                        LIMIT 1
+                    LOOP
+                        INSERT INTO usuario_recompensas (usuario_id, recompensa_id, fecha_obtencion)
+                        VALUES (NEW.usuario_id, recompensa_record.id, CURRENT_TIMESTAMP)
+                        ON CONFLICT (usuario_id, recompensa_id) DO NOTHING;
+                    END LOOP;
+                    
+                    -- Enviar notificación de reto completado
+                    INSERT INTO notificaciones (usuario_id, tipo, titulo, contenido, leido, fecha_creacion)
+                    VALUES (
+                        NEW.usuario_id,
+                        'logro',
+                        '¡Reto completado!',
+                        'Has completado el reto ' || (SELECT titulo FROM retos WHERE id = NEW.reto_id) || ' con éxito.',
+                        false,
+                        CURRENT_TIMESTAMP
+                    );
+                END IF;
+                
+                -- Si bajó de 100%, volver a estado activo
+                IF NEW.progreso < 100 AND OLD.progreso = 100 THEN
                     NEW.estado := 'activo';
                     NEW.fecha_completado := NULL;
-                    v_evento := 'progreso_revertido';
-
-                    -- Obtener puntos del reto para restarlos
-                    SELECT puntos_totales INTO puntos_obtenidos
-                    FROM retos r WHERE r.id = NEW.reto_id;
-
-                    -- Operación combinada para eliminar recompensa y logro
-                    WITH eliminacion_recompensa AS (
-                        DELETE FROM usuario_recompensas
-                        WHERE usuario_id = NEW.usuario_id 
-                        AND recompensa_id IN (
-                            SELECT id 
-                            FROM recompensas 
-                            WHERE criterio_obtencion LIKE '%Completar%reto%'
-                        )
-                    )
-                    DELETE FROM logros
-                    WHERE usuario_id = NEW.usuario_id 
-                    AND tipo = 'completar_reto' 
-                    AND descripcion LIKE '%' || NEW.reto_id || '%';
-
-                    -- Restar puntos al usuario
-                    UPDATE usuarios 
-                    SET puntaje = GREATEST(0, puntaje - puntos_obtenidos)
-                    WHERE id = NEW.usuario_id;
-                ELSE
-                    v_evento := 'actualizacion_progreso';
-                END IF;
-
-                -- Registrar en historial_progreso (siempre se hace)
-                IF (OLD.progreso IS DISTINCT FROM NEW.progreso) THEN
-                    INSERT INTO historial_progreso(
-                        usuario_id, reto_id, progreso_anterior, progreso_nuevo, fecha, evento
-                    ) VALUES (
-                        NEW.usuario_id, NEW.reto_id, OLD.progreso, NEW.progreso, CURRENT_TIMESTAMP, v_evento
-                    );
                 END IF;
                 
                 RETURN NEW;

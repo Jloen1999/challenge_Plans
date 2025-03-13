@@ -406,6 +406,99 @@ export class RetosController {
   };
 
   /**
+   * Obtiene todas las tareas de un reto específico
+   * @route GET /api/retos/:id/tareas
+   */
+  getTareasReto = async (req: Request, res: Response): Promise<void> => {
+    try {
+      const { id } = req.params;
+      const userId = req.user?.id;
+      
+      const tareas = await this.retosService.getTareasReto(id, userId);
+      
+      res.status(200).json({ 
+        message: 'Tareas obtenidas correctamente',
+        tareas 
+      });
+    } catch (error) {
+      this.handleError(error, res);
+    }
+  };
+
+  /**
+   * Obtiene los retos completados por un usuario
+   * @route GET /api/retos/user/completed
+   */
+  getCompletedRetos = async (req: Request, res: Response): Promise<void> => {
+    try {
+      const userId = req.user?.id;
+      
+      if (!userId) {
+        res.status(401).json({ message: 'No autenticado' });
+        return;
+      }
+      
+      const completedRetos = await this.retosService.getCompletedRetos(userId);
+      
+      res.status(200).json({ 
+        message: 'Retos completados obtenidos correctamente',
+        completedRetos 
+      });
+    } catch (error) {
+      this.handleError(error, res);
+    }
+  };
+
+  /**
+   * Obtiene los badges del usuario en todos los retos
+   * @route GET /api/retos/user/badges
+   */
+  getUserBadges = async (req: Request, res: Response): Promise<void> => {
+    try {
+      const userId = req.user?.id;
+      
+      if (!userId) {
+        res.status(401).json({ message: 'No autenticado' });
+        return;
+      }
+      
+      const badges = await this.retosService.getUserBadges(userId);
+      
+      res.status(200).json({ 
+        message: 'Badges obtenidos correctamente',
+        badges 
+      });
+    } catch (error) {
+      this.handleError(error, res);
+    }
+  };
+
+  /**
+   * Desmarca una tarea como completada
+   * @route DELETE /api/retos/tareas/:id/complete
+   */
+  uncompleteTarea = async (req: Request, res: Response): Promise<void> => {
+    try {
+      const { id } = req.params;
+      const userId = req.user?.id;
+      
+      if (!userId) {
+        res.status(401).json({ message: 'No autenticado' });
+        return;
+      }
+      
+      const result = await this.retosService.uncompleteTarea(id, userId);
+      
+      res.status(200).json({ 
+        message: 'Tarea desmarcada correctamente',
+        result
+      });
+    } catch (error) {
+      this.handleError(error, res);
+    }
+  };
+
+  /**
    * Manejador unificado de errores para el controlador
    */
   private handleError = (error: any, res: Response): void => {
