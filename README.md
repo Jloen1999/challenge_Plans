@@ -7,10 +7,14 @@
 ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-14+-blue)
 ![TypeORM](https://img.shields.io/badge/TypeORM-^0.3\.17-orange)  
 
-**Nombre:** Jose Luis Obiang Ela Nanguang
-**Profesor:** Enrique Moguel
-**Asignatura:** Plataformas, Frameworks y Tendencias Tecnológicas.
-**Fecha entrega:** 14/03/2025
+**Nombre:** Jose Luis Obiang Ela Nanguang  
+
+**Profesor:** Enrique Moguel  
+
+**Asignatura:** Plataformas, Frameworks y Tendencias Tecnológicas.  
+
+**Fecha entrega:** 14/03/2025  
+
 ➡️[Github](https://github.com/Jloen1999/challenge_Plans.git)
 
 ---
