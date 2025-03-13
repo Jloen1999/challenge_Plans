@@ -1,6 +1,7 @@
 # Challenge Plans - Plataforma de Aprendizaje Colaborativo
 
-![Challenge Plans Logo](./frontend/public/images/logo.png)
+![Challenge Plans Logo](./frontend/public/images/logo.png)  
+
 ![Version](https://img.shields.io/badge/version-1.0\.0-blue)
 ![Node](https://img.shields.io/badge/node-v16+-green)
 ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-14+-blue)
