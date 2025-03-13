@@ -5,7 +5,8 @@
 ![Version](https://img.shields.io/badge/version-1.0\.0-blue)
 ![Node](https://img.shields.io/badge/node-v16+-green)
 ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-14+-blue)
-![TypeORM](https://img.shields.io/badge/TypeORM-^0.3\.17-orange)
+![TypeORM](https://img.shields.io/badge/TypeORM-^0.3\.17-orange)  
+
 **Nombre:** Jose Luis Obiang Ela Nanguang
 **Profesor:** Enrique Moguel
 **Asignatura:** Plataformas, Frameworks y Tendencias Tecnológicas.
