@@ -1,19 +1,92 @@
 # Challenge Plans - Plataforma de Aprendizaje Colaborativo
 
 ![Challenge Plans Logo](./frontend/public/images/logo.png)
+![Version](https://img.shields.io/badge/version-1.0\.0-blue)
+![Node](https://img.shields.io/badge/node-v16+-green)
+![PostgreSQL](https://img.shields.io/badge/PostgreSQL-14+-blue)
+![TypeORM](https://img.shields.io/badge/TypeORM-^0.3\.17-orange)
+**Nombre:** Jose Luis Obiang Ela Nanguang
+**Profesor:** Enrique Moguel
+**Asignatura:** Plataformas, Frameworks y Tendencias Tecnológicas.
+**Fecha entrega:** 14/03/2025
+➡️[Github](https://github.com/Jloen1999/challenge_Plans.git)
+
+---
 
 ## 📋 Índice
 
-- [Introducción](#introducción)
-- [Estructura del Proyecto](#estructura-del-proyecto)
-- [Configuración del Entorno](#configuración-del-entorno)
-- [Configuración de la Base de Datos](#configuración-de-la-base-de-datos)
-- [Servicios del Backend](#servicios-del-backend)
-- [Controladores y Rutas](#controladores-y-rutas)
-- [Manual de Uso de Express](#manual-de-uso-de-express)
-- [Funcionalidades del Frontend](#funcionalidades-del-frontend)
-- [Ejecutar el Proyecto](#ejecutar-el-proyecto)  
-- [Pruebas](#pruebas)
+- [Challenge Plans - Plataforma de Aprendizaje Colaborativo](#challenge-plans---plataforma-de-aprendizaje-colaborativo)
+  - [📋 Índice](#-índice)
+  - [Introducción](#introducción)
+    - [Tecnologías Principales](#tecnologías-principales)
+      - [Backend](#backend)
+      - [Frontend](#frontend)
+  - [Estructura del Proyecto](#estructura-del-proyecto)
+    - [Backend](#backend-1)
+    - [Frontend](#frontend-1)
+  - [Configuración del Entorno](#configuración-del-entorno)
+    - [Prerrequisitos](#prerrequisitos)
+    - [Instalación](#instalación)
+  - [Configuración de la Base de Datos](#configuración-de-la-base-de-datos)
+    - [Modelo de Base de Datos](#modelo-de-base-de-datos)
+      - [Diagrama](#diagrama)
+      - [Entidades Principales](#entidades-principales)
+      - [Entidades de Relación](#entidades-de-relación)
+      - [Entidades de Soporte](#entidades-de-soporte)
+    - [Optimizaciones de Base de Datos](#optimizaciones-de-base-de-datos)
+      - [Índices](#índices)
+      - [Triggers y Funciones Automatizadas](#triggers-y-funciones-automatizadas)
+        - [1. Actualización automática de nivel de usuario](#1-actualización-automática-de-nivel-de-usuario)
+        - [2. Gestión de tareas completadas](#2-gestión-de-tareas-completadas)
+        - [3. Actualización automática de progreso en retos](#3-actualización-automática-de-progreso-en-retos)
+        - [4. Sistema de notificaciones automáticas](#4-sistema-de-notificaciones-automáticas)
+    - [Vistas Materializadas](#vistas-materializadas)
+    - [Sistema de Gamificación](#sistema-de-gamificación)
+    - [Variables de Entorno](#variables-de-entorno)
+    - [Verificación de Conexión](#verificación-de-conexión)
+    - [🔄 Sistema de Migraciones](#-sistema-de-migraciones)
+      - [Componentes Principales](#componentes-principales)
+      - [Estrategias de Ejecución](#estrategias-de-ejecución)
+        - [1️⃣ Ejecución Automática (todas las migraciones)](#1️⃣-ejecución-automática-todas-las-migraciones)
+        - [2️⃣ Ejecución Manual Controlada (Recomendada)](#2️⃣-ejecución-manual-controlada-recomendada)
+      - [🔍 Verificación del Esquema](#-verificación-del-esquema)
+      - [🔙 Revertir una Migración](#-revertir-una-migración)
+      - [Flujo de Trabajo Recomendado](#flujo-de-trabajo-recomendado)
+  - [Servicios del Backend](#servicios-del-backend)
+    - [Servicios de Usuario y Autenticación](#servicios-de-usuario-y-autenticación)
+    - [Servicios de Contenido Educativo](#servicios-de-contenido-educativo)
+    - [Servicios de Interacción y Colaboración](#servicios-de-interacción-y-colaboración)
+    - [Servicios de Soporte y Gestión](#servicios-de-soporte-y-gestión)
+  - [Controladores y Rutas](#controladores-y-rutas)
+    - [Controladores Principales](#controladores-principales)
+      - [Ejemplo de Controlador de Retos](#ejemplo-de-controlador-de-retos)
+    - [Definición de Rutas API](#definición-de-rutas-api)
+      - [Estructura de Rutas Principal](#estructura-de-rutas-principal)
+    - [Tabla de Endpoints API](#tabla-de-endpoints-api)
+      - [Autenticación y Usuarios](#autenticación-y-usuarios)
+      - [Retos y Tareas](#retos-y-tareas)
+      - [Planes de Estudio](#planes-de-estudio)
+      - [Apuntes y Recursos](#apuntes-y-recursos)
+      - [Interacción Social y Comentarios](#interacción-social-y-comentarios)
+      - [Categorías y Taxonomía](#categorías-y-taxonomía)
+  - [Manual de Uso de Express](#manual-de-uso-de-express)
+  - [Funcionalidades del Frontend](#funcionalidades-del-frontend)
+    - [Sistema de Autenticación](#sistema-de-autenticación)
+    - [Dashboard Interactivo](#dashboard-interactivo)
+    - [Gestión de Retos](#gestión-de-retos)
+    - [Planes de Estudio Personalizados](#planes-de-estudio-personalizados)
+    - [Sistema de Apuntes](#sistema-de-apuntes)
+    - [Componentes Reutilizables](#componentes-reutilizables)
+    - [Animaciones y Transiciones](#animaciones-y-transiciones)
+    - [Tema Personalizable](#tema-personalizable)
+    - [Adaptabilidad Responsiva](#adaptabilidad-responsiva)
+  - [Ejecutar el Proyecto](#ejecutar-el-proyecto)
+    - [Requisitos Previos](#requisitos-previos)
+    - [Configuración del Backend](#configuración-del-backend)
+    - [Configuración del Frontend](#configuración-del-frontend)
+  - [Pruebas](#pruebas)
+    - [Pruebas del Backend](#pruebas-del-backend)
+    - [Pruebas del Frontend](#pruebas-del-frontend)
 
 ## Introducción
 
@@ -884,7 +957,7 @@ Antes de ejecutar el proyecto, asegúrate de tener instalado:
 3. **Configurar variables de entorno**:
    Crea un archivo `.env` en la carpeta `backend` con el siguiente contenido:
 
-   ```
+   ```bash
    # Configuración de la base de datos
    DB_HOST=localhost
    DB_PORT=5432
@@ -912,12 +985,18 @@ Antes de ejecutar el proyecto, asegúrate de tener instalado:
 
    ```bash
    npm run migrate
+   ```
 
-````
+6. Iniciar el backend
+
+  ```bash
+  npm run dev
+  ```
 
 ### Configuración del Frontend
 
 1. **Instalar dependencias**:
+
    ```bash
    cd ../frontend
    npm install
@@ -925,13 +1004,15 @@ Antes de ejecutar el proyecto, asegúrate de tener instalado:
 
 2. **Configurar variables de entorno**:
    Crea un archivo `.env` en la carpeta `frontend` con el siguiente contenido:
-   ```
+
+   ```bash
    REACT_APP_API_URL=http://localhost:3000/api
    ```
 
 3. **Iniciar la aplicación**:
+
    ```bash
-   npm start
+   npm run dev
    ```
 
    La aplicación estará disponible en [http://localhost:3000](http://localhost:3000)
@@ -943,6 +1024,7 @@ Challenge Plans incluye un conjunto de pruebas automatizadas para garantizar la 
 ### Pruebas del Backend
 
 1. **Instalar dependencias de desarrollo**:
+
    ```bash
    cd backend
    npm install --save-dev jest ts-jest @types/jest supertest @types/supertest
@@ -950,6 +1032,7 @@ Challenge Plans incluye un conjunto de pruebas automatizadas para garantizar la 
 
 2. **Configurar Jest**:
    Crea un archivo `jest.config.js` en la carpeta `backend` con el siguiente contenido:
+
    ```javascript
    module.exports = {
      preset: 'ts-jest',
@@ -964,6 +1047,7 @@ Challenge Plans incluye un conjunto de pruebas automatizadas para garantizar la 
 
 3. **Escribir pruebas**:
    Crea una carpeta `__tests__` en la carpeta `backend` y añade archivos de prueba. Por ejemplo, `auth.test.ts`:
+
    ```typescript
    import request from 'supertest';
    import app from '../src/app';
@@ -984,6 +1068,7 @@ Challenge Plans incluye un conjunto de pruebas automatizadas para garantizar la 
    ```
 
 4. **Ejecutar pruebas**:
+
    ```bash
    npm test
    ```
@@ -991,6 +1076,7 @@ Challenge Plans incluye un conjunto de pruebas automatizadas para garantizar la 
 ### Pruebas del Frontend
 
 1. **Instalar dependencias de desarrollo**:
+
    ```bash
    cd ../frontend
    npm install --save-dev jest @testing-library/react @testing-library/jest-dom
@@ -998,6 +1084,7 @@ Challenge Plans incluye un conjunto de pruebas automatizadas para garantizar la 
 
 2. **Configurar Jest**:
    Añade la configuración de Jest en el archivo `package.json`:
+
    ```json
    "jest": {
      "setupFilesAfterEnv": ["<rootDir>/src/setupTests.ts"],
@@ -1013,11 +1100,13 @@ Challenge Plans incluye un conjunto de pruebas automatizadas para garantizar la 
 
 3. **Escribir pruebas**:
    Crea un archivo `setupTests.ts` en la carpeta `src` con el siguiente contenido:
+
    ```typescript
    import '@testing-library/jest-dom';
    ```
 
    Añade archivos de prueba en la carpeta `src/__tests__`. Por ejemplo, `App.test.tsx`:
+
    ```typescript
    import { render, screen } from '@testing-library/react';
    import App from '../App';
@@ -1030,10 +1119,7 @@ Challenge Plans incluye un conjunto de pruebas automatizadas para garantizar la 
    ```
 
 4. **Ejecutar pruebas**:
+
    ```bash
    npm test
    ```
-
-Con estos pasos, podrás ejecutar las pruebas automatizadas tanto del backend como del frontend de Challenge Plans, asegurando la calidad y el correcto funcionamiento del proyecto.
-
-
